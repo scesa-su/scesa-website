@@ -9,7 +9,7 @@ type LogoProps = {
 };
 
 export function Logo({ tone = "adaptive", className }: LogoProps) {
-  const imageClass = "h-12 w-auto";
+  const imageClass = "h-8 w-auto lg:h-15";
   return (
     <Link
       href="/"
@@ -23,8 +23,8 @@ export function Logo({ tone = "adaptive", className }: LogoProps) {
         <Image
           src="/scesa-logo.svg"
           alt=""
-          width={140}
-          height={56}
+          width={143}
+          height={60}
           priority
           unoptimized
           className={cn(imageClass, "dark:hidden")}
@@ -33,8 +33,8 @@ export function Logo({ tone = "adaptive", className }: LogoProps) {
       <Image
         src="/scesa-logo-white.svg"
         alt=""
-        width={140}
-        height={56}
+        width={143}
+        height={60}
         unoptimized
         className={cn(imageClass, tone === "adaptive" && "hidden dark:block")}
       />
