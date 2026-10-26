@@ -58,7 +58,12 @@ export function Footer() {
       <div className="mx-auto w-full max-w-360 px-4 py-12 md:px-8 lg:px-14 lg:py-16">
         <div className="flex flex-col gap-12 md:flex-row md:justify-between">
           <div className="flex flex-col gap-8">
-            <Logo tone="light" />
+            <div className="flex flex-col gap-4">
+              <Logo tone="light" />
+              <p className="max-w-xs text-sm">
+                Strathmore Computing and Engineering Students Association
+              </p>
+            </div>
             <ul className="flex items-center gap-5" aria-label="Social media">
               {SOCIAL_LINKS.map(({ label, href, icon }) => {
                 const external = href.startsWith("http");

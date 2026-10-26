@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 const variants = {
   // Design colour; white on #FF7A3F is ~2.6:1, below WCAG AA (owner decision 2026-10-27).
   primary: "bg-brand-accent text-white hover:bg-orange-500",
-  soft: "bg-orange-50 text-orange-700 hover:bg-orange-100",
+  soft: "bg-orange-50 text-brand-accent hover:bg-orange-100",
   outline:
     "border border-brand-border bg-transparent text-brand-primary hover:bg-navy-25",
 } as const;
