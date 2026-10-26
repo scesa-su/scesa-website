@@ -23,7 +23,7 @@
 }
 
 .dark {
-  --brand-background: #161A51;
+  --brand-background: #1E293B; /* same as the dark header (owner decision 2026-10-27) */
   --brand-surface: #1E293B;
   --brand-primary: #ECF3FF;
   --brand-border: #334155;
@@ -91,6 +91,12 @@
   --color-error-light: #FEE2E2;
   --color-info: #3B82F6;
   --color-info-light: #DBEAFE;
+  /* Darker shades so white badge text passes WCAG AA */
+  --color-success-dark: #15803D;
+  --color-warning-dark: #B45309;
+  --color-info-dark: #1D4ED8;
+  /* Fixed navy that does not invert in dark mode (footer, mobile drawer) */
+  --color-brand-navy: #161A51;
   --color-white: #FFFFFF;
   --color-black: #000000;
   --color-light-gray: #94A3B8;
