@@ -12,7 +12,7 @@ const FLICK_DISTANCE = 100;
 const FLICK_VELOCITY = 500;
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-background";
-const NAV_BUTTON = `inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-brand-border bg-brand-surface text-brand-primary transition-colors hover:bg-navy-25 ${FOCUS_RING}`;
+const NAV_BUTTON = `inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-brand-border bg-brand-surface text-brand-primary transition-colors hover:bg-navy-25 ${FOCUS_RING}`;
 
 export function SwipeableDeck() {
   const [top, setTop] = useState(0);
