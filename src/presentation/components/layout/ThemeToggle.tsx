@@ -15,9 +15,9 @@ export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
   // false on the server and during hydration, true afterwards: avoids a theme mismatch.
   const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false);
-  const base = cn("inline-flex size-10 items-center justify-center rounded-lg", className);
+  const base = "inline-flex size-10 items-center justify-center rounded-lg";
 
-  if (!mounted) return <span aria-hidden className={base} />;
+  if (!mounted) return <span aria-hidden className={cn(base, className)} />;
 
   const current: ThemeName = ORDER.includes(theme as ThemeName) ? (theme as ThemeName) : "system";
   const next = ORDER[(ORDER.indexOf(current) + 1) % ORDER.length];
@@ -33,6 +33,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         base,
         "text-brand-primary transition-colors hover:bg-navy-25",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent",
+        className,
       )}
     >
       <Icon aria-hidden className="size-5" />

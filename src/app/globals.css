@@ -23,7 +23,7 @@
 }
 
 .dark {
-  --brand-background: #161A51;
+  --brand-background: #1E293B; /* same as the dark header (owner decision 2026-10-27) */
   --brand-surface: #1E293B;
   --brand-primary: #ECF3FF;
   --brand-border: #334155;

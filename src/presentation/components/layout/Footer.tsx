@@ -5,6 +5,7 @@ import { NAV_LINKS, SOCIAL_LINKS, type SocialIcon } from "@/lib/constants";
 import { cn } from "@/lib/cn";
 import { Button } from "@/presentation/components/ui/Button";
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 const FOCUS_RING =
   "rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
@@ -75,6 +76,8 @@ export function Footer() {
                 );
               })}
             </ul>
+            {/* Header follows the design exactly, so the theme switch lives here. */}
+            <ThemeToggle className="-ml-2 text-white hover:bg-white/10" />
           </div>
 
           <nav aria-labelledby="footer-links-heading" className="md:min-w-56">

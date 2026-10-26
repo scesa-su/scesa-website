@@ -8,8 +8,9 @@ import { cn } from "@/lib/cn";
 export function NavLinks() {
   const pathname = usePathname();
   return (
-    <ul className="flex items-center gap-10 xl:gap-12">
-      {NAV_LINKS.map(({ label, href }) => {
+    <ul className="flex items-center gap-12 xl:gap-16">
+      {/* Desktop header per Home page.png: no Home link, the logo goes home. */}
+      {NAV_LINKS.filter(({ href }) => href !== "/").map(({ label, href }) => {
         const active = isActivePath(pathname, href);
         return (
           <li key={href}>
