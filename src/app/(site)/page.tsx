@@ -7,7 +7,7 @@ export default function HomePage() {
       <p className="text-lg font-body">
         Design token showcase: fonts, colors and theming.
       </p>
-      <div className="flex items-center justify-between gap-4 rounded-2xl bg-brand-surface p-6">
+      <div className="flex items-center justify-between gap-4 rounded-2xl border border-brand-border bg-brand-surface p-6">
         <span className="text-md font-body">Surface card</span>
         <span className="rounded-full bg-brand-accent px-4 py-2 text-sm font-semibold text-slate-900">
           Accent

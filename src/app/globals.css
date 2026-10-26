@@ -3,11 +3,12 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --brand-background: #D0ECF7;
+  --brand-background: #FEFEFE;
   --brand-surface: #FEFEFE;
   --brand-primary: #161A51;
   --brand-secondary: #A2D2FA;
   --brand-accent: #FF7A3F;
+  --brand-border: #E2E8F0;
   --navy-900: #161A51;
   --navy-800: #252F8A;
   --navy-700: #242EAF;
@@ -25,6 +26,7 @@
   --brand-background: #161A51;
   --brand-surface: #1E293B;
   --brand-primary: #ECF3FF;
+  --brand-border: #334155;
   --navy-900: #ECF3FF;
   --navy-800: #DDE9FF;
   --navy-700: #C1D5FF;
@@ -45,6 +47,7 @@
   --color-brand-primary: var(--brand-primary);
   --color-brand-secondary: var(--brand-secondary);
   --color-brand-accent: var(--brand-accent);
+  --color-brand-border: var(--brand-border);
   --color-navy-900: var(--navy-900);
   --color-navy-800: var(--navy-800);
   --color-navy-700: var(--navy-700);
