@@ -22,11 +22,11 @@ export type SocialIcon = (typeof SOCIAL_LINKS)[number]["icon"];
 
 // shortcut: placeholder SVGs until real SCESA event photos are added to public/images/home.
 export const HERO_PHOTOS = [
-  { src: "/images/home/deck-1.svg", alt: "SCESA members holding Clubs & Sports Gala awards" },
-  { src: "/images/home/deck-2.svg", alt: "Students at a SCESA hackathon" },
-  { src: "/images/home/deck-3.svg", alt: "A SCESA workshop in session" },
-  { src: "/images/home/deck-4.svg", alt: "SCESA community meetup" },
-  { src: "/images/home/deck-5.svg", alt: "SCESA members at a tech talk" },
+  { src: "/images/home/deck-1.svg", alt: "Placeholder for SCESA event photo 1" },
+  { src: "/images/home/deck-2.svg", alt: "Placeholder for SCESA event photo 2" },
+  { src: "/images/home/deck-3.svg", alt: "Placeholder for SCESA event photo 3" },
+  { src: "/images/home/deck-4.svg", alt: "Placeholder for SCESA event photo 4" },
+  { src: "/images/home/deck-5.svg", alt: "Placeholder for SCESA event photo 5" },
 ] as const;
 
 export const HOME_STATS = [

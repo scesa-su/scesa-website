@@ -52,7 +52,7 @@ export function SwipeableDeck() {
               drag={isTop ? "x" : false}
               dragSnapToOrigin
               onDragEnd={isTop ? onDragEnd : undefined}
-              animate={{ rotate: ROTATIONS[pos], scale: 1 - pos * 0.02 }}
+              animate={{ rotate: ROTATIONS[pos % ROTATIONS.length], scale: 1 - pos * 0.02 }}
               transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 26 }}
               style={{ zIndex: n - pos }}
               className={`absolute inset-0 overflow-hidden rounded-2xl border border-brand-border bg-brand-surface shadow-lg ${isTop ? "cursor-grab active:cursor-grabbing" : ""}`}
