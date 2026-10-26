@@ -10,13 +10,12 @@ export function isActivePath(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-// shortcut: placeholder URLs, replace with the real SCESA accounts before launch.
 export const SOCIAL_LINKS = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/", icon: "linkedin" },
-  { label: "Instagram", href: "https://www.instagram.com/", icon: "instagram" },
-  { label: "TikTok", href: "https://www.tiktok.com/", icon: "tiktok" },
-  { label: "Email", href: "mailto:hello@scesa.com", icon: "email" },
-  { label: "Luma", href: "https://lu.ma/", icon: "luma" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/strathmore-computing-and-engineering-student-s-association/", icon: "linkedin" },
+  { label: "Instagram", href: "https://www.instagram.com/strathmore.scesa/", icon: "instagram" },
+  { label: "TikTok", href: "https://www.tiktok.com/@scesacommunity", icon: "tiktok" },
+  { label: "Email", href: "mailto:scesa@strathmore.edu", icon: "email" },
+  { label: "Luma", href: "https://luma.com/user/SCESA", icon: "luma" },
 ] as const;
 
 export type SocialIcon = (typeof SOCIAL_LINKS)[number]["icon"];
