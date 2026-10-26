@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --brand-background: #FEFEFE;
+  --brand-surface: #FEFEFE;
+  --brand-primary: #161A51;
+  --brand-secondary: #A2D2FA;
+  --brand-accent: #FF7A3F;
+  --brand-border: #E2E8F0;
+  --navy-900: #161A51;
+  --navy-800: #252F8A;
+  --navy-700: #242EAF;
+  --navy-600: #2832DA;
+  --navy-500: #3543F6;
+  --navy-400: #546EFF;
+  --navy-300: #7493FF;
+  --navy-200: #9CBAFF;
+  --navy-100: #C1D5FF;
+  --navy-50: #DDE9FF;
+  --navy-25: #ECF3FF;
+}
+
+.dark {
+  --brand-background: #161A51;
+  --brand-surface: #1E293B;
+  --brand-primary: #ECF3FF;
+  --brand-border: #334155;
+  --navy-900: #ECF3FF;
+  --navy-800: #DDE9FF;
+  --navy-700: #C1D5FF;
+  --navy-600: #9CBAFF;
+  --navy-500: #7493FF;
+  --navy-400: #546EFF;
+  --navy-300: #3543F6;
+  --navy-200: #2832DA;
+  --navy-100: #242EAF;
+  --navy-50: #252F8A;
+  --navy-25: #161A51;
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-brand-background: var(--brand-background);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-border: var(--brand-border);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-navy-600: var(--navy-600);
+  --color-navy-500: var(--navy-500);
+  --color-navy-400: var(--navy-400);
+  --color-navy-300: var(--navy-300);
+  --color-navy-200: var(--navy-200);
+  --color-navy-100: var(--navy-100);
+  --color-navy-50: var(--navy-50);
+  --color-navy-25: var(--navy-25);
+}
+
+@theme {
+  --color-orange-900: #7E1C10;
+  --color-orange-800: #9D1E0F;
+  --color-orange-700: #C62408;
+  --color-orange-600: #EF3507;
+  --color-orange-500: #FE5011;
+  --color-orange-400: #FF7A3F;
+  --color-orange-300: #FFA571;
+  --color-orange-200: #FFCAA8;
+  --color-orange-100: #FFE6D4;
+  --color-orange-50: #FFF4ED;
+  --color-orange-25: #FFFDF9;
+  --color-slate-900: #0F172A;
+  --color-slate-800: #1E293B;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748B;
+  --color-slate-400: #94A3B8;
+  --color-slate-300: #CBD5E1;
+  --color-slate-200: #E2E8F0;
+  --color-slate-100: #F1F5F9;
+  --color-slate-50: #F8FAFC;
+  --color-success: #22C55E;
+  --color-success-light: #DCFCE7;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-error: #EF4444;
+  --color-error-light: #FEE2E2;
+  --color-info: #3B82F6;
+  --color-info-light: #DBEAFE;
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-light-gray: #94A3B8;
+
+  --text-display-2xl: 4.5rem;
+  --text-display-2xl--line-height: 5.625rem;
+  --text-display-2xl--letter-spacing: -0.02em;
+  --text-display-xl: 3.75rem;
+  --text-display-xl--line-height: 4.5rem;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-lg: 3rem;
+  --text-display-lg--line-height: 3.75rem;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-md: 2.25rem;
+  --text-display-md--line-height: 2.75rem;
+  --text-display-md--letter-spacing: -0.02em;
+  --text-display-sm: 1.875rem;
+  --text-display-sm--line-height: 2.375rem;
+  --text-display-sm--letter-spacing: -0.02em;
+  --text-display-xs: 1.5rem;
+  --text-display-xs--line-height: 2rem;
+  --text-display-xs--letter-spacing: 0;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.875rem;
+  --text-xl--letter-spacing: 0;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-lg--letter-spacing: 0;
+  --text-md: 1rem;
+  --text-md--line-height: 1.5rem;
+  --text-md--letter-spacing: 0;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-sm--letter-spacing: 0;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.125rem;
+  --text-xs--letter-spacing: 0;
+}
+
+@theme inline {
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  @apply bg-brand-background text-brand-primary font-body;
+}
