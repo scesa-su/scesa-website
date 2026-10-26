@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Caveat, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider } from "@/presentation/context/ThemeProvider";
 import "./globals.css";
 
@@ -15,6 +15,13 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
+// Handwritten captions on the hero photo frames.
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["400", "600"],
+});
+
 export const metadata: Metadata = {
   title: "SCESA",
   description:
@@ -26,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${jakarta.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${jakarta.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider>{children}</ThemeProvider>

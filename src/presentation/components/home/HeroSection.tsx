@@ -5,7 +5,7 @@ export function HeroSection() {
   return (
     <section aria-labelledby="hero-title" className="overflow-x-clip">
       <div className="mx-auto grid w-full max-w-360 items-center gap-12 px-4 py-12 md:px-8 lg:grid-cols-2 lg:px-14 lg:py-20">
-        <div className="flex flex-col items-start gap-6">
+        <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
           <h1 id="hero-title" className="max-w-md font-display text-display-md font-semibold text-brand-primary">
             Where Strathmore&apos;s Tech Pioneers Build the Future
           </h1>

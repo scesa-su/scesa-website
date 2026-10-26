@@ -20,13 +20,14 @@ export const SOCIAL_LINKS = [
 
 export type SocialIcon = (typeof SOCIAL_LINKS)[number]["icon"];
 
-// shortcut: placeholder SVGs until real SCESA event photos are added to public/images/home.
+// shortcut: placeholder SVGs and captions until real SCESA event photos are added to public/images/home.
+// width/height are the photo's pixel size; any aspect ratio works.
 export const HERO_PHOTOS = [
-  { src: "/images/home/deck-1.svg", alt: "Placeholder for SCESA event photo 1" },
-  { src: "/images/home/deck-2.svg", alt: "Placeholder for SCESA event photo 2" },
-  { src: "/images/home/deck-3.svg", alt: "Placeholder for SCESA event photo 3" },
-  { src: "/images/home/deck-4.svg", alt: "Placeholder for SCESA event photo 4" },
-  { src: "/images/home/deck-5.svg", alt: "Placeholder for SCESA event photo 5" },
+  { src: "/images/home/deck-1.svg", width: 800, height: 1000, alt: "Placeholder for SCESA event photo 1", caption: "Clubs & Sports Gala", date: "Apr 2025" },
+  { src: "/images/home/deck-2.svg", width: 1000, height: 800, alt: "Placeholder for SCESA event photo 2", caption: "Angular Kenya roadshow", date: "Feb 2025" },
+  { src: "/images/home/deck-3.svg", width: 900, height: 900, alt: "Placeholder for SCESA event photo 3", caption: "Hackathon weekend", date: "Nov 2024" },
+  { src: "/images/home/deck-4.svg", width: 750, height: 1000, alt: "Placeholder for SCESA event photo 4", caption: "AI & ML Circle meetup", date: "Mar 2025" },
+  { src: "/images/home/deck-5.svg", width: 1050, height: 700, alt: "Placeholder for SCESA event photo 5", caption: "Freshers' welcome", date: "Sep 2024" },
 ] as const;
 
 export const HOME_STATS = [
