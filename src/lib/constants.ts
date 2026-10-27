@@ -1,3 +1,5 @@
+export const SITE_URL = "https://scesa.com";
+
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Events", href: "/events" },
@@ -34,14 +36,4 @@ export const HOME_STATS = [
   { value: "500+", label: "student members" },
   { value: "6", label: "dedicated communities" },
   { value: "4", label: "Clubs & Sports Gala 2025 awards" },
-] as const;
-
-const EXCERPT = "A practical talk on component APIs, accessibility, and shipping faster in Angular.";
-const EVENT_IMAGE = "/images/home/event.svg";
-const EVENT_IMAGE_ALT = "Angular Kenya Campus Roadshow poster";
-
-export const FEATURED_EVENTS = [
-  { title: "Angular Kenya workshop", status: "live", excerpt: EXCERPT, image: EVENT_IMAGE, imageAlt: EVENT_IMAGE_ALT },
-  { title: "Angular Kenya roadshow", status: "scheduled", excerpt: EXCERPT, image: EVENT_IMAGE, imageAlt: EVENT_IMAGE_ALT },
-  { title: "Angular Kenya meetup", status: "completed", excerpt: EXCERPT, image: EVENT_IMAGE, imageAlt: EVENT_IMAGE_ALT },
 ] as const;
