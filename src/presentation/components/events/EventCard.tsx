@@ -1,19 +1,23 @@
 import Image from "next/image";
+import type { EventStatus } from "@/domain/entities/Event";
 import { Badge } from "@/presentation/components/ui/Badge";
 import { Button } from "@/presentation/components/ui/Button";
 import { Card } from "@/presentation/components/ui/Card";
 
-const STATUS_LABEL = { live: "Live", scheduled: "Scheduled", completed: "Completed" } as const;
+export const STATUS_LABEL: Record<EventStatus, string> = { live: "Live", scheduled: "Scheduled", completed: "Completed" };
 
 type EventCardProps = {
   title: string;
   excerpt: string;
-  status: keyof typeof STATUS_LABEL;
+  status: EventStatus;
   image: string;
   imageAlt: string;
+  href: string;
+  /** Already formatted for display, e.g. "14 Nov 2026". */
+  date?: string;
 };
 
-export function EventCard({ title, excerpt, status, image, imageAlt }: EventCardProps) {
+export function EventCard({ title, excerpt, status, image, imageAlt, href, date }: EventCardProps) {
   return (
     <Card className="flex h-full flex-col">
       <div className="relative aspect-16/10">
@@ -30,9 +34,9 @@ export function EventCard({ title, excerpt, status, image, imageAlt }: EventCard
           <h3 className="text-sm font-semibold text-brand-primary">{title}</h3>
           <Badge variant={status}>{STATUS_LABEL[status]}</Badge>
         </div>
+        {date && <p className="text-xs font-medium text-slate-600 dark:text-slate-300">{date}</p>}
         <p className="mb-4 text-xs text-slate-600 dark:text-slate-300">{excerpt}</p>
-        {/* shortcut: links to /events until event detail pages exist */}
-        <Button href="/events" variant="soft" aria-label={`View event: ${title}`} className="mt-auto w-full">
+        <Button href={href} variant="soft" aria-label={`View event: ${title}`} className="mt-auto w-full">
           View Event
         </Button>
       </div>

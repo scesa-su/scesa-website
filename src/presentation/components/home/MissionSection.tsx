@@ -3,7 +3,7 @@ export function MissionSection() {
     <section aria-label="Our mission" className="mx-auto w-full max-w-360 px-4 py-12 text-center md:px-8 lg:px-14">
       <p className="text-xl text-brand-primary">
         The official digital home of the{" "}
-        <span className="font-semibold text-orange-700 dark:text-brand-accent">
+        <span className="font-semibold text-brand-accent">
           Strathmore Computing and Engineering Students Association.
         </span>
       </p>
