@@ -1,0 +1,9 @@
+[
+  { "name": "Nathan Githinji", "role": "President", "photo": "/images/about/nathan-githinji.png" },
+  { "name": "Ravine Rianga", "role": "Vice President", "photo": "/images/about/ravine-rianga.png" },
+  { "name": "Daisy Onyimbo", "role": "Secretary", "photo": "/images/about/daisy-onyimbo.png" },
+  { "name": "Rina", "role": "Finance Executive", "photo": "/images/about/rina.png" },
+  { "name": "Antony Kasera", "role": "Project Manager", "photo": "/images/about/antony-kasera.png" },
+  { "name": "Richard Arnold", "role": "Membership Coordinator", "photo": "/images/about/richard-arnold.png" },
+  { "name": "Emma Naomi", "role": "Director of Communications", "photo": "/images/about/emma-naomi.png" }
+]
