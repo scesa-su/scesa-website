@@ -2,6 +2,7 @@ import { Button } from "@/presentation/components/ui/Button";
 import { Logo } from "./Logo";
 import { MobileDrawer } from "./MobileDrawer";
 import { NavLinks } from "./NavLinks";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Navbar() {
   return (
@@ -12,11 +13,14 @@ export function Navbar() {
           <nav aria-label="Main" className="hidden lg:block">
             <NavLinks />
           </nav>
-          <Button href="/join" size="lg" className="hidden focus-visible:ring-offset-brand-surface lg:inline-flex">
-            Join SCESA
-          </Button>
-          <div className="lg:hidden">
-            <MobileDrawer />
+          <div className="flex items-center gap-2 lg:gap-4">
+            <ThemeToggle />
+            <Button href="/join" size="lg" className="hidden focus-visible:ring-offset-brand-surface lg:inline-flex">
+              Join SCESA
+            </Button>
+            <div className="lg:hidden">
+              <MobileDrawer />
+            </div>
           </div>
         </div>
       </div>
