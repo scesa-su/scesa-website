@@ -1,4 +1,5 @@
 export const SITE_URL = "https://scesa.com";
+export const CONTACT_EMAIL = "scesa@strathmore.edu";
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -16,7 +17,7 @@ export const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/strathmore-computing-and-engineering-student-s-association/", icon: "linkedin" },
   { label: "Instagram", href: "https://www.instagram.com/strathmore.scesa/", icon: "instagram" },
   { label: "TikTok", href: "https://www.tiktok.com/@scesacommunity", icon: "tiktok" },
-  { label: "Email", href: "mailto:scesa@strathmore.edu", icon: "email" },
+  { label: "Email", href: `mailto:${CONTACT_EMAIL}`, icon: "email" },
   { label: "Luma", href: "https://luma.com/user/SCESA", icon: "luma" },
 ] as const;
 
