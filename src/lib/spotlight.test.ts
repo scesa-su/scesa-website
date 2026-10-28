@@ -140,8 +140,36 @@ test("real spotlight posts parse, use slug file names, and their images and even
   assert.ok(real.length > 0);
   for (const p of real) {
     assert.match(p.slug, /^[a-z0-9]+(-[a-z0-9]+)*$/, `bad file name ${p.slug}`);
-    if (p.coverImage) assert.ok(existsSync(path.join("public", p.coverImage)), `${p.slug}: missing public${p.coverImage}`);
+    for (const img of [p.coverImage, p.member?.photo, ...(p.gallery ?? []).map((g) => g.image)])
+      if (img) assert.ok(existsSync(path.join("public", img)), `${p.slug}: missing public${img}`);
     if (p.eventSlug)
       assert.ok(existsSync(path.join("src/content/events", `${p.eventSlug}.mdx`)), `${p.slug}: no event ${p.eventSlug}`);
+  }
+});
+
+test("parseSpotlightFile reads gallery, project and member photo, and rejects bad values naming the file", () => {
+  const project = `${valid.replace("kind: recap", "kind: in-the-works")}
+project:
+  stage: building
+  team: ["A", "B"]
+  links:
+    - { label: "Repo", url: "https://github.com/x/y" }
+gallery:
+  - { image: "/images/a.jpg", alt: "A" }`;
+  const post = parseSpotlightFile("p.mdx", file(project));
+  assert.equal(post.project?.stage, "building");
+  assert.deepEqual(post.project?.team, ["A", "B"]);
+  assert.equal(post.gallery?.[0].alt, "A");
+  const photo = `${member}\n  photo: "/images/m.jpg"\n  photoAlt: "M"`;
+  assert.equal(parseSpotlightFile("m.mdx", file(photo)).member?.photoAlt, "M");
+  for (const fm of [
+    project.replace("stage: building", "stage: done"),
+    project.replace("https://github.com", "http://github.com"),
+    `${member}\n  photo: "/images/m.jpg"`,
+    `${member}\n  photoAlt: "M"`,
+    `${member}\n  links:\n    - { label: "Site", url: "http://x.com" }`,
+    `${valid}\ngallery:\n  - { image: "/images/a.jpg" }`,
+  ]) {
+    assert.throws(() => parseSpotlightFile("bad-post.mdx", file(fm)), /bad-post\.mdx/);
   }
 });

@@ -1,9 +1,10 @@
 import matter from "gray-matter";
 import { z } from "zod";
-import { SPOTLIGHT_KINDS, type SpotlightPost } from "../../domain/entities/SpotlightPost.ts";
+import { PROJECT_STAGES, SPOTLIGHT_KINDS, type SpotlightPost } from "../../domain/entities/SpotlightPost.ts";
 import { readingMinutes } from "../../domain/usecases/spotlightQueries.ts";
 
 const text = z.string().trim().min(1);
+const link = z.object({ label: text, url: z.url({ protocol: /^https$/ }) });
 
 export const spotlightFrontmatterSchema = z
   .object({
@@ -16,7 +17,22 @@ export const spotlightFrontmatterSchema = z
     coverImage: text.optional(),
     coverAlt: text.optional(),
     eventSlug: text.optional(),
-    member: z.object({ name: text, degree: text, year: text, quote: text }).optional(),
+    member: z
+      .object({
+        name: text,
+        degree: text,
+        year: text,
+        quote: text,
+        photo: text.optional(),
+        photoAlt: text.optional(),
+        links: z.array(link).optional(),
+      })
+      .refine((m) => !m.photo === !m.photoAlt, { message: "photo and photoAlt go together", path: ["photoAlt"] })
+      .optional(),
+    project: z
+      .object({ stage: z.enum(PROJECT_STAGES), team: z.array(text).optional(), links: z.array(link).optional() })
+      .optional(),
+    gallery: z.array(z.object({ image: text, alt: text })).optional(),
     draft: z.boolean().default(false),
   })
   .refine((p) => !p.coverImage === !p.coverAlt, { message: "coverImage and coverAlt go together", path: ["coverAlt"] })
