@@ -6,7 +6,6 @@ import { parseLeadersFile, parsePartnersFile } from "@/data/models/aboutSchema";
 
 const ABOUT_DIR = path.join(process.cwd(), "src/content/about");
 
-// shortcut: Rina's surname is pending in leaders.json; add it (and the owner's replacement rina.png) when confirmed.
 // shortcut: partners.json has no logos; add a `logo` only after each organisation agrees to its use.
 export class JsonAboutDataSource {
   async readLeaders(): Promise<Leader[]> {

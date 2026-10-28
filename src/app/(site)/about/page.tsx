@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { DownloadIcon } from "lucide-react";
 import { aboutRepository } from "@/data/repositories/AboutRepository";
 import { BoardWall } from "@/presentation/components/about/BoardWall";
 import { GrowthPathways, MissionVision, Pillars } from "@/presentation/components/about/ClubStory";
-import { ConductSection } from "@/presentation/components/about/ConductSection";
-import { PartnersSection } from "@/presentation/components/about/PartnersSection";
-import { BODY, H2, SECTION } from "@/presentation/components/about/styles";
+import { CodeOfConduct } from "@/presentation/components/about/CodeOfConduct";
+import { ClosingPanels, PartnersSection } from "@/presentation/components/about/PartnersSection";
+import { BODY, CONTAINER } from "@/presentation/components/about/styles";
 import { Timeline } from "@/presentation/components/about/Timeline";
 import { Button } from "@/presentation/components/ui/Button";
 
@@ -19,44 +21,53 @@ export default async function AboutPage() {
 
   return (
     <main>
-      <section className={`${SECTION} lg:pt-20`}>
-        <h1 className="max-w-4xl font-display text-display-md font-semibold text-brand-primary lg:text-display-lg">
-          The students behind SCESA
-        </h1>
-        <p className={`mt-4 max-w-3xl ${BODY}`}>
-          SCESA is the student association of the School of Computing and Engineering Sciences at Strathmore
-          University&apos;s Madaraka campus. Since 2014 we have worked to close the gap between classroom theory and
-          real-world engineering.
-        </p>
-        <Button
-          href="/docs/scesa-portfolio-2026-27.pdf"
-          prefetch={false}
-          variant="outline"
-          size="lg"
-          className="mt-8"
-          aria-label="Download our 2026/27 corporate portfolio (PDF)"
-        >
-          Download our portfolio (PDF)
-        </Button>
+      <section className={`${CONTAINER} grid items-center gap-12 pt-12 pb-16 lg:grid-cols-12 lg:gap-16 lg:pt-20 lg:pb-24`}>
+        <div className="lg:col-span-6">
+          <h1 className="font-display text-display-md font-semibold text-brand-primary md:text-display-lg xl:text-display-xl">
+            The students behind SCESA
+          </h1>
+          <p className={`mt-6 max-w-xl ${BODY}`}>
+            SCESA is the student association of the School of Computing and Engineering Sciences at Strathmore
+            University&apos;s Madaraka campus. Since 2014 we have worked to close the gap between classroom theory and
+            real-world engineering.
+          </p>
+          <Button
+            href="/docs/scesa-portfolio-2026-27.pdf"
+            prefetch={false}
+            variant="outline"
+            size="lg"
+            className="mt-8"
+            aria-label="Download our 2026/27 corporate portfolio (PDF)"
+          >
+            <DownloadIcon aria-hidden className="size-5" />
+            Download our portfolio (PDF)
+          </Button>
+        </div>
+        <figure className="lg:col-span-6">
+          <Image
+            src="/images/about/members-auditorium.jpeg"
+            alt="Students seated in a Strathmore University auditorium during a SCESA session"
+            width={1120}
+            height={840}
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="aspect-4/3 h-auto w-full rounded-3xl object-cover"
+          />
+          <figcaption className="mt-3 font-hand text-xl text-slate-600 dark:text-slate-300">
+            A full house at a SCESA session
+          </figcaption>
+        </figure>
       </section>
-      <MissionVision />
+      <div className="border-t border-brand-border">
+        <MissionVision />
+      </div>
       <Pillars />
       <GrowthPathways />
       <Timeline />
       <BoardWall leaders={leaders} />
-      <ConductSection />
+      <CodeOfConduct />
       <PartnersSection partners={partners} />
-      <section aria-labelledby="join" className={`${SECTION} pb-20 text-center`}>
-        <h2 id="join" className={H2}>
-          Ready to join us?
-        </h2>
-        <p className={`mx-auto mt-3 max-w-2xl ${BODY}`}>
-          Pick the communities you care about and meet people building the same things you are.
-        </p>
-        <Button href="/join" size="lg" className="mt-6" aria-label="Find your tribe: become a SCESA member">
-          Find Your Tribe
-        </Button>
-      </section>
+      <ClosingPanels />
     </main>
   );
 }

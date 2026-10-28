@@ -33,7 +33,7 @@ export const HERO_PHOTOS = [
 ] as const;
 
 export const HOME_STATS = [
-  { value: "500+", label: "student members" },
+  { value: "250+", label: "members over the years" },
   { value: "6", label: "dedicated communities" },
   { value: "4", label: "Clubs & Sports Gala 2025 awards" },
 ] as const;
