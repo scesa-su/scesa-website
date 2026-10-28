@@ -28,7 +28,7 @@ export default async function AboutPage() {
           </h1>
           <p className={`mt-6 max-w-xl ${BODY}`}>
             SCESA is the student association of the School of Computing and Engineering Sciences at Strathmore
-            University&apos;s Madaraka campus. Since 2014 we have worked to close the gap between classroom theory and
+            University. Since 2014 we have worked to close the gap between classroom theory and
             real-world engineering.
           </p>
           <Button
@@ -54,7 +54,7 @@ export default async function AboutPage() {
             className="aspect-4/3 h-auto w-full rounded-3xl object-cover"
           />
           <figcaption className="mt-3 font-hand text-xl text-slate-600 dark:text-slate-300">
-            A full house at a SCESA session
+            Participants at a Data Engineering event (2025)
           </figcaption>
         </figure>
       </section>
