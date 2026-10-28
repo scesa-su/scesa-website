@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Caveat, Plus_Jakarta_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Caveat, Kalam, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider } from "@/presentation/context/ThemeProvider";
 import "./globals.css";
 
@@ -22,6 +22,13 @@ const caveat = Caveat({
   weight: ["400", "600"],
 });
 
+// Felt-tip marker lettering on the polaroid frames (home deck and board wall).
+const kalam = Kalam({
+  variable: "--font-kalam",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
 export const metadata: Metadata = {
   title: "SCESA",
   description:
@@ -33,7 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${jakarta.variable} ${caveat.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${jakarta.variable} ${caveat.variable} ${kalam.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider>{children}</ThemeProvider>
