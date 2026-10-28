@@ -25,6 +25,17 @@ member:                # required when kind is member
   degree: "BBIT"
   year: "Year 3"
   quote: "A short quote, with their permission."
+  photo: "/images/spotlight/full-name.jpg"   # optional portrait
+  photoAlt: "Full name smiling at the camera"  # required when photo is set
+  links:               # optional, https only
+    - { label: "LinkedIn", url: "https://www.linkedin.com/in/..." }
+project:               # optional, in-the-works posts: the status box
+  stage: building      # idea, building, testing or launched
+  team: ["Name One", "Name Two"]
+  links:
+    - { label: "Repo", url: "https://github.com/..." }
+gallery:               # optional, any kind: polaroids after the article
+  - { image: "/images/spotlight/gala-1.jpg", alt: "What the photo shows" }
 ---
 ```
 
@@ -32,10 +43,12 @@ If a field is missing or has the wrong format, the build fails and the error nam
 
 ## Kinds
 
-- `recap`: something that already happened.
-- `in-the-works`: something members are building or planning now.
-- `coming-up`: something announced for later. Add `eventSlug` once the event exists. After the event, change the kind to `recap` or set `draft: true`, or the post keeps saying "save the date".
-- `member`: a student or alum, their work and a quote.
+Each kind has its own article layout.
+
+- `recap`: something that already happened. With a `coverImage`, the photo runs wide across the top.
+- `in-the-works`: something members are building or planning now. Add `project` to show a status box with the stage, team and links.
+- `coming-up`: something announced for later. Add `eventSlug` once the event exists; the article then shows a card with the event's date, place and an Add to Calendar button. After the event, change the kind to `recap` or set `draft: true`, or the post keeps saying "save the date".
+- `member`: a student or alum, their work and a quote. Add `member.photo` for a profile header with their portrait.
 
 ## Images
 
