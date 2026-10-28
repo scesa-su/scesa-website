@@ -115,6 +115,17 @@
   --color-black: #000000;
   --color-light-gray: #94A3B8;
 
+  /* Spotlight margin-note underlines draw in once on load (applied with motion-safe only). */
+  --animate-draw: draw 700ms ease-out both;
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
   --text-display-2xl: 4.5rem;
   --text-display-2xl--line-height: 5.625rem;
   --text-display-2xl--letter-spacing: -0.02em;
