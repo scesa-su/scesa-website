@@ -1,5 +1,7 @@
 import Image from "next/image";
 import type { Partner } from "@/domain/entities/Partner";
+import { CONTACT_EMAIL } from "@/lib/constants";
+import { mailtoHref } from "@/lib/mailto";
 import { Button } from "@/presentation/components/ui/Button";
 import { H2, SECTION } from "./styles";
 
@@ -23,6 +25,12 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
   );
 }
 
+const PARTNER_MAILTO = mailtoHref({
+  to: CONTACT_EMAIL,
+  subject: "Partnership proposal",
+  body: ["Organisation:", "Contact person:", "Role:", "", "What you have in mind:", ""].join("\n"),
+});
+
 export function ClosingPanels() {
   return (
     <section aria-label="Work with SCESA" className={`${SECTION} pt-0 lg:pt-0`}>
@@ -37,10 +45,10 @@ export function ClosingPanels() {
             your team gets an early look at future talent while our members learn from your experts.
           </p>
           <Button
-            href="mailto:scesa@strathmore.edu"
+            href={PARTNER_MAILTO}
             size="lg"
             className="mt-8"
-            aria-label="Partner with SCESA: email scesa@strathmore.edu"
+            aria-label={`Partner with SCESA: email ${CONTACT_EMAIL}`}
           >
             Partner with SCESA
           </Button>
