@@ -95,6 +95,7 @@ export function SwipeableDeck() {
                 src={photo.src}
                 alt={photo.alt}
                 width={photo.width}
+                loading="eager"
                 height={photo.height}
                 priority={i === 0}
                 draggable={false}
