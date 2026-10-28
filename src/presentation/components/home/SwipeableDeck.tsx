@@ -101,16 +101,17 @@ export function SwipeableDeck() {
                 sizes="(min-width: 1024px) 440px, 90vw"
                 className="pointer-events-none h-auto w-full select-none"
               />
-              <figcaption className="flex items-baseline justify-between gap-3 px-1 pt-2 pb-4 font-hand leading-none text-slate-800">
-                <span className="text-lg font-semibold sm:text-xl">{photo.caption}</span>
-                <span className="shrink-0 text-md text-slate-600 sm:text-lg">{photo.date}</span>
+              <figcaption className="flex -rotate-1 items-baseline justify-between gap-3 px-1 pt-2 pb-4 font-marker leading-tight text-slate-800">
+                <span className="text-md font-bold sm:text-lg">{photo.caption}</span>
+                {photo.date && <span className="shrink-0 text-sm text-slate-600 sm:text-md">{photo.date}</span>}
               </figcaption>
             </motion.figure>
           );
         })}
       </div>
       <p aria-live="polite" className="sr-only">
-        Photo {top + 1} of {n}: {current.caption}, {current.date}
+        Photo {top + 1} of {n}: {current.caption}
+        {current.date && `, ${current.date}`}
       </p>
       <div className="flex items-center gap-4">
         <button type="button" onClick={prev} aria-label="Previous photo" className={NAV_BUTTON}>

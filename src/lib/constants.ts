@@ -22,18 +22,46 @@ export const SOCIAL_LINKS = [
 
 export type SocialIcon = (typeof SOCIAL_LINKS)[number]["icon"];
 
-// shortcut: placeholder SVGs and captions until real SCESA event photos are added to public/images/home.
-// width/height are the photo's pixel size; any aspect ratio works.
-export const HERO_PHOTOS = [
-  { src: "/images/home/deck-1.svg", width: 800, height: 1000, alt: "Placeholder for SCESA event photo 1", caption: "Clubs & Sports Gala", date: "Apr 2025" },
-  { src: "/images/home/deck-2.svg", width: 1000, height: 800, alt: "Placeholder for SCESA event photo 2", caption: "Angular Kenya roadshow", date: "Feb 2025" },
-  { src: "/images/home/deck-3.svg", width: 900, height: 900, alt: "Placeholder for SCESA event photo 3", caption: "Hackathon weekend", date: "Nov 2024" },
-  { src: "/images/home/deck-4.svg", width: 750, height: 1000, alt: "Placeholder for SCESA event photo 4", caption: "AI & ML Circle meetup", date: "Mar 2025" },
-  { src: "/images/home/deck-5.svg", width: 1050, height: 700, alt: "Placeholder for SCESA event photo 5", caption: "Freshers' welcome", date: "Sep 2024" },
-] as const;
+type HeroPhoto = { src: string; width: number; height: number; alt: string; caption: string; date?: string };
+
+// width/height are the photo's pixel size; any aspect ratio works. Leave date out when it is not known.
+export const HERO_PHOTOS: readonly HeroPhoto[] = [
+  {
+    src: "/images/home/clubs-sports-gala-2026.jpg",
+    width: 800,
+    height: 1066,
+    alt: "Two SCESA leaders holding the club's four award plaques at the Strathmore Clubs & Sports Gala",
+    caption: "Clubs & Sports Gala",
+    date: "Jun 2026",
+  },
+  {
+    src: "/images/home/em-industry-visit.jpg",
+    width: 800,
+    height: 533,
+    alt: "SCESA members posing as a group in front of an E&M Technology House backdrop",
+    caption: "E&M Technology House visit",
+    date: "Jun 2026",
+  },
+  {
+    src: "/images/home/arduino-workshop.jpg",
+    width: 800,
+    height: 600,
+    alt: "Students at the SCESA Arduino workshop standing together outside a campus building",
+    caption: "Arduino workshop",
+    date: "Sep 2025",
+  },
+  {
+    src: "/images/about/members-auditorium.jpeg",
+    width: 1120,
+    height: 840,
+    alt: "Students seated in a Strathmore University auditorium during a Data Engineering event",
+    caption: "Data Engineering event",
+    date: "2025",
+  },
+];
 
 export const HOME_STATS = [
-  { value: "500+", label: "student members" },
+  { value: "250+", label: "members over the years" },
   { value: "6", label: "dedicated communities" },
   { value: "4", label: "Clubs & Sports Gala 2025 awards" },
 ] as const;

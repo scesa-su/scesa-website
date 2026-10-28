@@ -98,6 +98,20 @@
   /* Fixed navy that does not invert in dark mode (footer, mobile drawer) */
   --color-brand-navy: #161A51;
   --color-white: #FFFFFF;
+
+  /* Board wall push pins: muted, fixed in both themes because they sit on white photo paper. */
+  --color-pin-red-hi: #E58F87;
+  --color-pin-red: #B9473E;
+  --color-pin-red-shade: #6E2520;
+  --color-pin-amber-hi: #F2D08A;
+  --color-pin-amber: #D19A2E;
+  --color-pin-amber-shade: #7E5612;
+  --color-pin-teal-hi: #93CEC6;
+  --color-pin-teal: #2F8C83;
+  --color-pin-teal-shade: #16514B;
+  --color-pin-navy-hi: #8E97D2;
+  --color-pin-navy: #343E8F;
+  --color-pin-navy-shade: #161A51;
   --color-black: #000000;
   --color-light-gray: #94A3B8;
 
@@ -140,8 +154,10 @@
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-hand: var(--font-caveat), cursive;
+  --font-marker: var(--font-kalam), cursive;
 }
 
 body {
   @apply bg-brand-background text-brand-primary font-body;
 }
+
