@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // /events renders per request (search params) and reads the MDX files at runtime.
+  // Dynamic and hourly-revalidated routes read the MDX files at runtime. Keys are picomatch globs, so no [slug] brackets.
   outputFileTracingIncludes: {
-    "/events": ["./src/content/events/**/*"],
+    "/**": ["./src/content/**/*"],
   },
 };
 

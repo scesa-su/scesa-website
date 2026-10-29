@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Caveat, Kalam, Plus_Jakarta_Sans } from "next/font/google";
+import { SITE_URL } from "@/lib/constants";
 import { ThemeProvider } from "@/presentation/context/ThemeProvider";
 import "./globals.css";
 
@@ -30,6 +31,7 @@ const kalam = Kalam({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "SCESA",
   description:
     "Strathmore Computing and Engineering Students Association",

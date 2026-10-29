@@ -2,6 +2,9 @@ import { eventRepository } from "@/data/repositories/EventRepository";
 import { SITE_URL } from "@/lib/constants";
 import { buildIcs } from "@/lib/ics";
 
+// Event status comes from the clock, so rebuild hourly.
+export const revalidate = 3600;
+
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
