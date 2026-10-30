@@ -42,7 +42,7 @@ export function buildIcs(event: IcsEvent, url: string) {
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
-    `UID:${event.slug}@scesa.com`,
+    `UID:${event.slug}@scesa.co.ke`,
     // Deterministic stamp so the static file is reproducible across builds.
     `DTSTAMP:${toUtc(event.date)}`,
     `DTSTART:${toUtc(event.date)}`,

@@ -127,10 +127,10 @@ test("eventStatus is live between date and endDate, completed after, scheduled b
 
 test("sitemap lists pages, every event and published posts, but no drafts", async () => {
   const urls = (await sitemap()).map((e) => e.url);
-  assert.ok(urls.includes("https://scesa.com/"));
-  for (const e of await new MdxEventsDataSource().readAll()) assert.ok(urls.includes(`https://scesa.com/events/${e.slug}`), e.slug);
+  assert.ok(urls.includes("https://scesa.co.ke/"));
+  for (const e of await new MdxEventsDataSource().readAll()) assert.ok(urls.includes(`https://scesa.co.ke/events/${e.slug}`), e.slug);
   for (const p of await new MdxSpotlightDataSource().readAll()) {
-    assert.equal(urls.includes(`https://scesa.com/spotlight/${p.slug}`), !p.draft, p.slug);
+    assert.equal(urls.includes(`https://scesa.co.ke/spotlight/${p.slug}`), !p.draft, p.slug);
   }
   assert.ok(!urls.some((u) => u.endsWith("/spotlight/alumni-story-draft")));
 });
