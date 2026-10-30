@@ -31,3 +31,16 @@ export async function canEdit(token: string, fetcher: typeof fetch = fetch): Pro
     return false;
   }
 }
+
+/**
+ * Any Keystatic response that hands out an access token (sign-in, refresh, repo-not-found, or a
+ * percent-encoded path to one of them) is replaced by a 403 unless the account can push.
+ */
+export async function guardSession(response: Response, fetcher: typeof fetch = fetch): Promise<Response> {
+  const token = accessTokenFrom(response.headers.getSetCookie());
+  if (!token || (await canEdit(token, fetcher))) return response;
+  return new Response(
+    "Only SCESA editors can use the content editor. Ask the site owner to add your GitHub account to the scesa-su editors team.",
+    { status: 403 },
+  );
+}
