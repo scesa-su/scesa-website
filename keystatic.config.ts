@@ -1,6 +1,7 @@
 import { collection, config, fields } from "@keystatic/core";
 import { block, repeating, wrapper } from "@keystatic/core/content-components";
 import { EVENT_CATEGORIES } from "./src/domain/entities/Event";
+import { KEYSTATIC_REPO } from "./src/lib/keystatic";
 import { PROJECT_STAGES, SPOTLIGHT_KINDS, type SpotlightKind } from "./src/domain/entities/SpotlightPost";
 
 const required = { isRequired: true } as const;
@@ -130,7 +131,7 @@ const spotlightCollection = (kind: SpotlightKind) =>
 export default config({
   storage:
     process.env.NODE_ENV === "production"
-      ? { kind: "github", repo: "scesa-su/scesa-website", branchPrefix: "content/" }
+      ? { kind: "github", repo: KEYSTATIC_REPO, branchPrefix: "content/" }
       : { kind: "local" },
   ui: { brand: { name: "SCESA" } },
   collections: {
