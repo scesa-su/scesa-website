@@ -6,7 +6,12 @@ const EVENTS_DIR = "src/content/events";
 
 export class MdxEventsDataSource {
   async readAll(): Promise<StoredEvent[]> {
-    const files = (await readdir(path.join(process.cwd(), EVENTS_DIR))).filter((f) => f.endsWith(".mdx"));
+    // Keystatic deletes the folder along with the last event; no folder means no events.
+    const names = await readdir(path.join(process.cwd(), EVENTS_DIR)).catch((e: NodeJS.ErrnoException) => {
+      if (e.code === "ENOENT") return [];
+      throw e;
+    });
+    const files = names.filter((f) => f.endsWith(".mdx"));
     return Promise.all(
       files.map(async (f) => {
         const file = path.join(EVENTS_DIR, f);

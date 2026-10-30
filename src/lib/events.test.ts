@@ -143,7 +143,7 @@ test("parseEventFile accepts virtualUrl without venue and rejects javascript: UR
 });
 
 test("real events parse and their posters exist", async () => {
+  // Empty when every event has been deleted in Keystatic, which also removes the folder.
   const real = await new MdxEventsDataSource().readAll();
-  assert.ok(real.length > 0);
   for (const e of real) assert.ok(existsSync(path.join("public", e.image)), `${e.slug}: missing public${e.image}`);
 });
