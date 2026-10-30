@@ -9,7 +9,8 @@ const csp = [
   "img-src 'self' data: blob: https://avatars.githubusercontent.com https://raw.githubusercontent.com",
   "font-src 'self' https://fonts.gstatic.com",
   "connect-src 'self' https://api.github.com https://raw.githubusercontent.com",
-  "frame-src 'none'",
+  // Event pages embed a Google Maps pin.
+  "frame-src https://www.google.com",
   "frame-ancestors 'none'",
   "object-src 'none'",
   "base-uri 'self'",
