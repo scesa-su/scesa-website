@@ -9,6 +9,10 @@ import { EventMeta, HostedBy } from "@/presentation/components/events/EventMeta"
 import { mdxComponents } from "@/presentation/components/events/mdxComponents";
 import { Badge } from "@/presentation/components/ui/Badge";
 import { Card } from "@/presentation/components/ui/Card";
+import { allowOnly } from "@/lib/mdx";
+
+// Only elements with a component render; raw HTML in an event is dropped.
+const mdxOptions = { remarkPlugins: [allowOnly(Object.keys(mdxComponents))] };
 
 // Event status comes from the clock, so rebuild hourly.
 export const revalidate = 3600;
@@ -60,7 +64,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
               About this event
             </h2>
             <p className="mt-3 text-md text-slate-600 dark:text-slate-300">{event.excerpt}</p>
-            <MDXRemote source={event.body} components={mdxComponents} />
+            <MDXRemote source={event.body} components={mdxComponents} options={{ mdxOptions }} />
           </section>
           {showCalendar && (
             <div className="sticky bottom-0 -mx-4 border-t border-brand-border bg-brand-surface px-4 py-3 md:-mx-8 md:px-8 lg:hidden">

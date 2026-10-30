@@ -99,6 +99,7 @@ test("parseEventFile rejects bad frontmatter and names the file", () => {
 
 test("escapeIcsText escapes per RFC 5545", () => {
   assert.equal(escapeIcsText("a,b;c\\d\ne"), "a\\,b\\;c\\\\d\\ne");
+  assert.equal(escapeIcsText("a\rATTACH:x\r\nb"), "a\\nATTACH:x\\nb");
 });
 
 test("buildIcs emits CRLF lines with UTC times and escaped text", () => {

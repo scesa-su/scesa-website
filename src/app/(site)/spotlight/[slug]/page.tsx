@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { eventRepository } from "@/data/repositories/EventRepository";
 import { spotlightRepository } from "@/data/repositories/SpotlightRepository";
 import { SITE_URL } from "@/lib/constants";
+import { allowOnly } from "@/lib/mdx";
 import { CONTAINER } from "@/presentation/components/about/styles";
 import { PostRow } from "@/presentation/components/spotlight/FeedEntry";
 import { cn } from "@/lib/cn";
@@ -17,6 +18,9 @@ import {
 import { Gallery } from "@/presentation/components/spotlight/Gallery";
 import { spotlightMdxComponents } from "@/presentation/components/spotlight/mdxComponents";
 import { Button } from "@/presentation/components/ui/Button";
+
+// Only elements with a component render; raw HTML in a post is dropped.
+const mdxOptions = { remarkPlugins: [allowOnly(Object.keys(spotlightMdxComponents))] };
 
 // Event status comes from the clock, so rebuild hourly.
 export const revalidate = 3600;
@@ -59,7 +63,7 @@ export default async function SpotlightArticlePage({ params }: PageProps<"/spotl
     <>
       <ProjectStatus post={post} />
       <div className="mt-4">
-        <MDXRemote source={post.body} components={spotlightMdxComponents} />
+        <MDXRemote source={post.body} components={spotlightMdxComponents} options={{ mdxOptions }} />
       </div>
       <Gallery images={post.gallery} />
       {event && !coming && (
