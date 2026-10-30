@@ -44,6 +44,14 @@ export const HERO_PHOTOS: readonly HeroPhoto[] = [
     date: "Jun 2026",
   },
   {
+    src: "/images/home/team-building-hike-2025.jpg",
+    width: 800,
+    height: 533,
+    alt: "SCESA members smiling as they walk a forest trail on the team building hike",
+    caption: "Team building hike",
+    date: "Jun 2025",
+  },
+  {
     src: "/images/home/arduino-workshop.jpg",
     width: 800,
     height: 600,
