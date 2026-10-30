@@ -37,12 +37,12 @@ export default function NotFound() {
         </div>
         <Polaroid
           src="/images/not-found/404_not_found.svg"
-          alt="Afrian E. Prasetyo on Unsplash"
+          alt="Illustration of a person asleep in a bin, holding 404 balloons"
           sizes="(min-width: 1024px) 40vw, 90vw"
           index={1}
           priority
           className="mx-auto w-full max-w-md"
-          caption={<span className="font-marker text-lg font-bold text-slate-800">We looked everywhere. Even here.</span>}
+          caption={<span className="font-marker text-lg font-bold text-slate-800">Gone for a nap. Back after the hackathon.</span>}
         />
       </main>
     </SiteLayout>
