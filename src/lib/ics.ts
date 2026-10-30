@@ -4,7 +4,7 @@ type IcsEvent = Pick<Event, "slug" | "title" | "excerpt" | "date" | "endDate" | 
 
 /** RFC 5545 §3.3.11 TEXT escaping. */
 export function escapeIcsText(value: string) {
-  return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+  return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r\n|\r|\n/g, "\\n");
 }
 
 /** 2026-11-14T09:00:00+03:00 -> 20261114T060000Z */
