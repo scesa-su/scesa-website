@@ -37,7 +37,14 @@ Use the **+** menu in the article editor to insert:
 
 ## Events
 
-Fill in the title, category, start and end time, speaker, host community, poster, poster alt text and excerpt. An event needs a venue, an online link, or both.
+Fill in the title, category, start and end time, poster, poster alt text and excerpt, then:
+
+- **Where**: pick **In person** or **Online**. An event is one or the other, never both.
+  - **In person**: type the **Venue** shown on the page. **Map pin** is optional: an address, a Google Maps place name, or coordinates such as `-1.3098, 36.8126`. Leave it blank to pin the venue name. The page shows a map under the description.
+  - **Online**: paste the Meet, Zoom or YouTube **Online link**. No map is shown.
+- **Registration form**: optional. Paste an external sign-up link (Google Form, Luma, Eventbrite) to show a **Register** button.
+- **Speaker**: optional. Leave it blank if the event has no speaker.
+- **Hosts**: add one entry per hosting community or partner. At least one is required.
 
 You don't set an event's status. The site works it out from the times: before the start it is **Scheduled**, between start and end it is **Live**, and after the end it is **Completed**. Pages refresh it every hour.
 

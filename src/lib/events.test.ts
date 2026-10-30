@@ -142,11 +142,33 @@ test("buildIcs uses the virtual link when there is no venue", () => {
   assert.ok(unfolded.includes(`Join online: ${virtualUrl}`));
 });
 
-test("parseEventFile accepts virtualUrl without venue and rejects javascript: URLs", () => {
-  const virtualOnly = valid.replace('venue: "V"', 'virtualUrl: "https://meet.example.com/abc"');
-  assert.equal(parseEventFile("v.mdx", file(virtualOnly)).virtualUrl, "https://meet.example.com/abc");
-  const js = valid.replace('venue: "V"', 'virtualUrl: "javascript:alert(1)"');
-  assert.throws(() => parseEventFile("foo.mdx", file(js)), /foo\.mdx/);
+const online = (link: string) => valid.replace('  discriminant: in-person\n  value:\n    venue: "V"', `  discriminant: online\n  value:\n    link: "${link}"`);
+
+test("parseEventFile maps an online location to virtualUrl only and rejects javascript: URLs", () => {
+  const event = parseEventFile("v.mdx", file(online("https://meet.example.com/abc")));
+  assert.equal(event.virtualUrl, "https://meet.example.com/abc");
+  assert.equal(event.venue, undefined);
+  assert.equal(event.mapQuery, undefined);
+  assert.throws(() => parseEventFile("foo.mdx", file(online("javascript:alert(1)"))), /foo\.mdx/);
+});
+
+test("parseEventFile pins the map to the venue unless a map pin is given", () => {
+  const event = parseEventFile("v.mdx", file(valid));
+  assert.equal(event.venue, "V");
+  assert.equal(event.mapQuery, "V");
+  assert.equal(event.virtualUrl, undefined);
+  const pinned = valid.replace('    venue: "V"', '    venue: "V"\n    mapPin: "-1.3098, 36.8126"');
+  assert.equal(parseEventFile("v.mdx", file(pinned)).mapQuery, "-1.3098, 36.8126");
+});
+
+test("parseEventFile allows no speaker and several hosts, and keeps a registration link", () => {
+  const fm = valid
+    .replace('speaker: "S"\n', 'registrationUrl: "https://forms.gle/abc"\n')
+    .replace('hosts:\n  - "C"', 'hosts:\n  - "GDSC"\n  - "AWS Club"');
+  const event = parseEventFile("v.mdx", file(fm));
+  assert.equal(event.speaker, undefined);
+  assert.deepEqual(event.hosts, ["GDSC", "AWS Club"]);
+  assert.equal(event.registrationUrl, "https://forms.gle/abc");
 });
 
 test("real events parse and their posters exist", async () => {

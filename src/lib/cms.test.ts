@@ -27,9 +27,16 @@ title: Angular workshop
 category: workshop
 date: 2026-11-14T09:00:00.000Z
 endDate: 2026-11-14T13:00:00.000Z
-venue: Strathmore University
+location:
+  discriminant: in-person
+  value:
+    venue: Strathmore University
+    mapPin: ''
+registrationUrl: null
 speaker: Jane
-community: Web Dev
+hosts:
+  - Web Dev
+  - GDSC
 image: /images/events/angular-workshop/image.jpg
 imageAlt: Poster
 excerpt: Build components.
@@ -46,6 +53,8 @@ test("schema parity: Keystatic-format files parse and dates become Nairobi time"
   assert.equal(event.date, "2026-11-14T09:00:00+03:00");
   assert.equal(event.endDate, "2026-11-14T13:00:00+03:00");
   assert.equal(event.virtualUrl, undefined);
+  assert.equal(event.venue, "Strathmore University");
+  assert.deepEqual(event.hosts, ["Web Dev", "GDSC"]);
   // Quoted strings with an offset, as hand-written before, still work.
   const quoted = keystaticEvent.replace("date: 2026-11-14T09:00:00.000Z", 'date: "2026-11-14T09:00:00+03:00"');
   assert.equal(parseEventFile("x.mdx", quoted).date, "2026-11-14T09:00:00+03:00");
@@ -57,8 +66,11 @@ test("schema parity: Keystatic-format files parse and dates become Nairobi time"
 });
 
 test("empty optionals saved as blank or null count as missing", () => {
-  const blanks = keystaticEvent.replace("venue: Strathmore University", "venue: Strathmore University\nvirtualUrl: ''");
-  assert.equal(parseEventFile("x.mdx", blanks).virtualUrl, undefined);
+  // The fixture saves an emptied map pin as '' and an emptied registration link as null.
+  const blanks = parseEventFile("x.mdx", keystaticEvent.replace("registrationUrl: null", "registrationUrl: ''"));
+  assert.equal(blanks.registrationUrl, undefined);
+  assert.equal(blanks.mapQuery, "Strathmore University");
+  assert.equal(parseEventFile("x.mdx", keystaticEvent).registrationUrl, undefined);
   const nulls = keystaticPost.replace("draft: false", "draft: false\neventSlug: null\ncoverImage: ''");
   assert.equal(parseSpotlightFile("coming-up", "x.mdx", nulls).eventSlug, undefined);
 });
