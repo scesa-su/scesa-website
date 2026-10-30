@@ -42,7 +42,7 @@ export default function NotFound() {
           index={1}
           priority
           className="mx-auto w-full max-w-md"
-          caption={<span className="font-marker text-lg font-bold text-slate-800">Gone for a nap. Back after the hackathon.</span>}
+          caption={<span className="font-marker text-lg font-bold text-slate-800">Debugging in my dreams. Try heading back home.</span>}
         />
       </main>
     </SiteLayout>
