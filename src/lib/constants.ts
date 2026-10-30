@@ -1,4 +1,4 @@
-export const SITE_URL = "https://scesa.com";
+export const SITE_URL = "https://scesa.co.ke";
 export const CONTACT_EMAIL = "scesa@strathmore.edu";
 
 export const NAV_LINKS = [

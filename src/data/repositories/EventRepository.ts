@@ -1,7 +1,7 @@
-import type { Event } from "@/domain/entities/Event";
-import type { IEventRepository } from "@/domain/repositories/IEventRepository";
-import { sortNewestFirst } from "@/domain/usecases/eventQueries";
-import { MdxEventsDataSource } from "@/data/datasources/MdxEventsDataSource";
+import type { Event } from "../../domain/entities/Event.ts";
+import type { IEventRepository } from "../../domain/repositories/IEventRepository.ts";
+import { eventStatus, sortNewestFirst } from "../../domain/usecases/eventQueries.ts";
+import { MdxEventsDataSource } from "../datasources/MdxEventsDataSource.ts";
 
 export class EventRepository implements IEventRepository {
   private readonly source: MdxEventsDataSource;
@@ -11,7 +11,9 @@ export class EventRepository implements IEventRepository {
   }
 
   async getAll(): Promise<Event[]> {
-    return sortNewestFirst(await this.source.readAll());
+    const now = new Date();
+    const events = (await this.source.readAll()).map((e) => ({ ...e, status: eventStatus(e.date, e.endDate, now) }));
+    return sortNewestFirst(events);
   }
 
   async getBySlug(slug: string): Promise<Event | undefined> {

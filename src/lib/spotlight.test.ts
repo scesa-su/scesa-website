@@ -39,12 +39,11 @@ const slugs = (list: SpotlightPost[]) => list.map((p) => p.slug);
 
 const file = (frontmatter: string, body = "Body text") => `---\n${frontmatter}\n---\n\n${body}`;
 const valid = `title: "T"
-kind: recap
 date: "2026-06-20T10:00:00+03:00"
 dek: "D"
 excerpt: "E"
 author: "A"`;
-const member = `${valid.replace("kind: recap", "kind: member")}
+const member = `${valid}
 member:
   name: "N"
   degree: "BBIT"
@@ -52,26 +51,29 @@ member:
   quote: "Q"`;
 
 test("parseSpotlightFile returns a post with slug, body, reading time and draft default", () => {
-  const post = parseSpotlightFile("gala-night.mdx", file(valid));
+  const post = parseSpotlightFile("recap", "gala-night.mdx", file(valid));
   assert.equal(post.slug, "gala-night");
+  assert.equal(post.kind, "recap");
   assert.equal(post.draft, false);
   assert.equal(post.readingMinutes, 1);
   assert.match(post.body, /Body text/);
-  assert.equal(parseSpotlightFile("m.mdx", file(member)).member?.quote, "Q");
+  assert.equal(parseSpotlightFile("member", "m.mdx", file(member)).member?.quote, "Q");
 });
 
 test("parseSpotlightFile rejects bad frontmatter and names the file", () => {
   const cases = [
     valid.replace('title: "T"\n', ""),
-    valid.replace("kind: recap", "kind: news"),
     valid.replace('date: "2026-06-20T10:00:00+03:00"', 'date: "20 Jun"'),
+    valid.replace('date: "2026-06-20T10:00:00+03:00"', 'date: "2026-06-20T10:00:00"'),
     `${valid}\ncoverImage: "/images/x.jpg"`,
-    valid.replace("kind: recap", "kind: member"),
-    member.replace('  quote: "Q"', ""),
     `${valid}\ndraft: "yes"`,
   ];
   for (const fm of cases) {
-    assert.throws(() => parseSpotlightFile("bad-post.mdx", file(fm)), /bad-post\.mdx/);
+    assert.throws(() => parseSpotlightFile("recap", "recap/bad-post.mdx", file(fm)), /recap\/bad-post\.mdx/);
+  }
+  // Member posts, found by their folder, need member details.
+  for (const fm of [valid, member.replace('  quote: "Q"', "")]) {
+    assert.throws(() => parseSpotlightFile("member", "member/bad-post.mdx", file(fm)), /member\/bad-post\.mdx/);
   }
 });
 
@@ -99,7 +101,7 @@ test("readingMinutes is computed from the body at 200 words a minute", () => {
   assert.equal(readingMinutes(""), 1);
   assert.equal(readingMinutes("word ".repeat(200)), 1);
   assert.equal(readingMinutes("word ".repeat(201)), 2);
-  assert.equal(parseSpotlightFile("long.mdx", file(valid, "word ".repeat(450))).readingMinutes, 3);
+  assert.equal(parseSpotlightFile("recap", "long.mdx", file(valid, "word ".repeat(450))).readingMinutes, 3);
 });
 
 test("relatedPosts excludes the current post and puts the same kind first", () => {
@@ -148,7 +150,7 @@ test("real spotlight posts parse, use slug file names, and their images and even
 });
 
 test("parseSpotlightFile reads gallery, project and member photo, and rejects bad values naming the file", () => {
-  const project = `${valid.replace("kind: recap", "kind: in-the-works")}
+  const project = `${valid}
 project:
   stage: building
   team: ["A", "B"]
@@ -156,20 +158,19 @@ project:
     - { label: "Repo", url: "https://github.com/x/y" }
 gallery:
   - { image: "/images/a.jpg", alt: "A" }`;
-  const post = parseSpotlightFile("p.mdx", file(project));
+  const post = parseSpotlightFile("in-the-works", "p.mdx", file(project));
   assert.equal(post.project?.stage, "building");
   assert.deepEqual(post.project?.team, ["A", "B"]);
   assert.equal(post.gallery?.[0].alt, "A");
   const photo = `${member}\n  photo: "/images/m.jpg"\n  photoAlt: "M"`;
-  assert.equal(parseSpotlightFile("m.mdx", file(photo)).member?.photoAlt, "M");
+  assert.equal(parseSpotlightFile("member", "m.mdx", file(photo)).member?.photoAlt, "M");
   for (const fm of [
     project.replace("stage: building", "stage: done"),
     project.replace("https://github.com", "http://github.com"),
     `${member}\n  photo: "/images/m.jpg"`,
-    `${member}\n  photoAlt: "M"`,
     `${member}\n  links:\n    - { label: "Site", url: "http://x.com" }`,
     `${valid}\ngallery:\n  - { image: "/images/a.jpg" }`,
   ]) {
-    assert.throws(() => parseSpotlightFile("bad-post.mdx", file(fm)), /bad-post\.mdx/);
+    assert.throws(() => parseSpotlightFile("member", "bad-post.mdx", file(fm)), /bad-post\.mdx/);
   }
 });

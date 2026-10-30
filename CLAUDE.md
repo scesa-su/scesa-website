@@ -1,7 +1,7 @@
 # Project Specification & Master Guide: SCESA Web Platform
 
 **Strathmore Computing and Engineering Students Association (SCESA)**  
-**Domain:** `scesa.com`  
+**Domain:** `scesa.co.ke`  
 **Location Context:** Nairobi, Kenya  
 **Design Artifacts:** Located in `./designs`
 
@@ -18,7 +18,7 @@
 - **PWA Integration:** `@ducanh2912/next-pwa` with web manifest, service worker caching, and offline support.
 - **Content System:** Local Markdown/MDX with frontmatter (`gray-matter` + `@next/mdx` / `next-mdx-remote`) stored in repository for zero-cost maintenance.
 - **Payments & Database:** M-Pesa STK Push (via Paystack Kenya or IntaSend API) + Google Sheets API (via Google Cloud Service Account) for automated member recording with zero recurring hosting costs.
-- **Hosting Target:** Vercel (Hobby Tier: custom domain `scesa.com`, free automated SSL, edge routing).
+- **Hosting Target:** Vercel (Hobby Tier: custom domain `scesa.co.ke`, free automated SSL, edge routing).
 
 ---
 
@@ -146,6 +146,7 @@ Follows standard 4px base: `1` (4px), `2` (8px), `3` (12px), `4` (16px), `5` (20
 2. `dev` is the continuous integration branch. All development converges here.
 3. Feature, fix, and task branches are branched from `dev` and merged back into `dev` via Pull Requests.
 4. When a release cycle is complete, `dev` is fast-forwarded or merged into `main`.
+5. **Owner exception (2026-10-29), content PRs:** Keystatic saves edits on `content/<name>` branches and editors open a PR from Keystatic straight into `main`. This is allowed only when the PR touches nothing but `src/content/**` and `public/images/**`. The owner merges `main` back into `dev` afterwards. See `docs/cms.md`.
 
 ### Industry Branch Naming Scheme
 - `feature/<short-description>` (e.g., `feature/swipeable-hero-deck`, `feature/mpesa-checkout`)
@@ -229,7 +230,7 @@ Concise explanation of what this PR introduces or fixes.
     6. *Competitive Programming & Algorithms*
   - Each card features: Community logo/icon, member count, meeting frequency, short bio, and *"Explore Community"* link.
 - **Dedicated Community Page (`/communities/[slug]`):**
-  - Future-ready architecture allowing subdomain mapping (`angular.scesa.com` -> `/communities/angular`).
+  - Future-ready architecture allowing subdomain mapping (`angular.scesa.co.ke` -> `/communities/angular`).
   - Community banner, mission, lead organizers/mentors with LinkedIn links.
   - Embedded list of upcoming events specific to this community.
   - Direct *"Join WhatsApp / Discord"* button.

@@ -10,6 +10,9 @@ import { mdxComponents } from "@/presentation/components/events/mdxComponents";
 import { Badge } from "@/presentation/components/ui/Badge";
 import { Card } from "@/presentation/components/ui/Card";
 
+// Event status comes from the clock, so rebuild hourly.
+export const revalidate = 3600;
+
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
