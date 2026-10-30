@@ -18,6 +18,9 @@ import { Gallery } from "@/presentation/components/spotlight/Gallery";
 import { spotlightMdxComponents } from "@/presentation/components/spotlight/mdxComponents";
 import { Button } from "@/presentation/components/ui/Button";
 
+// Event status comes from the clock, so rebuild hourly.
+export const revalidate = 3600;
+
 export const dynamicParams = false;
 
 export async function generateStaticParams() {

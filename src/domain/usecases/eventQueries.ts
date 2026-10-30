@@ -1,4 +1,4 @@
-import type { Event } from "../entities/Event.ts";
+import type { Event, EventStatus } from "../entities/Event.ts";
 
 export const EVENT_FILTERS = ["all", "upcoming", "workshops", "hackathons", "completed"] as const;
 export type EventFilter = (typeof EVENT_FILTERS)[number];
@@ -26,4 +26,11 @@ export function filterEvents(events: readonly Event[], filter: EventFilter, q = 
       matchesFilter[filter](e) &&
       (!needle || [e.title, e.speaker, e.community].some((field) => field.toLowerCase().includes(needle))),
   );
+}
+
+/** Live from `date` until `endDate`, completed from `endDate` on, scheduled before. */
+export function eventStatus(date: string, endDate: string, now: Date): EventStatus {
+  const t = now.getTime();
+  if (t >= Date.parse(endDate)) return "completed";
+  return t >= Date.parse(date) ? "live" : "scheduled";
 }

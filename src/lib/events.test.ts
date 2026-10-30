@@ -1,5 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
+import path from "node:path";
+import { MdxEventsDataSource } from "../data/datasources/MdxEventsDataSource.ts";
 import type { Event } from "../domain/entities/Event.ts";
 import { filterEvents, parseFilter, sortNewestFirst } from "../domain/usecases/eventQueries.ts";
 import { parseEventFile } from "../data/models/eventSchema.ts";
@@ -63,7 +66,6 @@ test("sortNewestFirst orders by start date descending without mutating", () => {
 
 const file = (frontmatter: string) => `---\n${frontmatter}\n---\n\nBody text`;
 const valid = `title: "T"
-status: scheduled
 category: talk
 date: "2026-11-14T09:00:00+03:00"
 endDate: "2026-11-14T10:00:00+03:00"
@@ -88,7 +90,7 @@ test("parseEventFile rejects bad frontmatter and names the file", () => {
     valid.replace('date: "2026-11-14T09:00:00+03:00"', 'date: "2026-11-14T09:00:00"'),
     valid.replace('endDate: "2026-11-14T10:00:00+03:00"', 'endDate: "2026-11-14T08:00:00+03:00"'),
     valid.replace('venue: "V"', ""),
-    valid.replace("status: scheduled", "status: soon"),
+    valid.replace("category: talk", "category: party"),
   ];
   for (const fm of cases) {
     assert.throws(() => parseEventFile("foo.mdx", file(fm)), /foo\.mdx/);
@@ -138,4 +140,10 @@ test("parseEventFile accepts virtualUrl without venue and rejects javascript: UR
   assert.equal(parseEventFile("v.mdx", file(virtualOnly)).virtualUrl, "https://meet.example.com/abc");
   const js = valid.replace('venue: "V"', 'virtualUrl: "javascript:alert(1)"');
   assert.throws(() => parseEventFile("foo.mdx", file(js)), /foo\.mdx/);
+});
+
+test("real events parse and their posters exist", async () => {
+  const real = await new MdxEventsDataSource().readAll();
+  assert.ok(real.length > 0);
+  for (const e of real) assert.ok(existsSync(path.join("public", e.image)), `${e.slug}: missing public${e.image}`);
 });

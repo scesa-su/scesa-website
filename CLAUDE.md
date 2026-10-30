@@ -146,6 +146,7 @@ Follows standard 4px base: `1` (4px), `2` (8px), `3` (12px), `4` (16px), `5` (20
 2. `dev` is the continuous integration branch. All development converges here.
 3. Feature, fix, and task branches are branched from `dev` and merged back into `dev` via Pull Requests.
 4. When a release cycle is complete, `dev` is fast-forwarded or merged into `main`.
+5. **Owner exception (2026-10-29), content PRs:** Keystatic saves edits on `content/<name>` branches and editors open a PR from Keystatic straight into `main`. This is allowed only when the PR touches nothing but `src/content/**` and `public/images/**`. The owner merges `main` back into `dev` afterwards. See `docs/cms.md`.
 
 ### Industry Branch Naming Scheme
 - `feature/<short-description>` (e.g., `feature/swipeable-hero-deck`, `feature/mpesa-checkout`)

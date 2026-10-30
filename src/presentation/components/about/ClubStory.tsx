@@ -119,7 +119,7 @@ export function GrowthPathways() {
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="aspect-4/3 h-auto w-full rounded-3xl object-cover"
           />
-          <p className="mt-3 font-hand text-xl text-slate-600 dark:text-slate-300">A group photo after the SU Cybersecurity Meetup (2026)</p>
+          <p className="mt-3 font-hand text-xl text-slate-600 dark:text-slate-300">A group photo after the SU Cybersecurity Meetup (2025)</p>
         </div>
         <div className="lg:col-span-7">
           <h2 id="growth" className={H2}>
