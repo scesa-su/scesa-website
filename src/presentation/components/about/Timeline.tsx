@@ -31,6 +31,19 @@ export function Timeline() {
         <Entry year="2020–2025" title="Growing the club">
           New communities start under SCESA and our events grow bigger and better every year. More than 250 members
           have joined us along the way.
+          <figure className="mt-5 max-w-60 sm:max-w-xs">
+            <Image
+              src="/images/home/team-building-2025.jpg"
+              alt="SCESA members gathered in a circle outdoors under tall trees during team building"
+              width={800}
+              height={1067}
+              sizes="(min-width: 640px) 320px, 240px"
+              className="h-auto w-full rounded-2xl"
+            />
+            <figcaption className="mt-2 font-hand text-lg leading-tight text-slate-600 dark:text-slate-300">
+              Team building, June 2025
+            </figcaption>
+          </figure>
         </Entry>
         {/* Source: SCESA LinkedIn. */}
         <Entry year="2026" title="Four awards for 2025/26">
