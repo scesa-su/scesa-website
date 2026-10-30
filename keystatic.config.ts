@@ -148,10 +148,39 @@ export default config({
         category: fields.select({ label: "Category", options: options(EVENT_CATEGORIES), defaultValue: "workshop" }),
         date: fields.datetime({ label: "Starts (Nairobi time)", validation: required }),
         endDate: fields.datetime({ label: "Ends (Nairobi time)", validation: required }),
-        venue: optionalText("Venue", "Venue or online link is required"),
-        virtualUrl: fields.url({ label: "Online link" }),
-        speaker: text("Speaker"),
-        community: text("Host community"),
+        location: fields.conditional(
+          fields.select({
+            label: "Where",
+            options: [
+              { label: "In person", value: "in-person" },
+              { label: "Online", value: "online" },
+            ],
+            defaultValue: "in-person",
+          }),
+          {
+            "in-person": fields.object({
+              venue: text("Venue", "Shown on the page, e.g. Strathmore University, STC Auditorium"),
+              mapPin: optionalText(
+                "Map pin",
+                "Address, Google Maps place name or coordinates (-1.3098, 36.8126). Leave blank to pin the venue name.",
+              ),
+            }),
+            online: fields.object({
+              link: fields.url({ label: "Online link", description: "Meet, Zoom or YouTube link", validation: { isRequired: true } }),
+            }),
+          },
+        ),
+        registrationUrl: fields.url({
+          label: "Registration form",
+          description: "Optional external sign-up link (Google Form, Luma, Eventbrite). Shows a Register button.",
+        }),
+        speaker: optionalText("Speaker", "Leave blank if there is no speaker"),
+        hosts: fields.array(text("Host"), {
+          label: "Hosts",
+          description: "Communities or partners hosting the event",
+          itemLabel: (p) => p.value || "Host",
+          validation: { length: { min: 1 } },
+        }),
         image: fields.image({
           label: "Poster",
           description: "Under about 300 KB",

@@ -5,14 +5,17 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { eventRepository } from "@/data/repositories/EventRepository";
 import { AddToCalendar } from "@/presentation/components/events/AddToCalendar";
 import { STATUS_LABEL } from "@/presentation/components/events/EventCard";
+import { EventMap } from "@/presentation/components/events/EventMap";
 import { EventMeta, HostedBy } from "@/presentation/components/events/EventMeta";
 import { mdxComponents } from "@/presentation/components/events/mdxComponents";
+import { PosterViewer } from "@/presentation/components/events/PosterViewer";
 import { Badge } from "@/presentation/components/ui/Badge";
 import { Card } from "@/presentation/components/ui/Card";
+import remarkGfm from "remark-gfm";
 import { allowOnly } from "@/lib/mdx";
 
-// Only elements with a component render; raw HTML in an event is dropped.
-const mdxOptions = { remarkPlugins: [allowOnly(Object.keys(mdxComponents))] };
+// GFM: strikethrough and tables as Keystatic saves them. Only elements with a component render; raw HTML is dropped.
+const mdxOptions = { remarkPlugins: [remarkGfm, allowOnly(Object.keys(mdxComponents))] };
 
 // Event status comes from the clock, so rebuild hourly.
 export const revalidate = 3600;
@@ -42,9 +45,10 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
             <Badge variant={event.status} className="absolute top-3 left-3">
               {STATUS_LABEL[event.status]}
             </Badge>
+            <PosterViewer src={event.image} alt={event.imageAlt} title={event.title} />
           </div>
           <div className="hidden lg:block">
-            <HostedBy community={event.community} speaker={event.speaker} />
+            <HostedBy hosts={event.hosts} speaker={event.speaker} />
           </div>
         </div>
 
@@ -53,22 +57,23 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
           <EventMeta {...event} />
           {showCalendar && (
             <Card className="hidden p-4 lg:block">
-              <AddToCalendar slug={event.slug} title={event.title} virtualUrl={event.virtualUrl} />
+              <AddToCalendar slug={event.slug} title={event.title} virtualUrl={event.virtualUrl} registrationUrl={event.registrationUrl} />
             </Card>
           )}
           <div className="lg:hidden">
-            <HostedBy community={event.community} speaker={event.speaker} />
+            <HostedBy hosts={event.hosts} speaker={event.speaker} />
           </div>
           <section aria-labelledby="about-event">
             <h2 id="about-event" className="font-display text-display-sm font-semibold text-brand-primary">
               About this event
             </h2>
-            <p className="mt-3 text-md text-slate-600 dark:text-slate-300">{event.excerpt}</p>
+            <p className="mt-3 border-b border-brand-border pb-6 text-xl font-medium text-brand-primary">{event.excerpt}</p>
             <MDXRemote source={event.body} components={mdxComponents} options={{ mdxOptions }} />
           </section>
+          {event.venue && event.mapQuery && <EventMap query={event.mapQuery} venue={event.venue} />}
           {showCalendar && (
             <div className="sticky bottom-0 -mx-4 border-t border-brand-border bg-brand-surface px-4 py-3 md:-mx-8 md:px-8 lg:hidden">
-              <AddToCalendar slug={event.slug} title={event.title} virtualUrl={event.virtualUrl} />
+              <AddToCalendar slug={event.slug} title={event.title} virtualUrl={event.virtualUrl} registrationUrl={event.registrationUrl} />
             </div>
           )}
         </div>
