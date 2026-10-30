@@ -1,6 +1,6 @@
 # Editing the site with Keystatic
 
-Spotlight posts and events are edited at **scesa.com/keystatic**. You don't need to code or use git. You need a GitHub account with access to `scesa-su/scesa-website`; ask the site owner if you don't have one.
+Spotlight posts and events are edited at **scesa.co.ke/keystatic**. You don't need to code or use git. You need a GitHub account with access to `scesa-su/scesa-website`; ask the site owner if you don't have one.
 
 ## How a change goes live
 

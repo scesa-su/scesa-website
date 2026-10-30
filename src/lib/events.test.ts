@@ -102,7 +102,7 @@ test("escapeIcsText escapes per RFC 5545", () => {
 });
 
 test("buildIcs emits CRLF lines with UTC times and escaped text", () => {
-  const ics = buildIcs({ ...base, title: "Hack, Build; Ship" }, "https://scesa.com/events/x");
+  const ics = buildIcs({ ...base, title: "Hack, Build; Ship" }, "https://scesa.co.ke/events/x");
   assert.ok(ics.endsWith("\r\n"));
   assert.ok(!/[^\r]\n/.test(ics), "every newline is CRLF");
   const lines = ics.split("\r\n");
@@ -114,9 +114,9 @@ test("buildIcs emits CRLF lines with UTC times and escaped text", () => {
 });
 
 test("buildIcs folds long lines", () => {
-  const ics = buildIcs({ ...base, excerpt: "x".repeat(200) }, "https://scesa.com/events/x");
+  const ics = buildIcs({ ...base, excerpt: "x".repeat(200) }, "https://scesa.co.ke/events/x");
   const unfolded = ics.replace(/\r\n /g, "");
-  assert.ok(unfolded.includes(`DESCRIPTION:${"x".repeat(200)}\\n\\nhttps://scesa.com/events/x`));
+  assert.ok(unfolded.includes(`DESCRIPTION:${"x".repeat(200)}\\n\\nhttps://scesa.co.ke/events/x`));
 });
 
 test("formatTimeRange uses Nairobi time", () => {
@@ -129,7 +129,7 @@ test("formatTimeRange prefixes the end date for multi-day events", () => {
 
 test("buildIcs uses the virtual link when there is no venue", () => {
   const virtualUrl = "https://meet.example.com/abc";
-  const ics = buildIcs({ ...base, venue: undefined, virtualUrl }, "https://scesa.com/events/x");
+  const ics = buildIcs({ ...base, venue: undefined, virtualUrl }, "https://scesa.co.ke/events/x");
   const unfolded = ics.replace(/\r\n /g, "");
   assert.ok(unfolded.split("\r\n").includes(`LOCATION:${virtualUrl}`));
   assert.ok(unfolded.includes(`Join online: ${virtualUrl}`));

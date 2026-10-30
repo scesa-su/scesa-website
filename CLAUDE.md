@@ -1,7 +1,7 @@
 # Project Specification & Master Guide: SCESA Web Platform
 
 **Strathmore Computing and Engineering Students Association (SCESA)**  
-**Domain:** `scesa.com`  
+**Domain:** `scesa.co.ke`  
 **Location Context:** Nairobi, Kenya  
 **Design Artifacts:** Located in `./designs`
 
@@ -18,7 +18,7 @@
 - **PWA Integration:** `@ducanh2912/next-pwa` with web manifest, service worker caching, and offline support.
 - **Content System:** Local Markdown/MDX with frontmatter (`gray-matter` + `@next/mdx` / `next-mdx-remote`) stored in repository for zero-cost maintenance.
 - **Payments & Database:** M-Pesa STK Push (via Paystack Kenya or IntaSend API) + Google Sheets API (via Google Cloud Service Account) for automated member recording with zero recurring hosting costs.
-- **Hosting Target:** Vercel (Hobby Tier: custom domain `scesa.com`, free automated SSL, edge routing).
+- **Hosting Target:** Vercel (Hobby Tier: custom domain `scesa.co.ke`, free automated SSL, edge routing).
 
 ---
 
@@ -230,7 +230,7 @@ Concise explanation of what this PR introduces or fixes.
     6. *Competitive Programming & Algorithms*
   - Each card features: Community logo/icon, member count, meeting frequency, short bio, and *"Explore Community"* link.
 - **Dedicated Community Page (`/communities/[slug]`):**
-  - Future-ready architecture allowing subdomain mapping (`angular.scesa.com` -> `/communities/angular`).
+  - Future-ready architecture allowing subdomain mapping (`angular.scesa.co.ke` -> `/communities/angular`).
   - Community banner, mission, lead organizers/mentors with LinkedIn links.
   - Embedded list of upcoming events specific to this community.
   - Direct *"Join WhatsApp / Discord"* button.
