@@ -1,7 +1,16 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { serialize } from "next-mdx-remote/serialize";
+import remarkGfm from "remark-gfm";
 import { allowOnly } from "./mdx.ts";
+
+test("GFM strikethrough and tables from Keystatic render as elements, not literal text", async () => {
+  const source = "Was ~~gone~~ now.\n\n| Time | Session |\n| --- | --- |\n| 9:00 | Intro |";
+  const out = (await serialize(source, { mdxOptions: { remarkPlugins: [remarkGfm, allowOnly(["del", "table"])] } })).compiledSource;
+  assert.match(out, /_components\.del/);
+  assert.match(out, /_components\.table/);
+  assert.doesNotMatch(out, /~~/);
+});
 
 const compile = async (source: string) =>
   (await serialize(source, { mdxOptions: { remarkPlugins: [allowOnly(["PullQuote", "a"])] } })).compiledSource;

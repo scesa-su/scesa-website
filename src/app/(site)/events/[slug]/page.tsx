@@ -9,10 +9,11 @@ import { EventMeta, HostedBy } from "@/presentation/components/events/EventMeta"
 import { mdxComponents } from "@/presentation/components/events/mdxComponents";
 import { Badge } from "@/presentation/components/ui/Badge";
 import { Card } from "@/presentation/components/ui/Card";
+import remarkGfm from "remark-gfm";
 import { allowOnly } from "@/lib/mdx";
 
-// Only elements with a component render; raw HTML in an event is dropped.
-const mdxOptions = { remarkPlugins: [allowOnly(Object.keys(mdxComponents))] };
+// GFM: strikethrough and tables as Keystatic saves them. Only elements with a component render; raw HTML is dropped.
+const mdxOptions = { remarkPlugins: [remarkGfm, allowOnly(Object.keys(mdxComponents))] };
 
 // Event status comes from the clock, so rebuild hourly.
 export const revalidate = 3600;
