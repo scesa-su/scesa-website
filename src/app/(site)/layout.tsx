@@ -1,7 +1,7 @@
 import { Footer } from "@/presentation/components/layout/Footer";
 import { Navbar } from "@/presentation/components/layout/Navbar";
 
-export default function SiteLayout({ children }: LayoutProps<"/">) {
+export default function SiteLayout({ children }: Pick<LayoutProps<"/">, "children">) {
   return (
     <>
       <a
