@@ -75,7 +75,7 @@ export function EventFilters({ filter, q }: EventFiltersProps) {
       </div>
       <div className="relative md:w-80">
         <label htmlFor="event-search" className="sr-only">
-          Search events by title, speaker or community
+          Search events by title, speaker or host
         </label>
         <Search
           aria-hidden="true"
@@ -85,7 +85,7 @@ export function EventFilters({ filter, q }: EventFiltersProps) {
           id="event-search"
           type="search"
           value={value}
-          placeholder="Search title, speaker or community"
+          placeholder="Search title, speaker or host"
           onChange={(e) => {
             const next = e.target.value;
             setValue(next);

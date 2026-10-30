@@ -24,7 +24,7 @@ export function filterEvents(events: readonly Event[], filter: EventFilter, q = 
   return events.filter(
     (e) =>
       matchesFilter[filter](e) &&
-      (!needle || [e.title, e.speaker, e.community].some((field) => field.toLowerCase().includes(needle))),
+      (!needle || [e.title, e.speaker ?? "", ...e.hosts].some((field) => field.toLowerCase().includes(needle))),
   );
 }
 

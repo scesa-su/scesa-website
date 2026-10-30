@@ -18,7 +18,7 @@ const base: Event = {
   endDate: "2026-11-14T13:00:00+03:00",
   venue: "Strathmore",
   speaker: "Jane",
-  community: "Web Dev",
+  hosts: ["Web Dev"],
   image: "/i.svg",
   imageAlt: "alt",
   excerpt: "e",
@@ -26,8 +26,8 @@ const base: Event = {
 };
 const events: Event[] = [
   { ...base, slug: "ws" },
-  { ...base, slug: "hack", title: "Hack Weekend", category: "hackathon", status: "live", speaker: "Judges", community: "GDSC" },
-  { ...base, slug: "old", title: "Meetup", category: "meetup", status: "completed", speaker: "Ann", community: "Angular Kenya" },
+  { ...base, slug: "hack", title: "Hack Weekend", category: "hackathon", status: "live", speaker: "Judges", hosts: ["GDSC", "AWS Club"] },
+  { ...base, slug: "old", title: "Meetup", category: "meetup", status: "completed", speaker: undefined, hosts: ["Angular Kenya"] },
 ];
 const slugs = (list: Event[]) => list.map((e) => e.slug);
 
@@ -46,7 +46,7 @@ test("filterEvents by filter", () => {
   assert.deepEqual(slugs(filterEvents(events, "completed")), ["old"]);
 });
 
-test("filterEvents search is case-insensitive over title, speaker and community", () => {
+test("filterEvents search is case-insensitive over title, speaker and hosts", () => {
   assert.deepEqual(slugs(filterEvents(events, "all", "ANGULAR")), ["ws", "old"]);
   assert.deepEqual(slugs(filterEvents(events, "all", "judges")), ["hack"]);
   assert.deepEqual(slugs(filterEvents(events, "all", "gdsc")), ["hack"]);
@@ -69,9 +69,13 @@ const valid = `title: "T"
 category: talk
 date: "2026-11-14T09:00:00+03:00"
 endDate: "2026-11-14T10:00:00+03:00"
-venue: "V"
+location:
+  discriminant: in-person
+  value:
+    venue: "V"
 speaker: "S"
-community: "C"
+hosts:
+  - "C"
 image: "/i.svg"
 imageAlt: "A"
 excerpt: "E"`;
@@ -89,7 +93,9 @@ test("parseEventFile rejects bad frontmatter and names the file", () => {
     valid.replace('date: "2026-11-14T09:00:00+03:00"', 'date: "14 Nov"'),
     valid.replace('date: "2026-11-14T09:00:00+03:00"', 'date: "2026-11-14T09:00:00"'),
     valid.replace('endDate: "2026-11-14T10:00:00+03:00"', 'endDate: "2026-11-14T08:00:00+03:00"'),
-    valid.replace('venue: "V"', ""),
+    valid.replace('    venue: "V"', ""),
+    valid.replace('hosts:\n  - "C"', "hosts: []"),
+    valid.replace('speaker: "S"\n', 'speaker: "S"\nregistrationUrl: "javascript:alert(1)"\n'),
     valid.replace("category: talk", "category: party"),
   ];
   for (const fm of cases) {
