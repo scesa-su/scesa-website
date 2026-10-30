@@ -54,22 +54,46 @@ export function EventMeta({ title, date, endDate, venue, virtualUrl }: MetaProps
   );
 }
 
-function Host({ label, name }: { label: string; name: string }) {
+const AVATAR_TONES = [
+  "bg-navy-50 text-brand-primary",
+  "bg-orange-100 text-orange-900",
+  "bg-brand-secondary text-slate-900",
+];
+
+/** "AWS Club" -> "AC", "GDSC" -> "GD". */
+export const initials = (name: string) => {
+  const words = name.trim().split(/\s+/);
+  return (words.length > 1 ? words[0][0] + words[1][0] : words[0].slice(0, 2)).toUpperCase();
+};
+
+/** Overlapping initial circles, Luma style; hover or keyboard focus shows each host's full name. */
+function HostStack({ hosts }: { hosts: string[] }) {
   return (
-    <div className="flex items-center gap-3 py-3">
-      <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-md bg-navy-50 text-sm font-semibold text-brand-primary">
-        {name.charAt(0)}
-      </span>
-      <div className="min-w-0">
-        <p className={secondary}>{label}</p>
-        <p className="font-medium text-brand-primary">{name}</p>
-      </div>
-    </div>
+    <ul className="flex items-center py-3 pl-2">
+      {hosts.map((name, i) => (
+        <li key={name} className="group relative -ml-2">
+          <span
+            role="img"
+            aria-label={name}
+            tabIndex={0}
+            className={`flex size-10 items-center justify-center rounded-full text-sm font-semibold ring-2 ring-brand-surface focus-visible:outline-none focus-visible:ring-brand-accent ${AVATAR_TONES[i % AVATAR_TONES.length]}`}
+          >
+            <span aria-hidden="true">{initials(name)}</span>
+          </span>
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+          >
+            {name}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
-/** Host community and speaker. */
-export function HostedBy({ community, speaker }: Pick<Event, "community" | "speaker">) {
+/** Host communities and, when there is one, the speaker. */
+export function HostedBy({ hosts, speaker }: Pick<Event, "hosts" | "speaker">) {
   // Rendered twice (lg and below-lg copies), so the label id must be unique per instance.
   const labelId = useId();
   return (
@@ -78,8 +102,13 @@ export function HostedBy({ community, speaker }: Pick<Event, "community" | "spea
         Hosted by
       </p>
       <div className="divide-y divide-brand-border">
-        <Host label="Host community" name={community} />
-        <Host label="Speaker" name={speaker} />
+        <HostStack hosts={hosts} />
+        {speaker && (
+          <div className="py-3">
+            <p className={secondary}>Speaker</p>
+            <p className="font-medium text-brand-primary">{speaker}</p>
+          </div>
+        )}
       </div>
     </section>
   );

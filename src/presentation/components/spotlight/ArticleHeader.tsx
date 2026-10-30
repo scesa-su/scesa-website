@@ -186,7 +186,7 @@ export function EventCard({ event }: { event: Event }) {
       </h2>
       <EventMeta {...event} />
       {event.status !== "completed" && (
-        <AddToCalendar slug={event.slug} title={event.title} virtualUrl={event.virtualUrl} />
+        <AddToCalendar slug={event.slug} title={event.title} virtualUrl={event.virtualUrl} registrationUrl={event.registrationUrl} />
       )}
       <Button href={`/events/${event.slug}`} variant="soft" aria-label={`See the event details: ${event.title}`}>
         See the event details
