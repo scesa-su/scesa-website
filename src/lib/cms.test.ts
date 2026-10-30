@@ -105,10 +105,9 @@ test("an .mdx at the spotlight root, outside a kind folder, throws naming it", a
   }
 });
 
-test("the six migrated posts keep their slugs and kinds", async () => {
+test("the migrated posts keep their slugs and kinds", async () => {
   const real = (await new MdxSpotlightDataSource().readAll()).map((p) => `${p.kind}/${p.slug}`).sort();
   assert.deepEqual(real, [
-    "coming-up/build-weekend-hackathon-announcement",
     "in-the-works/members-project-in-progress",
     "member/alumni-story-draft",
     "member/member-spotlight-placeholder",
