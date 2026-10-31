@@ -28,6 +28,8 @@ _bmad-output/
 # misc
 .DS_Store
 *.pem
+# member exports must never be committed
+*.csv
 
 # debug
 npm-debug.log*

@@ -74,3 +74,21 @@ export const HOME_STATS = [
   { value: "6", label: "dedicated communities" },
   { value: "4", label: "Clubs & Sports Gala 2025 awards" },
 ] as const;
+
+export const COMMUNITIES = [
+  "ESA Strathmore",
+  "Strathmore Data Community",
+  "AWS Rebuild",
+  "Google Developer Group",
+  "IET",
+  "Women in Tech Kenya",
+  "SU Cybersecurity Club",
+] as const;
+
+// One-time membership fee, paid to the same Paybill account as Team Building (owner decision 2026-10-31).
+export const MEMBERSHIP_FEE_KES = 500;
+export const MPESA_PAYBILL = "4098097";
+export const MPESA_ACCOUNT = "0242402209001";
+
+// The old Google Form, linked when JavaScript is off. It stays open this term (owner decision 2026-10-31).
+export const MEMBERSHIP_GOOGLE_FORM_URL = "https://forms.gle/CStqGdz7xmTy48n77";
