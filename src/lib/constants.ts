@@ -92,3 +92,53 @@ export const MPESA_ACCOUNT = "0242402209001";
 
 // The old Google Form, linked when JavaScript is off. It stays open this term (owner decision 2026-10-31).
 export const MEMBERSHIP_GOOGLE_FORM_URL = "https://forms.gle/CStqGdz7xmTy48n77";
+
+// Undergraduate degrees by school, from each school's site (checked 2026-10-31). Update when Strathmore adds one;
+// the form also offers "Other" so a missing course never blocks an applicant.
+export const STRATHMORE_SCHOOLS = [
+  {
+    name: "School of Computing and Engineering Sciences",
+    courses: [
+      "Bachelor of Science in Informatics and Computer Science",
+      "Bachelor of Business Information Technology",
+      "Bachelor of Science in Computer Networks and Cyber Security",
+      "Bachelor of Science in Electrical and Electronics Engineering",
+    ],
+  },
+  {
+    name: "Strathmore University Business School",
+    courses: [
+      "Bachelor of Commerce",
+      "Bachelor of Commerce (Evening)",
+      "Bachelor of Commerce (CPA/ACCA Exempt)",
+      "Bachelor of Commerce (ACCA Embedded)",
+      "Bachelor of Financial Services",
+      "Bachelor of Science in Supply Chain and Operations Management",
+    ],
+  },
+  {
+    name: "Strathmore Institute of Mathematical Sciences",
+    courses: [
+      "Bachelor of Business Science in Actuarial Science",
+      "Bachelor of Business Science in Financial Economics",
+      "Bachelor of Business Science in Financial Engineering",
+      "Bachelor of Science in Statistics and Data Science",
+    ],
+  },
+  {
+    name: "Strathmore Law School",
+    courses: ["Bachelor of Laws (LL.B)"],
+  },
+  {
+    name: "School of Humanities and Social Sciences",
+    courses: [
+      "Bachelor of Arts in Communication",
+      "Bachelor of Arts in Development Studies and Philosophy",
+      "Bachelor of Arts in International Studies",
+    ],
+  },
+  {
+    name: "School of Tourism and Hospitality",
+    courses: ["Bachelor of Science in Tourism Management", "Bachelor of Science in Hospitality Management"],
+  },
+] as const;
