@@ -11,6 +11,7 @@ import {
   UsersIcon,
   type LucideIcon,
 } from "lucide-react";
+import { COMMUNITIES } from "@/lib/constants";
 import { Badge } from "@/presentation/components/ui/Badge";
 import { BODY, H2, H3, ICON_TILE, SECTION, SMALL } from "./styles";
 
@@ -25,16 +26,6 @@ const PILLARS: { name: string; text: string; icon: LucideIcon }[] = [
   { name: "Collaboration", icon: UsersIcon, text: "Most of what we do happens in teams, with other clubs and with people from industry." },
   { name: "Industry Readiness", icon: BriefcaseBusinessIcon, text: "Site visits, mentors and real projects mean members start their first job knowing how the work gets done." },
   { name: "Excellence", icon: GemIcon, text: "We pay attention to detail and keep at a piece of work until it is right." },
-];
-
-const COMMUNITIES = [
-  "ESA Strathmore",
-  "Strathmore Data Community",
-  "AWS Rebuild",
-  "Google Developer Group",
-  "IET",
-  "Women in Tech Kenya",
-  "SU Cybersecurity Club"
 ];
 
 // Portfolio p. 7, "Professional Growth".
