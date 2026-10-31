@@ -11,8 +11,12 @@ export function findConflict(
   application: Pick<MemberApplication, "studentId" | "mpesaCode">,
 ): MemberConflict | undefined {
   if (records.some((r) => r.mpesaCode.toUpperCase() === application.mpesaCode)) return "mpesa_code";
-  if (records.some((r) => r.studentId === application.studentId && r.paymentStatus !== "rejected")) return "student_id";
+  if (isStudentRegistered(records, application.studentId)) return "student_id";
   return undefined;
+}
+
+export function isStudentRegistered(records: MemberRecord[], studentId: string): boolean {
+  return records.some((r) => r.studentId === studentId && r.paymentStatus !== "rejected");
 }
 
 export function findStatus(records: MemberRecord[], reference: string, studentId: string): PaymentStatus | undefined {
