@@ -5,7 +5,6 @@ import type { IMemberRepository } from "../../domain/repositories/IMemberReposit
 import {
   findConflict,
   findStatus,
-  isStudentRegistered,
   nairobiIso,
   processMembershipApplication,
 } from "../../domain/usecases/processMembershipApplication.ts";
@@ -114,12 +113,6 @@ test("findConflict: taken ID or code; a rejected row frees the ID but not its co
   assert.equal(findConflict(rows, { studentId: "222222", mpesaCode: "CODE000002" }), "mpesa_code");
 });
 
-test("isStudentRegistered ignores rejected rows", () => {
-  assert.equal(isStudentRegistered(rows, "111111"), true);
-  assert.equal(isStudentRegistered(rows, "222222"), false);
-  assert.equal(isStudentRegistered(rows, "333333"), false);
-});
-
 test("findStatus needs both reference and student ID to match", () => {
   assert.equal(findStatus(rows, "SC-AAAAAAAA", "111111"), "confirmed");
   assert.equal(findStatus(rows, "SC-AAAAAAAA", "222222"), undefined);
@@ -138,7 +131,6 @@ test("processMembershipApplication appends a pending row, or nothing on a confli
   const appended: Member[] = [];
   const repo: IMemberRepository = {
     findConflict: async (a) => findConflict(rows, a),
-    isStudentRegistered: async () => false,
     append: async (m) => void appended.push(m),
     findStatus: async () => undefined,
   };

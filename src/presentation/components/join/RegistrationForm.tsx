@@ -4,7 +4,7 @@ import { CheckIcon } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { memberApplicationSchema } from "@/data/models/memberSchema";
 import { cn } from "@/lib/cn";
-import { COMMUNITIES, CONTACT_EMAIL, MEMBERSHIP_FEE_KES, MPESA_ACCOUNT, MPESA_PAYBILL, STRATHMORE_SCHOOLS } from "@/lib/constants";
+import { COMMUNITIES, MEMBERSHIP_FEE_KES, MPESA_ACCOUNT, MPESA_PAYBILL } from "@/lib/constants";
 import { Button } from "@/presentation/components/ui/Button";
 import { Card } from "@/presentation/components/ui/Card";
 import { ERROR_TEXT, SelectField, TextField } from "./Field";
@@ -18,13 +18,8 @@ const STEP_SCHEMAS = [
   memberApplicationSchema.pick({ mpesaCode: true }),
 ];
 
-// Picked from a dropdown when the school or course is not listed; the course is then typed in.
-const OTHER = "Other";
-
 type Values = {
   fullName: string;
-  school: string;
-  courseChoice: string;
   studentId: string;
   email: string;
   phone: string;
@@ -34,13 +29,11 @@ type Values = {
   mpesaCode: string;
   website: string;
 };
-type FieldName = Exclude<keyof Values, "website" | "courseChoice">;
+type FieldName = Exclude<keyof Values, "website">;
 type Errors = Partial<Record<FieldName, string>>;
 
 const EMPTY: Values = {
   fullName: "",
-  school: "",
-  courseChoice: "",
   studentId: "",
   email: "",
   phone: "",
@@ -61,8 +54,6 @@ export function RegistrationForm() {
   const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [reference, setReference] = useState("");
-  const [checking, setChecking] = useState(false);
-  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const moved = useRef(false);
 
@@ -74,33 +65,6 @@ export function RegistrationForm() {
 
   const set = (name: keyof Values) => (e: { target: { value: string } }) =>
     setValues((v) => ({ ...v, [name]: e.target.value }));
-
-  const courses = STRATHMORE_SCHOOLS.find((s) => s.name === values.school)?.courses ?? [];
-  const typingCourse = values.school === OTHER || values.courseChoice === OTHER;
-
-  // The school narrows the course list; changing either resets what depends on it.
-  const pickSchool = (e: { target: { value: string } }) =>
-    setValues((v) => ({ ...v, school: e.target.value, courseChoice: "", course: "" }));
-  const pickCourse = (e: { target: { value: string } }) =>
-    setValues((v) => ({ ...v, courseChoice: e.target.value, course: e.target.value === OTHER ? "" : e.target.value }));
-
-  /** Warns before payment when the student ID is already in the sheet. If the check itself fails, carry on: the server checks again on submit. */
-  async function checkRegistered(): Promise<boolean> {
-    setChecking(true);
-    try {
-      const res = await fetch("/api/register/check", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ studentId: values.studentId }),
-      });
-      const body = (await res.json().catch(() => ({}))) as { registered?: boolean };
-      return res.ok && body.registered === true;
-    } catch {
-      return false;
-    } finally {
-      setChecking(false);
-    }
-  }
 
   function toggleCommunity(name: string) {
     setValues((v) => ({
@@ -142,22 +106,15 @@ export function RegistrationForm() {
     }
   }
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const result = STEP_SCHEMAS[step].safeParse(values);
-    const next: Errors = result.success
-      ? {}
-      : // First message per field; issues are in field order.
-        Object.fromEntries([...result.error.issues].reverse().map((i) => [String(i.path[0]), i.message]));
-    if (step === 0 && !values.school) next.school = "Pick your school";
-    if (step === 0 && !typingCourse && !values.courseChoice) next.course = "Pick your course";
-    setErrors(next);
-    if (Object.keys(next).length > 0) return;
-    if (step === 0) {
-      const registered = await checkRegistered();
-      setAlreadyRegistered(registered);
-      if (registered) return;
+    if (!result.success) {
+      // First message per field; issues are in field order.
+      setErrors(Object.fromEntries([...result.error.issues].reverse().map((i) => [String(i.path[0]), i.message])));
+      return;
     }
+    setErrors({});
     if (step < 2) setStep(step + 1);
     else void submit();
   }
@@ -218,37 +175,7 @@ export function RegistrationForm() {
               <TextField id="studentId" label="Strathmore student ID" inputMode="numeric" maxLength={6} placeholder="123456" value={values.studentId} onChange={set("studentId")} error={errors.studentId} />
               <TextField id="email" label="Strathmore email" type="email" autoComplete="email" placeholder="you@strathmore.edu" value={values.email} onChange={set("email")} error={errors.email} />
               <TextField id="phone" label="Phone number" type="tel" autoComplete="tel" placeholder="0712 345 678" hint="The number you will pay from." value={values.phone} onChange={set("phone")} error={errors.phone} />
-              <SelectField id="school" label="School" value={values.school} onChange={pickSchool} error={errors.school}>
-                <option value="">Select your school</option>
-                {STRATHMORE_SCHOOLS.map((s) => (
-                  <option key={s.name} value={s.name}>
-                    {s.name}
-                  </option>
-                ))}
-                <option value={OTHER}>Other</option>
-              </SelectField>
-              {values.school !== OTHER && (
-                <SelectField
-                  id="courseChoice"
-                  label="Course"
-                  value={values.courseChoice}
-                  onChange={pickCourse}
-                  disabled={!values.school}
-                  hint={values.school ? undefined : "Pick your school first."}
-                  error={typingCourse ? undefined : errors.course}
-                >
-                  <option value="">Select your course</option>
-                  {courses.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                  <option value={OTHER}>Other (not listed)</option>
-                </SelectField>
-              )}
-              {typingCourse && (
-                <TextField id="course" label="Your course" placeholder="Bachelor of …" value={values.course} onChange={set("course")} error={errors.course} />
-              )}
+              <TextField id="course" label="Course" placeholder="BSc Computer Science" value={values.course} onChange={set("course")} error={errors.course} />
               <SelectField id="year" label="Year of study" value={values.year} onChange={set("year")} error={errors.year}>
                 <option value="">Select your year</option>
                 {[1, 2, 3, 4, 5].map((y) => (
@@ -329,23 +256,6 @@ export function RegistrationForm() {
             </div>
           )}
 
-          {step === 0 && alreadyRegistered && (
-            <div role="alert" className="mt-6 rounded-lg border border-brand-border bg-navy-25 p-4 text-md text-brand-primary">
-              <p className="font-semibold">This student ID is already registered.</p>
-              <p className="mt-1">
-                You have probably joined before.{" "}
-                <a href="/join/status" className="font-medium underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent">
-                  Check your status
-                </a>{" "}
-                with your reference, or email{" "}
-                <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent">
-                  {CONTACT_EMAIL}
-                </a>{" "}
-                if you joined through the Google Form or lost your reference.
-              </p>
-            </div>
-          )}
-
           {formError && (
             <p role="alert" className={cn("mt-6 rounded-lg bg-orange-50 p-3 dark:bg-slate-900", ERROR_TEXT)}>
               {formError}
@@ -358,8 +268,8 @@ export function RegistrationForm() {
                 Back
               </Button>
             )}
-            <Button type="submit" size="lg" disabled={submitting || checking}>
-              {checking ? "Checking…" : step < 2 ? "Continue" : submitting ? "Submitting…" : "Submit application"}
+            <Button type="submit" size="lg" disabled={submitting}>
+              {step < 2 ? "Continue" : submitting ? "Submitting…" : "Submit application"}
             </Button>
           </div>
         </form>

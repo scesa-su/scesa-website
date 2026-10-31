@@ -1,6 +1,5 @@
 "use client";
 
-import { PartyPopperIcon } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import { statusLookupSchema } from "@/data/models/memberSchema";
@@ -15,7 +14,7 @@ type Errors = { reference?: string; studentId?: string };
 
 const MESSAGES: Record<PaymentStatus, string> = {
   pending: "We have your application and are still matching your M-Pesa payment. Check back in a day or two.",
-  confirmed: "You're a SCESA member. Join the members' WhatsApp community below.",
+  confirmed: "You're a SCESA member. Welcome! Join the members' WhatsApp community below.",
   rejected: `We couldn't match your payment. Email ${CONTACT_EMAIL}, or apply again with the correct M-Pesa code.`,
 };
 
@@ -81,26 +80,15 @@ export function StatusLookup({ initialReference = "" }: { initialReference?: str
 
       <div aria-live="polite" className="mt-6">
         {result && "error" in result && <p className={ERROR_TEXT}>{result.error}</p>}
-        {result && "status" in result && result.status === "confirmed" && (
-          <div className="relative mt-10 rounded-2xl border border-brand-border bg-brand-background px-5 pt-14 pb-6 text-center">
-            <span aria-hidden className="absolute inset-x-6 top-0 h-1 rounded-b-full bg-linear-to-r from-brand-secondary via-brand-accent to-success" />
-            <span
-              aria-hidden
-              className="absolute top-0 left-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-brand-border bg-brand-surface text-brand-accent"
-            >
-              <PartyPopperIcon className="size-8" />
-            </span>
-            <p className="font-display text-display-xs font-semibold text-brand-primary">Welcome to SCESA!</p>
-            <p className="mt-2 text-md text-slate-600 dark:text-slate-300">{MESSAGES.confirmed}</p>
+        {result && "status" in result && (
+          <div className="flex flex-col gap-4">
+            <p className="text-md text-brand-primary">{MESSAGES[result.status]}</p>
             {result.inviteUrl && (
-              <Button href={result.inviteUrl} target="_blank" rel="noopener noreferrer" aria-label="Join the WhatsApp community (opens in a new tab)" size="lg" className="mt-6 w-full sm:w-auto">
+              <Button href={result.inviteUrl} target="_blank" rel="noopener noreferrer" aria-label="Join the WhatsApp community (opens in a new tab)" size="lg" className="self-start">
                 Join the WhatsApp community
               </Button>
             )}
           </div>
-        )}
-        {result && "status" in result && result.status !== "confirmed" && (
-          <p className="text-md text-brand-primary">{MESSAGES[result.status]}</p>
         )}
       </div>
     </Card>
