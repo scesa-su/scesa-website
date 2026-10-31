@@ -1,6 +1,6 @@
 import type { Member, MemberApplication, MemberRecord, PaymentStatus } from "../../domain/entities/Member.ts";
 import type { IMemberRepository, MemberConflict } from "../../domain/repositories/IMemberRepository.ts";
-import { findConflict, findStatus } from "../../domain/usecases/processMembershipApplication.ts";
+import { findConflict, findStatus, isStudentRegistered } from "../../domain/usecases/processMembershipApplication.ts";
 import { GoogleSheetsDataSource, readSheetsConfig } from "../datasources/GoogleSheetsDataSource.ts";
 import { columnLetter, toRecords, toRow, type MemberColumn } from "../models/memberSchema.ts";
 
@@ -21,6 +21,10 @@ export class MemberRepository implements IMemberRepository {
 
   async findConflict(application: Pick<MemberApplication, "studentId" | "mpesaCode">): Promise<MemberConflict | undefined> {
     return findConflict(await this.read(["student_id", "mpesa_code", "payment_status"]), application);
+  }
+
+  async isStudentRegistered(studentId: string): Promise<boolean> {
+    return isStudentRegistered(await this.read(["student_id", "payment_status"]), studentId);
   }
 
   async append(member: Member): Promise<void> {

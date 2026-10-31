@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { generateKeyPairSync } from "node:crypto";
 import { POST as register } from "./route.ts";
 import { POST as status } from "../membership-status/route.ts";
+import { POST as check } from "./check/route.ts";
 
 // Throwaway key and made-up rows; no real credentials or member data.
 const { privateKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
@@ -144,4 +145,14 @@ test("status: confirmed pair gets the invite, pending gets none, a wrong pair ge
   const malformed = await post(status, { reference: "nope", studentId: "1" });
   assert.equal(wrong.status, 404);
   assert.deepEqual(await wrong.json(), await malformed.json());
+});
+
+test("check: a registered ID says so before payment, a new or rejected-only ID does not", async (t) => {
+  mockGoogle(t);
+  const registered = async (studentId: string) => ((await (await post(check, { studentId })).json()) as { registered: boolean }).registered;
+  assert.equal(await registered("111111"), true);
+  assert.equal(await registered("333333"), false);
+  assert.equal((await post(check, { studentId: "12" })).status, 400);
+  mockGoogle(t, true);
+  assert.equal((await post(check, { studentId: "111111" })).status, 503);
 });
