@@ -8,6 +8,7 @@ import { featuredEvents, filterEvents, parseFilter, sortNewestFirst } from "../d
 import { parseEventFile } from "../data/models/eventSchema.ts";
 import { buildIcs, escapeIcsText } from "./ics.ts";
 import { formatTimeRange } from "./dates.ts";
+import { stripEmoji } from "./text.ts";
 
 const base: Event = {
   slug: "x",
@@ -115,6 +116,25 @@ test("parseEventFile rejects bad frontmatter and names the file", () => {
   for (const fm of cases) {
     assert.throws(() => parseEventFile("foo.mdx", file(fm)), /foo\.mdx/);
   }
+});
+
+test("stripEmoji drops emoji, their trailing space and zero-width characters", () => {
+  assert.equal(stripEmoji("# 🌿 **Team Building**"), "# **Team Building**");
+  assert.equal(stripEmoji("* \u200B**😋 Food provided**"), "* **Food provided**");
+  assert.equal(stripEmoji("Hike 🥾 then swim"), "Hike then swim");
+  assert.equal(stripEmoji("Team 👩🏽‍💻 and 🇰🇪 flags"), "Team and flags");
+  assert.equal(stripEmoji("Level 1️⃣ done"), "Level 1 done");
+  assert.equal(stripEmoji("SCESA © 2026, Ubuntu® and Strathmore™"), "SCESA © 2026, Ubuntu® and Strathmore™");
+  assert.equal(stripEmoji("No emoji here: 9:00 → 17:00"), "No emoji here: 9:00 → 17:00");
+});
+
+test("parseEventFile strips emoji from title, excerpt and body", () => {
+  const raw = file(valid).replace('title: "T"', 'title: "🎉 Launch Night"').replace(/\n---\n/, "\n---\n# 🌿 Welcome\n\n* \u200B🥾 **Hike**\n");
+  const event = parseEventFile("launch.mdx", raw);
+  assert.equal(event.title, "Launch Night");
+  assert.match(event.body, /# Welcome/);
+  assert.match(event.body, /\* \*\*Hike\*\*/);
+  assert.doesNotMatch(event.body, /\p{Extended_Pictographic}|\u200B/u);
 });
 
 test("escapeIcsText escapes per RFC 5545", () => {
