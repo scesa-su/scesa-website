@@ -18,11 +18,10 @@ export function HeroSection({ nextEvent }: { nextEvent?: Event }) {
   return (
     <section aria-labelledby="hero-title" className="relative overflow-x-clip">
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-blueprint" />
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-grain" />
 
       <div className={`${CONTAINER} relative flex min-h-[calc(100svh-8rem)] flex-col lg:min-h-[calc(100svh-9rem)]`}>
-        <div className="grid flex-1 items-center gap-14 py-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
-          <div className="relative z-10 lg:col-span-7">
+        <div className="grid flex-1 items-center gap-14 pb-10 lg:grid-cols-12 lg:gap-8 lg:py-16">
+          <div className="relative z-10 flex min-h-[calc(100svh-5rem)] flex-col justify-center py-10 lg:col-span-7 lg:block lg:min-h-0 lg:py-0">
             <p className={cn(EYEBROW, "motion-safe:animate-fade-up")}>SCESA · Strathmore University · Est. 2014</p>
             <h1 id="hero-title" className="mt-6 font-display text-display-hero font-semibold text-brand-primary">
               <RevealText
@@ -37,10 +36,7 @@ export function HeroSection({ nextEvent }: { nextEvent?: Event }) {
                 ]}
               />
             </h1>
-            <p
-              className="mt-8 max-w-xl text-lg text-brand-muted motion-safe:animate-fade-up lg:text-xl"
-              style={{ animationDelay: `${AFTER_HEADLINE - 200}ms` }}
-            >
+            <p className="mt-8 max-w-xl text-lg text-brand-muted lg:text-xl">
               Workshops, hackathons and communities for Strathmore&apos;s computing and engineering students.
             </p>
             <div
@@ -58,7 +54,7 @@ export function HeroSection({ nextEvent }: { nextEvent?: Event }) {
             </div>
           </div>
 
-          <div className="relative px-4 sm:px-10 lg:col-span-5 lg:px-0">
+          <div className="relative px-4 sm:px-10 lg:col-span-5 lg:pr-0 lg:pl-10 xl:pl-0">
             <SwipeableDeck />
           </div>
         </div>

@@ -37,6 +37,7 @@ export function Logo({ tone = "adaptive", className }: LogoProps) {
         alt=""
         width={143}
         height={60}
+        priority
         unoptimized
         className={cn(imageClass, tone === "adaptive" && "hidden dark:block")}
       />

@@ -94,7 +94,7 @@ export function SwipeableDeck() {
         onPointerMove={tilt}
         onPointerLeave={untilt}
         style={{ rotateX, rotateY, transformPerspective: 1000 }}
-        className="grid w-full max-w-110 place-items-center lg:max-w-130"
+        className="grid w-full max-w-110 place-items-center xl:max-w-130"
       >
         <div
           role="group"
@@ -145,7 +145,6 @@ export function SwipeableDeck() {
                   src={photo.src}
                   alt={photo.alt}
                   width={photo.width}
-                  loading="eager"
                   height={photo.height}
                   priority={i === 0}
                   draggable={false}
