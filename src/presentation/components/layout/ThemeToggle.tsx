@@ -4,6 +4,7 @@ import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING } from "@/lib/styles";
 
 const ORDER = ["light", "dark", "system"] as const;
 type ThemeName = (typeof ORDER)[number];
@@ -31,8 +32,8 @@ export function ThemeToggle({ className }: { className?: string }) {
       title={`Theme: ${current}`}
       className={cn(
         base,
-        "text-brand-primary transition-colors hover:bg-navy-25",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent",
+        "text-brand-primary transition-colors hover:bg-brand-sunken",
+        FOCUS_RING,
         className,
       )}
     >

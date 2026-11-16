@@ -1,12 +1,13 @@
 import Link from "next/link";
 import type { SpotlightPost } from "@/domain/entities/SpotlightPost";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING } from "@/lib/styles";
 import { MarginNote } from "./MarginNote";
 import { Polaroid } from "./Polaroid";
 import { PostMeta } from "./PostMeta";
 
 const TITLE_LINK =
-  "rounded-sm after:absolute after:inset-0 hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
+  `rounded-sm after:absolute after:inset-0 hover:underline hover:underline-offset-4 ${FOCUS_RING}`;
 
 /** The note as a caption on the white frame: dark ink in both themes. */
 const ON_FRAME = "rotate-0 text-sm leading-tight text-slate-800 dark:text-slate-800 sm:text-md";
@@ -44,7 +45,7 @@ export function LeadStory({ post }: EntryProps) {
             {post.title}
           </Link>
         </h2>
-        <p className="mt-3 max-w-[60ch] text-lg text-slate-600 dark:text-slate-300">{post.dek}</p>
+        <p className="mt-3 max-w-[60ch] text-lg text-brand-muted">{post.dek}</p>
         <PostMeta {...post} className="mt-4" />
       </div>
     </article>
@@ -78,7 +79,7 @@ export function PostRow({ post, index = 0, heading: Heading = "h2" }: PostRowPro
             {post.title}
           </Link>
         </Heading>
-        <p className="mt-2 max-w-[60ch] text-md text-slate-600 dark:text-slate-300">
+        <p className="mt-2 max-w-[60ch] text-md text-brand-muted">
           {post.member ? `“${post.member.quote}”` : post.excerpt}
         </p>
         <PostMeta {...post} className="mt-3" />

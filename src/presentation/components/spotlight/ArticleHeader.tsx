@@ -4,14 +4,15 @@ import { PROJECT_STAGES, type SpotlightLink, type SpotlightPost } from "@/domain
 import { cn } from "@/lib/cn";
 import { AddToCalendar } from "@/presentation/components/events/AddToCalendar";
 import { EventMeta } from "@/presentation/components/events/EventMeta";
+import { RevealText } from "@/presentation/components/motion/RevealText";
 import { Button } from "@/presentation/components/ui/Button";
 import { MarginNote } from "./MarginNote";
 import { Polaroid } from "./Polaroid";
 import { PostMeta } from "./PostMeta";
 
-const H1 = "mt-4 font-display text-display-sm font-semibold text-balance text-brand-primary lg:text-display-lg";
-const DEK = "mt-4 text-xl text-slate-600 dark:text-slate-300";
-const BOX = "rounded-2xl border border-brand-border bg-navy-25 p-6";
+const H1 = "mt-4 font-display text-display-sm font-semibold text-balance text-brand-primary sm:text-display-md lg:text-display-lg";
+const DEK = "mt-4 text-xl text-brand-muted";
+const BOX = "rounded-2xl border border-brand-border bg-brand-sunken p-6";
 const BOX_H2 = "font-display text-xl font-semibold text-brand-primary";
 
 type PostProps = { post: SpotlightPost };
@@ -20,9 +21,11 @@ function TitleBlock({ post }: PostProps) {
   return (
     <>
       <MarginNote post={post} />
-      <h1 className={H1}>{post.title}</h1>
+      <h1 className={H1}>
+        <RevealText lines={[post.title]} />
+      </h1>
       <p className={DEK}>{post.dek}</p>
-      <PostMeta {...post} className="mt-4" />
+      <PostMeta {...post} className="mt-6 border-t border-brand-border pt-4" />
     </>
   );
 }
@@ -112,7 +115,9 @@ export function MemberHeader({ post }: PostProps) {
         )}
         <div>
           <MarginNote post={post} />
-          <h1 className={H1}>{post.title}</h1>
+          <h1 className={H1}>
+            <RevealText lines={[post.title]} />
+          </h1>
           <p className={DEK}>{post.dek}</p>
           <p className="mt-4 text-md font-medium text-brand-primary">
             {m.name}, {m.degree}, {m.year}
@@ -158,7 +163,7 @@ export function ProjectStatus({ post }: PostProps) {
             <span
               className={cn(
                 "text-xs sm:text-sm",
-                i === current ? "font-semibold text-brand-primary" : "text-slate-600 dark:text-slate-300",
+                i === current ? "font-semibold text-brand-primary" : "text-brand-muted",
               )}
             >
               {STAGE_LABEL[s]}

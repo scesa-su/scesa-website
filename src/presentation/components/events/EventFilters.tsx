@@ -1,10 +1,12 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 import type { EventFilter } from "@/domain/usecases/eventQueries";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING_OFFSET } from "@/lib/styles";
 
 const FILTER_LABELS: Record<EventFilter, string> = {
   all: "All",
@@ -13,9 +15,6 @@ const FILTER_LABELS: Record<EventFilter, string> = {
   hackathons: "Hackathons",
   completed: "Completed",
 };
-
-const focusRing =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-background";
 
 function eventsHref(filter: EventFilter, q: string) {
   const params = new URLSearchParams();
@@ -54,7 +53,11 @@ export function EventFilters({ filter, q }: EventFiltersProps) {
 
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <div role="group" aria-label="Filter events" className="flex flex-wrap gap-2">
+      <div
+        role="group"
+        aria-label="Filter events"
+        className="flex overflow-x-auto rounded-full border border-brand-border bg-brand-surface p-1 [scrollbar-width:none]"
+      >
         {(Object.keys(FILTER_LABELS) as EventFilter[]).map((f) => (
           <button
             key={f}
@@ -62,13 +65,18 @@ export function EventFilters({ filter, q }: EventFiltersProps) {
             aria-pressed={f === filter}
             onClick={() => navigate(f, value)}
             className={cn(
-              "h-10 rounded-full border px-4 text-sm font-medium transition-colors",
-              focusRing,
-              f === filter
-                ? "border-brand-primary bg-brand-primary text-brand-background"
-                : "border-brand-border bg-brand-surface text-brand-primary hover:bg-navy-25",
+              "relative isolate h-11 shrink-0 rounded-full px-5 text-sm font-medium whitespace-nowrap transition-colors duration-300",
+              FOCUS_RING_OFFSET,
+              f === filter ? "text-brand-background" : "text-brand-primary hover:bg-brand-sunken",
             )}
           >
+            {f === filter && (
+              <motion.span
+                layoutId="event-filter-pill"
+                transition={{ type: "spring", stiffness: 420, damping: 36 }}
+                className="absolute inset-0 -z-10 rounded-full bg-brand-primary"
+              />
+            )}
             {FILTER_LABELS[f]}
           </button>
         ))}
@@ -79,7 +87,7 @@ export function EventFilters({ filter, q }: EventFiltersProps) {
         </label>
         <Search
           aria-hidden="true"
-          className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-500 dark:text-slate-400"
+          className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-slate-500 dark:text-slate-400"
         />
         <input
           id="event-search"
@@ -93,8 +101,8 @@ export function EventFilters({ filter, q }: EventFiltersProps) {
             timer.current = setTimeout(() => navigate(filter, next), 300);
           }}
           className={cn(
-            "h-10 w-full rounded-lg border border-brand-border bg-brand-surface pr-3 pl-9 text-sm text-brand-primary placeholder:text-slate-500 dark:placeholder:text-slate-400",
-            focusRing,
+            "h-12 w-full rounded-full border border-brand-border bg-brand-surface pr-4 pl-11 text-md text-brand-primary transition-colors placeholder:text-slate-500 hover:border-slate-400 dark:placeholder:text-slate-400",
+            FOCUS_RING_OFFSET,
           )}
         />
       </div>

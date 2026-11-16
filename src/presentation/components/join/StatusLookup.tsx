@@ -91,7 +91,7 @@ export function StatusLookup({ initialReference = "" }: { initialReference?: str
               <PartyPopperIcon className="size-8" />
             </span>
             <p className="font-display text-display-xs font-semibold text-brand-primary">Welcome to SCESA!</p>
-            <p className="mt-2 text-md text-slate-600 dark:text-slate-300">{MESSAGES.confirmed}</p>
+            <p className="mt-2 text-md text-brand-muted">{MESSAGES.confirmed}</p>
             {result.inviteUrl && (
               <Button href={result.inviteUrl} target="_blank" rel="noopener noreferrer" aria-label="Join the WhatsApp community (opens in a new tab)" size="lg" className="mt-6 w-full sm:w-auto">
                 Join the WhatsApp community

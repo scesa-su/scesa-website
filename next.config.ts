@@ -28,6 +28,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   // Production only: next dev needs 'unsafe-eval' for fast refresh.
   async headers() {
     return process.env.NODE_ENV === "production" ? [{ source: "/:path*", headers: securityHeaders }] : [];

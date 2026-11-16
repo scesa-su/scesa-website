@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING } from "@/lib/styles";
 
 type LogoProps = {
   // "adaptive": colour logo in light mode, white logo in dark mode. "light": always white (navy backgrounds).
@@ -9,13 +10,14 @@ type LogoProps = {
 };
 
 export function Logo({ tone = "adaptive", className }: LogoProps) {
-  const imageClass = "h-8 w-auto lg:h-15";
+  const imageClass =
+    "h-8 w-auto transition-[height] duration-500 ease-out-expo lg:h-15 lg:group-data-condensed/nav:h-10";
   return (
     <Link
       href="/"
       aria-label="SCESA home"
       className={cn(
-        "inline-flex shrink-0 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent",
+        `inline-flex shrink-0 rounded-lg ${FOCUS_RING}`,
         className,
       )}
     >
@@ -35,6 +37,7 @@ export function Logo({ tone = "adaptive", className }: LogoProps) {
         alt=""
         width={143}
         height={60}
+        priority
         unoptimized
         className={cn(imageClass, tone === "adaptive" && "hidden dark:block")}
       />

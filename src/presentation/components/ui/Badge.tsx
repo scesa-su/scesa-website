@@ -5,7 +5,7 @@ const variants = {
   live: "bg-success-dark text-white",
   scheduled: "bg-warning-dark text-white",
   completed: "bg-info-dark text-white",
-  neutral: "bg-navy-25 text-brand-primary",
+  neutral: "bg-brand-sunken text-brand-primary",
 } as const;
 
 type BadgeProps = ComponentProps<"span"> & { variant?: keyof typeof variants };

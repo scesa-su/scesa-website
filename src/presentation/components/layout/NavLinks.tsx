@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, isActivePath } from "@/lib/constants";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING } from "@/lib/styles";
 
 export function NavLinks() {
   const pathname = usePathname();
@@ -18,11 +19,12 @@ export function NavLinks() {
               href={href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "rounded-md text-md font-medium transition-colors",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-4 focus-visible:ring-offset-brand-surface",
+                "relative rounded-lg text-md font-medium transition-colors duration-200",
+                "after:absolute after:inset-x-0 after:-bottom-1.5 after:h-0.5 after:origin-left after:rounded-full after:bg-current after:transition-transform after:duration-500 after:ease-out-expo",
+                `focus-visible:ring-offset-4 focus-visible:ring-offset-brand-surface ${FOCUS_RING}`,
                 active
-                  ? "text-orange-700 underline decoration-2 underline-offset-8 dark:text-brand-accent"
-                  : "text-brand-primary hover:text-orange-700 dark:hover:text-brand-accent",
+                  ? "text-orange-700 after:scale-x-100 dark:text-brand-accent"
+                  : "text-brand-primary after:scale-x-0 hover:text-orange-700 hover:after:scale-x-100 dark:hover:text-brand-accent",
               )}
             >
               {label}

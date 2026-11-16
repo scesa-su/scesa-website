@@ -6,8 +6,9 @@ import { spotlightRepository } from "@/data/repositories/SpotlightRepository";
 import { SITE_URL } from "@/lib/constants";
 import remarkGfm from "remark-gfm";
 import { allowOnly } from "@/lib/mdx";
-import { CONTAINER } from "@/presentation/components/about/styles";
+import { PAGE } from "@/lib/styles";
 import { PostRow } from "@/presentation/components/spotlight/FeedEntry";
+import { ReadingProgress } from "@/presentation/components/spotlight/ReadingProgress";
 import { cn } from "@/lib/cn";
 import {
   DefaultHeader,
@@ -18,6 +19,8 @@ import {
 } from "@/presentation/components/spotlight/ArticleHeader";
 import { Gallery } from "@/presentation/components/spotlight/Gallery";
 import { spotlightMdxComponents } from "@/presentation/components/spotlight/mdxComponents";
+import { ArrowLink } from "@/presentation/components/ui/ArrowLink";
+import { BackLink } from "@/presentation/components/ui/BackLink";
 import { Button } from "@/presentation/components/ui/Button";
 
 // GFM: strikethrough and tables as Keystatic saves them. Only elements with a component render; raw HTML is dropped.
@@ -36,7 +39,7 @@ export async function generateMetadata({ params }: PageProps<"/spotlight/[slug]"
   const post = await spotlightRepository.getBySlug((await params).slug);
   if (!post) return {};
   return {
-    title: `${post.title} | SCESA Spotlight`,
+    title: `${post.title} | Spotlight`,
     description: post.dek,
     openGraph: {
       type: "article",
@@ -82,7 +85,11 @@ export default async function SpotlightArticlePage({ params }: PageProps<"/spotl
   );
 
   return (
-    <main className={`${CONTAINER} py-12 lg:pb-24`}>
+    <main className={PAGE}>
+      <ReadingProgress />
+      <BackLink href="/spotlight" className="mb-10">
+        All stories
+      </BackLink>
       {post.kind === "recap" && post.coverImage ? (
         <article className="mx-auto max-w-6xl">
           <RecapHeader post={post} />
@@ -107,24 +114,22 @@ export default async function SpotlightArticlePage({ params }: PageProps<"/spotl
         </article>
       )}
 
-      <section aria-label="More from Spotlight" className="mx-auto mt-20 max-w-4xl">
+      <section aria-labelledby="more-spotlight" className="mx-auto mt-24 max-w-5xl border-t border-brand-border pt-12 lg:mt-32">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <h2 id="more-spotlight" className="font-display text-display-xs font-semibold text-brand-primary md:text-display-sm">
+            More from Spotlight
+          </h2>
+          <ArrowLink href="/spotlight">All stories</ArrowLink>
+        </div>
         {related.length > 0 && (
-          <>
-            <h2 id="more-spotlight" className="font-display text-display-xs font-semibold text-brand-primary md:text-display-sm">
-              More from Spotlight
-            </h2>
-            <ul className="mt-6 divide-y divide-brand-border border-t border-brand-border">
-              {related.map((p, i) => (
-                <li key={p.slug}>
-                  <PostRow post={p} index={i} heading="h3" />
-                </li>
-              ))}
-            </ul>
-          </>
+          <ul className="mt-6 divide-y divide-brand-border">
+            {related.map((p, i) => (
+              <li key={p.slug}>
+                <PostRow post={p} index={i} heading="h3" />
+              </li>
+            ))}
+          </ul>
         )}
-        <Button href="/spotlight" variant="outline" size="lg" className="mt-8" aria-label="Back to all Spotlight posts">
-          Back to all posts
-        </Button>
       </section>
     </main>
   );

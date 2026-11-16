@@ -3,6 +3,7 @@ import matter from "gray-matter";
 import { z } from "zod";
 import { PROJECT_STAGES, type SpotlightKind, type SpotlightPost } from "../../domain/entities/SpotlightPost.ts";
 import { readingMinutes } from "../../domain/usecases/spotlightQueries.ts";
+import { stripEmoji } from "../../lib/text.ts";
 import { nairobiDateTime, optional, text } from "./fields.ts";
 
 const link = z.object({ label: text, url: z.url({ protocol: /^https$/ }) });
@@ -48,11 +49,18 @@ export function parseSpotlightFile(kind: SpotlightKind, fileName: string, raw: s
   if (!result.success) {
     throw new Error(`Invalid spotlight frontmatter in ${fileName}:\n${z.prettifyError(result.error)}`);
   }
+  const post = result.data;
+  const clean = (value: string) => stripEmoji(value).trim();
+  const body = stripEmoji(content);
   return {
     slug: path.basename(fileName, ".mdx"),
     kind,
-    ...result.data,
-    readingMinutes: readingMinutes(content),
-    body: content,
+    ...post,
+    title: clean(post.title),
+    dek: clean(post.dek),
+    excerpt: clean(post.excerpt),
+    member: post.member && { ...post.member, quote: clean(post.member.quote) },
+    readingMinutes: readingMinutes(body),
+    body,
   };
 }

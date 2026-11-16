@@ -1,7 +1,8 @@
 import { ExternalLink } from "lucide-react";
+import { FOCUS_RING } from "@/lib/styles";
 
 const link =
-  "inline-flex items-center gap-1 rounded-sm text-sm font-medium text-brand-primary underline underline-offset-2 hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
+  `inline-flex items-center gap-1 rounded-sm text-sm font-medium text-brand-primary underline underline-offset-2 hover:text-brand-accent ${FOCUS_RING}`;
 
 /** Google Maps pin for an in-person event. The keyless embed URL needs no API key; CSP must allow frame-src https://www.google.com. */
 export function EventMap({ query, venue }: { query: string; venue: string }) {
@@ -11,7 +12,7 @@ export function EventMap({ query, venue }: { query: string; venue: string }) {
       <h2 id="event-location" className="font-display text-display-xs font-semibold text-brand-primary">
         Location
       </h2>
-      <p className="text-md text-slate-600 dark:text-slate-300">{venue}</p>
+      <p className="text-md text-brand-muted">{venue}</p>
       <iframe
         src={`https://www.google.com/maps?q=${q}&output=embed`}
         title={`Map showing ${venue}`}

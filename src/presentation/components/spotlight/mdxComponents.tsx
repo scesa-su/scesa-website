@@ -13,7 +13,7 @@ function PullQuote({ quote, attribution }: { quote: string; attribution?: string
       <blockquote className="font-display text-display-xs font-semibold text-brand-primary md:text-display-sm">
         <p>“{quote}”</p>
       </blockquote>
-      {attribution && <figcaption className="mt-3 text-md text-slate-600 dark:text-slate-300">— {attribution}</figcaption>}
+      {attribution && <figcaption className="mt-3 text-md font-semibold text-brand-muted">{attribution}</figcaption>}
     </figure>
   );
 }
@@ -29,7 +29,7 @@ function Figure({ src, alt, caption }: { src: string; alt: string; caption?: str
         sizes="(min-width: 768px) 68ch, 100vw"
         className="h-auto w-full rounded-2xl border border-brand-border"
       />
-      {caption && <figcaption className="mt-2 text-sm text-slate-600 dark:text-slate-300">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-sm text-brand-muted">{caption}</figcaption>}
     </figure>
   );
 }
@@ -49,7 +49,7 @@ function GalleryImage({ src, alt }: { src: string; alt: string }) {
 
 function Callout({ title, children }: { title?: string; children?: ReactNode }) {
   return (
-    <aside className="mt-8 rounded-2xl border border-brand-border bg-navy-25 p-5 [&>*:first-child]:mt-0">
+    <aside className="mt-8 rounded-2xl border border-brand-border bg-brand-sunken p-5 [&>*:first-child]:mt-0">
       {title && <p className="font-display text-xl font-semibold text-brand-primary">{title}</p>}
       {children}
     </aside>
