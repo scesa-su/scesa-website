@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { Magnetic } from "@/presentation/components/motion/Magnetic";
 import { Button } from "@/presentation/components/ui/Button";
 
-const HIDDEN_ON = ["/", "/join"];
+const HIDDEN_ON = ["/", "/join", "/about"];
 
 export function FooterCta() {
   const pathname = usePathname();

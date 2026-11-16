@@ -1,5 +1,7 @@
 import { CheckIcon } from "lucide-react";
 import { BODY, H2, SECTION } from "@/lib/styles";
+import { Reveal } from "@/presentation/components/motion/Reveal";
+import { SectionLabel } from "@/presentation/components/ui/SectionLabel";
 
 // Portfolio p. 5, "Behavior" and "Professionalism".
 const CONDUCT = [
@@ -15,19 +17,25 @@ export function CodeOfConduct() {
     <section aria-labelledby="conduct" className={SECTION}>
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
-          <h2 id="conduct" className={H2}>
+          <SectionLabel index={6}>How we work</SectionLabel>
+          <h2 id="conduct" className={`mt-6 ${H2}`}>
             Code of conduct
           </h2>
           <p className={`mt-4 ${BODY}`}>What we expect from every member, at events and online.</p>
         </div>
-        <ul className="space-y-5 lg:col-span-8">
-          {CONDUCT.map((c) => (
-            <li key={c} className={`flex gap-4 ${BODY}`}>
-              <CheckIcon aria-hidden className="mt-1 size-5 shrink-0 text-brand-accent" />
-              {c}
+        <ol className="border-b border-brand-border lg:col-span-8">
+          {CONDUCT.map((c, i) => (
+            <li key={c} className="border-t border-brand-border">
+              <Reveal y={16} delay={i * 0.05} className={`flex gap-5 py-5 ${BODY}`}>
+                <span aria-hidden className="w-6 shrink-0 pt-0.5 text-sm font-semibold text-brand-muted tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="flex-1">{c}</span>
+                <CheckIcon aria-hidden className="mt-1 size-5 shrink-0 text-brand-accent" />
+              </Reveal>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
   );

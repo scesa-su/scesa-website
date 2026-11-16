@@ -4,23 +4,30 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 import { mailtoHref } from "@/lib/mailto";
 import { Button } from "@/presentation/components/ui/Button";
 import { H2, SECTION } from "@/lib/styles";
+import { Reveal } from "@/presentation/components/motion/Reveal";
+import { SectionLabel } from "@/presentation/components/ui/SectionLabel";
 
 export function PartnersSection({ partners }: { partners: Partner[] }) {
   return (
     <section aria-labelledby="partners" className={SECTION}>
-      <h2 id="partners" className={`${H2} text-center`}>
+      <SectionLabel index={7} className="justify-center">
+        Partners
+      </SectionLabel>
+      <h2 id="partners" className={`mt-6 ${H2} text-center`}>
         Organisations we&apos;ve worked with
       </h2>
-      <ul className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-brand-border bg-brand-border md:grid-cols-4">
+      <Reveal className="mt-12">
+      <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-brand-border bg-brand-border md:grid-cols-4">
         {partners.map((p) => (
           <li
             key={p.name}
-            className="flex min-h-24 items-center justify-center bg-brand-background p-4 text-center font-display text-md font-semibold md:min-h-28 md:p-6 md:text-lg text-brand-muted"
+            className="flex min-h-24 items-center justify-center bg-brand-background p-4 text-center font-display text-md font-semibold text-brand-muted transition-colors duration-300 hover:bg-brand-sunken hover:text-brand-primary md:min-h-28 md:p-6 md:text-lg"
           >
             {p.logo ? <Image src={p.logo} alt={p.name} width={160} height={64} className="h-10 w-auto" /> : p.name}
           </li>
         ))}
       </ul>
+      </Reveal>
     </section>
   );
 }
