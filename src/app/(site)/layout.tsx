@@ -1,12 +1,13 @@
 import { Footer } from "@/presentation/components/layout/Footer";
 import { Navbar } from "@/presentation/components/layout/Navbar";
+import { MotionProvider } from "@/presentation/context/MotionProvider";
 
 export default function SiteLayout({ children }: Pick<LayoutProps<"/">, "children">) {
   return (
-    <>
+    <MotionProvider>
       <a
         href="#content"
-        className="sr-only z-50 rounded-md bg-brand-surface px-4 py-2 text-brand-primary focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+        className="sr-only z-50 rounded-lg bg-brand-surface px-4 py-2 text-brand-primary focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
       >
         Skip to content
       </a>
@@ -15,6 +16,6 @@ export default function SiteLayout({ children }: Pick<LayoutProps<"/">, "childre
         {children}
       </div>
       <Footer />
-    </>
+    </MotionProvider>
   );
 }
