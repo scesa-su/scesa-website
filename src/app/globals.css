@@ -194,6 +194,10 @@
   --font-marker: var(--font-kalam), cursive;
 }
 
+html {
+  scroll-padding-top: 6rem;
+}
+
 body {
   @apply bg-brand-background text-brand-primary font-body;
 }

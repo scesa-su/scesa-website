@@ -9,7 +9,8 @@ type LogoProps = {
 };
 
 export function Logo({ tone = "adaptive", className }: LogoProps) {
-  const imageClass = "h-8 w-auto lg:h-15";
+  const imageClass =
+    "h-8 w-auto transition-[height] duration-500 ease-out-expo lg:h-15 lg:group-data-condensed/nav:h-10";
   return (
     <Link
       href="/"

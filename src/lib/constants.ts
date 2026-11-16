@@ -7,7 +7,7 @@ export const CONTACT_EMAIL = "scesa@strathmore.edu";
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Events", href: "/events" },
-  { label: "Communities", href: "/communities" },
+  // Communities returns once /communities is built.
   { label: "Spotlight", href: "/spotlight" },
   { label: "About", href: "/about" },
 ] as const;
