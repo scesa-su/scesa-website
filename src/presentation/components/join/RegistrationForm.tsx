@@ -168,7 +168,14 @@ export function RegistrationForm() {
       <ol aria-label="Progress" className="grid grid-cols-4 gap-2">
         {STEPS.map((label, i) => (
           <li key={label} aria-current={i === step ? "step" : undefined} className="flex flex-col gap-2">
-            <span className={cn("h-1.5 rounded-full", i <= step ? "bg-brand-accent" : "bg-slate-200 dark:bg-slate-700")} />
+            <span className="relative h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+              <span
+                className={cn(
+                  "absolute inset-0 origin-left rounded-full bg-brand-accent transition-transform duration-700 ease-out-expo",
+                  i <= step ? "scale-x-100" : "scale-x-0",
+                )}
+              />
+            </span>
             <span
               className={cn(
                 "text-xs",
@@ -266,22 +273,37 @@ export function RegistrationForm() {
               <legend className="text-md text-brand-muted">
                 Pick the communities you want to join. You can pick more than one.
               </legend>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <p aria-live="polite" className="mt-2 text-sm font-semibold text-brand-primary">
+                {values.communities.length === 0
+                  ? "None selected yet"
+                  : `${values.communities.length} selected`}
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {COMMUNITIES.map((c) => {
                   const checked = values.communities.includes(c);
                   return (
                     <label
                       key={c}
                       className={cn(
-                        "inline-flex h-10 cursor-pointer items-center gap-2 rounded-full border px-4 text-sm font-medium transition-colors",
+                        "group flex min-h-14 cursor-pointer items-center gap-3 rounded-lg border px-4 py-3 text-md font-medium text-brand-primary transition-[border-color,background-color,box-shadow] duration-200",
                         "has-focus-visible:ring-2 has-focus-visible:ring-brand-accent has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-brand-background",
                         checked
-                          ? "border-brand-primary bg-brand-primary text-brand-background"
-                          : "border-brand-border bg-brand-surface text-brand-primary hover:bg-brand-sunken",
+                          ? "border-brand-accent bg-brand-sunken shadow-sm"
+                          : "border-brand-border bg-brand-surface hover:border-slate-400 dark:hover:border-slate-500",
                       )}
                     >
                       <input type="checkbox" name="communities" value={c} checked={checked} onChange={() => toggleCommunity(c)} className="sr-only" />
-                      {checked && <CheckIcon aria-hidden className="size-4" />}
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "flex size-5 shrink-0 items-center justify-center rounded-md border-2 transition-colors duration-200",
+                          checked
+                            ? "border-brand-accent bg-brand-accent text-white"
+                            : "border-slate-300 group-hover:border-slate-400 dark:border-slate-600 dark:group-hover:border-slate-500",
+                        )}
+                      >
+                        <CheckIcon strokeWidth={3} className={cn("size-3.5 transition-transform duration-200", checked ? "scale-100" : "scale-0")} />
+                      </span>
                       {c}
                     </label>
                   );

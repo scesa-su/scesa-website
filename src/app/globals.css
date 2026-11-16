@@ -244,3 +244,80 @@ body {
   mask-image: radial-gradient(ellipse at 30% 40%, black 20%, transparent 70%);
 }
 
+
+@supports (appearance: base-select) {
+  .select-refined,
+  .select-refined::picker(select) {
+    appearance: base-select;
+  }
+
+  .select-refined {
+    display: block;
+    line-height: 2.875rem;
+  }
+
+  .select-refined::picker-icon {
+    display: none;
+  }
+
+  .select-refined::picker(select) {
+    margin-block: 6px;
+    padding: 6px;
+    max-height: min(22rem, 60vh);
+    overflow-y: auto;
+    border: 1px solid var(--brand-border);
+    border-radius: 12px;
+    background: var(--brand-surface);
+    box-shadow: 0 18px 40px -14px rgb(15 23 42 / 0.3);
+    opacity: 0;
+    translate: 0 -4px;
+    transition:
+      opacity 150ms ease-out,
+      translate 250ms var(--ease-out-expo),
+      overlay 250ms allow-discrete,
+      display 250ms allow-discrete;
+  }
+
+  .select-refined:open::picker(select) {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  @starting-style {
+    .select-refined:open::picker(select) {
+      opacity: 0;
+      translate: 0 -4px;
+    }
+  }
+
+  .select-refined option {
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    line-height: 1.35;
+    white-space: normal;
+    color: var(--brand-primary);
+    cursor: pointer;
+  }
+
+  .select-refined option[value=""] {
+    color: var(--brand-muted);
+  }
+
+  .select-refined option:hover,
+  .select-refined option:focus-visible {
+    background: var(--brand-sunken);
+    outline: none;
+  }
+
+  .select-refined option:checked {
+    font-weight: 600;
+  }
+
+  .select-refined option::checkmark {
+    order: 1;
+    margin-inline-start: auto;
+    color: var(--brand-accent);
+  }
+}
