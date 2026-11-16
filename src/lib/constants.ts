@@ -73,9 +73,13 @@ export const HERO_PHOTOS: readonly HeroPhoto[] = [
 ];
 
 export const HOME_STATS = [
-  { value: "250+", label: "members over the years" },
-  { value: "6", label: "dedicated communities" },
-  { value: "4", label: "Clubs & Sports Gala 2025 awards" },
+  { value: "250+", label: "members over the years", detail: "Students who have joined SCESA since it started in 2014." },
+  { value: "6", label: "dedicated communities", detail: "Data, cloud, security, engineering and more, each running its own sessions." },
+  {
+    value: "4",
+    label: "Clubs & Sports Gala 2025 awards",
+    detail: "Recognised by Strathmore for our events, partnerships and the way the club is run.",
+  },
 ] as const;
 
 export const COMMUNITIES = [

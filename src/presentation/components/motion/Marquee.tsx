@@ -34,7 +34,7 @@ export function Marquee({ children, baseVelocity = -2, skew = false, repeat = 1,
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const smoothVelocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
-  const speedUp = useTransform(smoothVelocity, [-1000, 0, 1000], [4, 0, 4], { clamp: false });
+  const speedUp = useTransform(smoothVelocity, [-1000, 0, 1000], [1.5, 0, 1.5], { clamp: false });
   const skewX = useTransform(smoothVelocity, [-2000, 2000], skew && !reduce ? [6, -6] : [0, 0]);
   const x = useTransform(baseX, (v) => `${wrapHalf(v)}%`);
 
