@@ -2,16 +2,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { DownloadIcon } from "lucide-react";
 import { aboutRepository } from "@/data/repositories/AboutRepository";
+import { CONTAINER } from "@/lib/styles";
 import { BoardWall } from "@/presentation/components/about/BoardWall";
 import { GrowthPathways, MissionVision, Pillars } from "@/presentation/components/about/ClubStory";
 import { CodeOfConduct } from "@/presentation/components/about/CodeOfConduct";
 import { ClosingPanels, PartnersSection } from "@/presentation/components/about/PartnersSection";
-import { BODY, CONTAINER } from "@/presentation/components/about/styles";
 import { Timeline } from "@/presentation/components/about/Timeline";
+import { PageHeader } from "@/presentation/components/layout/PageHeader";
+import { Parallax } from "@/presentation/components/motion/Parallax";
 import { Button } from "@/presentation/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "About | SCESA",
+  title: "About",
   description:
     "Who runs SCESA, what we stand for and how we help Strathmore computing and engineering students grow.",
 };
@@ -21,46 +23,44 @@ export default async function AboutPage() {
 
   return (
     <main>
-      <section className={`${CONTAINER} grid items-center gap-12 pt-12 pb-16 lg:grid-cols-12 lg:gap-16 lg:pt-20 lg:pb-24`}>
-        <div className="lg:col-span-6">
-          <h1 className="font-display text-display-md font-semibold text-brand-primary md:text-display-lg xl:text-display-xl">
-            The students behind SCESA
-          </h1>
-          <p className={`mt-6 max-w-xl ${BODY}`}>
-            SCESA is the student association of the School of Computing and Engineering Sciences at Strathmore
-            University. Since 2014 we have worked to close the gap between classroom theory and
-            real-world engineering.
-          </p>
+      <PageHeader
+        eyebrow="About SCESA"
+        title={["The students", "behind SCESA"]}
+        underline
+        intro="SCESA is the student association of the School of Computing and Engineering Sciences at Strathmore University. Since 2014 we have worked to close the gap between classroom theory and real-world engineering."
+        aside={
           <Button
             href="/docs/scesa-portfolio-2026-27.pdf"
             prefetch={false}
             variant="outline"
             size="lg"
-            className="mt-8"
             aria-label="Download our 2026/27 corporate portfolio (PDF)"
           >
             <DownloadIcon aria-hidden className="size-5" />
             Download our portfolio (PDF)
           </Button>
+        }
+      />
+
+      <figure className={CONTAINER}>
+        <div className="relative aspect-4/3 overflow-hidden rounded-3xl sm:aspect-video lg:aspect-21/9">
+          <Parallax distance={48} className="absolute -inset-y-16 inset-x-0">
+            <Image
+              src="/images/about/board-group-2026.jpeg"
+              alt="SCESA members and guests on the steps outside a Strathmore University building, between a Cybersecurity Club banner and a SCESA banner"
+              fill
+              priority
+              sizes="(min-width: 1440px) 1328px, 100vw"
+              className="object-cover object-[50%_40%]"
+            />
+          </Parallax>
         </div>
-        <figure className="lg:col-span-6">
-          <Image
-            src="/images/about/members-auditorium.jpeg"
-            alt="Students seated in a Strathmore University auditorium during a SCESA session"
-            width={1120}
-            height={840}
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="aspect-4/3 h-auto w-full rounded-3xl object-cover"
-          />
-          <figcaption className="mt-3 font-hand text-xl text-slate-600 dark:text-slate-300">
-            Participants at a Data Engineering event (2025)
-          </figcaption>
-        </figure>
-      </section>
-      <div className="border-t border-brand-border">
-        <MissionVision />
-      </div>
+        <figcaption className="mt-3 font-marker text-lg text-brand-muted">
+          A group photo after the SU Cybersecurity Meetup (2025)
+        </figcaption>
+      </figure>
+
+      <MissionVision />
       <Pillars />
       <GrowthPathways />
       <Timeline />

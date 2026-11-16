@@ -1,10 +1,13 @@
 export const SITE_URL = "https://scesa.co.ke";
+export const SITE_NAME = "SCESA";
+export const SITE_DESCRIPTION =
+  "Workshops, hackathons and communities for Strathmore University's computing and engineering students.";
 export const CONTACT_EMAIL = "scesa@strathmore.edu";
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Events", href: "/events" },
-  { label: "Communities", href: "/communities" },
+  // Communities returns once /communities is built.
   { label: "Spotlight", href: "/spotlight" },
   { label: "About", href: "/about" },
 ] as const;
@@ -70,9 +73,13 @@ export const HERO_PHOTOS: readonly HeroPhoto[] = [
 ];
 
 export const HOME_STATS = [
-  { value: "250+", label: "members over the years" },
-  { value: "6", label: "dedicated communities" },
-  { value: "4", label: "Clubs & Sports Gala 2025 awards" },
+  { value: "250+", label: "members over the years", detail: "Students who have joined SCESA since it started in 2014." },
+  { value: "6", label: "dedicated communities", detail: "Data, cloud, security, engineering and more, each running its own sessions." },
+  {
+    value: "4",
+    label: "Clubs & Sports Gala 2025 awards",
+    detail: "Recognised by Strathmore for our events, partnerships and the way the club is run.",
+  },
 ] as const;
 
 export const COMMUNITIES = [

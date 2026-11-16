@@ -28,6 +28,14 @@ export function filterEvents(events: readonly Event[], filter: EventFilter, q = 
   );
 }
 
+/** For the home page: live and upcoming events soonest first, then past events newest first. */
+export function featuredEvents(events: readonly Event[], limit = 3): Event[] {
+  const byDate = (a: Event, b: Event) => Date.parse(a.date) - Date.parse(b.date);
+  const upcoming = events.filter((e) => e.status !== "completed").sort(byDate);
+  const past = events.filter((e) => e.status === "completed").sort((a, b) => byDate(b, a));
+  return [...upcoming, ...past].slice(0, limit);
+}
+
 /** Live from `date` until `endDate`, completed from `endDate` on, scheduled before. */
 export function eventStatus(date: string, endDate: string, now: Date): EventStatus {
   const t = now.getTime();

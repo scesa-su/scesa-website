@@ -60,6 +60,14 @@ test("parseSpotlightFile returns a post with slug, body, reading time and draft 
   assert.equal(parseSpotlightFile("member", "m.mdx", file(member)).member?.quote, "Q");
 });
 
+test("parseSpotlightFile strips emoji from title, dek, quote and body", () => {
+  const raw = file(member.replace('title: "T"', 'title: "🏆 Four wins"').replace('quote: "Q"', 'quote: "Loved it 🙌"'), "We won 🎉 big.");
+  const post = parseSpotlightFile("member", "m.mdx", raw);
+  assert.equal(post.title, "Four wins");
+  assert.equal(post.member?.quote, "Loved it");
+  assert.match(post.body, /We won big\./);
+});
+
 test("parseSpotlightFile rejects bad frontmatter and names the file", () => {
   const cases = [
     valid.replace('title: "T"\n', ""),

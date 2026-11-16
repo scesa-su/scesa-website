@@ -2,6 +2,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { z } from "zod";
 import { EVENT_CATEGORIES, type Event } from "../../domain/entities/Event.ts";
+import { stripEmoji } from "../../lib/text.ts";
 import { nairobiDateTime, optional, text } from "./fields.ts";
 
 /** An event as stored; its status is derived from the dates when it is read. */
@@ -43,5 +44,13 @@ export function parseEventFile(fileName: string, raw: string): StoredEvent {
     where.discriminant === "in-person"
       ? { venue: where.value.venue, mapQuery: where.value.mapPin ?? where.value.venue }
       : { virtualUrl: where.value.link };
-  return { slug: path.basename(fileName, ".mdx"), ...rest, ...place, body: content };
+  return {
+    slug: path.basename(fileName, ".mdx"),
+    ...rest,
+    title: stripEmoji(rest.title).trim(),
+    excerpt: stripEmoji(rest.excerpt).trim(),
+    imageAlt: stripEmoji(rest.imageAlt).trim(),
+    ...place,
+    body: stripEmoji(content),
+  };
 }

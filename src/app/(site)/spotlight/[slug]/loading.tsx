@@ -1,9 +1,9 @@
-import { CONTAINER } from "@/presentation/components/about/styles";
+import { PAGE } from "@/lib/styles";
 import { LoadingPage, Skeleton } from "@/presentation/components/ui/Skeleton";
 
 export default function SpotlightArticleLoading() {
   return (
-    <LoadingPage className={`${CONTAINER} py-12 lg:pb-24`}>
+    <LoadingPage className={PAGE}>
       <div className="mx-auto max-w-[68ch]">
         <Skeleton className="h-6 w-32" />
         <Skeleton className="mt-4 h-10 w-full lg:h-14" />

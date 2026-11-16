@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { TrophyIcon } from "lucide-react";
 import type { ReactNode } from "react";
-import { BODY, H2, SECTION, SMALL } from "./styles";
+import { BODY, H2, SECTION, SMALL } from "@/lib/styles";
+import { Reveal } from "@/presentation/components/motion/Reveal";
+import { SectionLabel } from "@/presentation/components/ui/SectionLabel";
 
 // Source: SCESA LinkedIn (Clubs & Sports Gala, 19 June 2026).
 const AWARDS = [
@@ -14,7 +16,8 @@ const AWARDS = [
 export function Timeline() {
   return (
     <section aria-labelledby="timeline" className={SECTION}>
-      <h2 id="timeline" className={H2}>
+      <SectionLabel index={4}>Our story</SectionLabel>
+      <h2 id="timeline" className={`mt-6 ${H2}`}>
         Our story so far
       </h2>
       <ol className="mt-12 max-w-4xl">
@@ -40,7 +43,7 @@ export function Timeline() {
               sizes="(min-width: 640px) 320px, 240px"
               className="h-auto w-full rounded-2xl"
             />
-            <figcaption className="mt-2 font-hand text-lg leading-tight text-slate-600 dark:text-slate-300">
+            <figcaption className="mt-2 font-marker text-md leading-tight text-brand-muted">
               Team building, June 2025
             </figcaption>
           </figure>
@@ -69,7 +72,7 @@ export function Timeline() {
                 sizes="(min-width: 1024px) 224px, (min-width: 640px) 192px, 240px"
                 className="h-auto w-full rounded-2xl"
               />
-              <figcaption className="mt-2 font-hand text-lg leading-tight text-slate-600 dark:text-slate-300">
+              <figcaption className="mt-2 font-marker text-md leading-tight text-brand-muted">
                 All four plaques, June 2026
               </figcaption>
             </figure>
@@ -82,13 +85,15 @@ export function Timeline() {
 
 function Entry({ year, title, children }: { year: string; title: string; children: ReactNode }) {
   return (
-    <li className="relative grid gap-2 border-l-2 border-brand-border pb-12 pl-8 last:border-transparent last:pb-0 md:grid-cols-[11rem_1fr] md:gap-8">
-      <span aria-hidden className="absolute top-2 -left-2.25 size-4 rounded-full border-4 border-brand-background bg-brand-accent" />
-      <p className="font-display text-display-xs font-semibold text-brand-primary">{year}</p>
-      <div>
-        <h3 className="font-display text-xl font-semibold text-brand-primary">{title}</h3>
-        <div className={`mt-2 ${BODY}`}>{children}</div>
-      </div>
+    <li className="relative border-l-2 border-brand-border pb-14 pl-8 last:border-transparent last:pb-0">
+      <span aria-hidden className="absolute top-3 -left-2.25 size-4 rounded-full border-4 border-brand-background bg-brand-accent" />
+      <Reveal className="grid gap-2 md:grid-cols-[11rem_1fr] md:gap-8">
+        <p className="font-display text-display-sm font-semibold text-brand-primary tabular-nums">{year}</p>
+        <div>
+          <h3 className="font-display text-xl font-semibold text-brand-primary">{title}</h3>
+          <div className={`mt-2 ${BODY}`}>{children}</div>
+        </div>
+      </Reveal>
     </li>
   );
 }
