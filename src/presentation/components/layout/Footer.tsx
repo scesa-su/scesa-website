@@ -1,115 +1,101 @@
 import Link from "next/link";
-import { CalendarDaysIcon, MailIcon } from "lucide-react";
-import type { ReactNode } from "react";
-import { NAV_LINKS, SOCIAL_LINKS, type SocialIcon } from "@/lib/constants";
+import { ArrowUpRightIcon } from "lucide-react";
+import { CONTACT_EMAIL, NAV_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/cn";
-import { FOCUS_RING } from "@/lib/styles";
+import { CONTAINER, FOCUS_RING } from "@/lib/styles";
+import { Magnetic } from "@/presentation/components/motion/Magnetic";
 import { Button } from "@/presentation/components/ui/Button";
-import { Logo } from "./Logo";
+import { BackToTop } from "./BackToTop";
+import { FooterWordmark } from "./FooterWordmark";
+import { SOCIAL_ICONS, isExternal, socialLabel } from "./SocialIcons";
 
-// lucide-react 1.x ships no brand icons, so these are small inline outlines.
-function BrandSvg({ children }: { children: ReactNode }) {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="size-5"
-    >
-      {children}
-    </svg>
-  );
-}
-
-const ICONS: Record<SocialIcon, ReactNode> = {
-  linkedin: (
-    <BrandSvg>
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect width="4" height="12" x="2" y="9" />
-      <circle cx="4" cy="4" r="2" />
-    </BrandSvg>
-  ),
-  instagram: (
-    <BrandSvg>
-      <rect width="20" height="20" x="2" y="2" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <path d="M17.5 6.5h.01" />
-    </BrandSvg>
-  ),
-  tiktok: (
-    <BrandSvg>
-      <path d="M21 7.917v4.034a9.948 9.948 0 0 1-5-1.951v4.5a6.5 6.5 0 1 1-8-6.326v4.326a2.5 2.5 0 1 0 4 2V3h4.083A6.005 6.005 0 0 0 21 7.917z" />
-    </BrandSvg>
-  ),
-  email: <MailIcon aria-hidden className="size-5" />,
-  luma: <CalendarDaysIcon aria-hidden className="size-5" />,
-};
+const HEADING = "text-xs font-semibold uppercase tracking-[0.2em] text-slate-400";
+const LINK = cn("rounded-lg text-md transition-colors duration-200 hover:text-orange-300", FOCUS_RING);
+const RING_ON_NAVY = "focus-visible:ring-offset-brand-navy dark:focus-visible:ring-offset-slate-900";
 
 export function Footer() {
   return (
-    <footer className="bg-brand-navy text-white dark:bg-slate-900">
-      <div className="mx-auto w-full max-w-360 px-4 py-12 md:px-8 lg:px-14 lg:py-16">
-        <div className="flex flex-col gap-12 md:flex-row md:justify-between">
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-4">
-              <Logo tone="light" />
-              <p className="max-w-xs text-sm">
-                Strathmore Computing and Engineering Students Association
-              </p>
-            </div>
-            <ul className="flex items-center gap-5" aria-label="Social media">
-              {SOCIAL_LINKS.map(({ label, href, icon }) => {
-                const external = href.startsWith("http");
-                return (
-                  <li key={label}>
-                    <a
-                      href={href}
-                      aria-label={external ? `SCESA on ${label} (opens in new tab)` : `${label} SCESA`}
-                      {...(external && { target: "_blank", rel: "noopener noreferrer" })}
-                      className={cn("inline-flex rounded-lg p-1 hover:text-orange-300", FOCUS_RING)}
-                    >
-                      {ICONS[icon]}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+    <footer className="relative overflow-hidden bg-brand-navy text-white dark:bg-slate-900">
+      <div className={`${CONTAINER} pt-16 lg:pt-24`}>
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <h2 className="max-w-3xl font-display text-display-md font-semibold text-balance lg:text-display-xl">
+            Ready to build with us?
+          </h2>
+          <Magnetic>
+            <Button href="/join" size="lg" className={RING_ON_NAVY}>
+              Join SCESA
+            </Button>
+          </Magnetic>
+        </div>
 
-          <nav aria-labelledby="footer-links-heading" className="md:min-w-56">
-            <h2 id="footer-links-heading" className="font-display text-xl font-medium">
-              Links
-            </h2>
-            <ul className="mt-6 flex flex-col items-start gap-6">
+        <div className="mt-16 grid gap-12 border-t border-white/15 pt-12 sm:grid-cols-3">
+          <nav aria-labelledby="footer-explore">
+            <h3 id="footer-explore" className={HEADING}>
+              Explore
+            </h3>
+            <ul className="mt-6 flex flex-col items-start gap-4">
               {NAV_LINKS.filter(({ href }) => href !== "/").map(({ label, href }) => (
                 <li key={href}>
-                  <Link href={href} className={cn("rounded-lg text-md hover:text-orange-300", FOCUS_RING)}>
+                  <Link href={href} className={LINK}>
                     {label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Button
-                  href="/join"
-                  size="sm"
-                  className="focus-visible:ring-offset-brand-navy dark:focus-visible:ring-offset-slate-900"
-                >
-                  Join SCESA
-                </Button>
+                <Link href="/join" className={LINK}>
+                  Membership
+                </Link>
               </li>
             </ul>
           </nav>
+
+          <div>
+            <h3 id="footer-connect" className={HEADING}>
+              Connect
+            </h3>
+            <ul aria-labelledby="footer-connect" className="mt-6 flex flex-col items-start gap-4">
+              {SOCIAL_LINKS.filter(({ icon }) => icon !== "email").map(({ label, href, icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    aria-label={socialLabel(label, href)}
+                    {...(isExternal(href) && { target: "_blank", rel: "noopener noreferrer" })}
+                    className={cn(LINK, "group inline-flex items-center gap-3")}
+                  >
+                    {SOCIAL_ICONS[icon]}
+                    {label}
+                    <ArrowUpRightIcon
+                      aria-hidden
+                      className="size-4 opacity-0 transition duration-500 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className={HEADING}>Contact</h3>
+            <address className="mt-6 flex flex-col items-start gap-4 not-italic">
+              <a href={`mailto:${CONTACT_EMAIL}`} className={LINK}>
+                {CONTACT_EMAIL}
+              </a>
+              <p className="text-md text-slate-300">
+                Strathmore University
+                <br />
+                Madaraka, Nairobi, Kenya
+              </p>
+            </address>
+          </div>
         </div>
 
-        <p className="mt-12 text-center text-sm">
-          &copy; {new Date().getFullYear()} Strathmore Computing and Engineering Students
-          Association
-        </p>
+        <div className="mt-16 flex flex-col gap-4 border-t border-white/15 py-6 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between">
+          <p>&copy; {new Date().getFullYear()} Strathmore Computing and Engineering Students Association</p>
+          <BackToTop className="hover:text-orange-300" />
+        </div>
       </div>
+
+      <FooterWordmark />
     </footer>
   );
 }
