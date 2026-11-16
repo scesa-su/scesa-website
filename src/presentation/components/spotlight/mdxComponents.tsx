@@ -13,7 +13,7 @@ function PullQuote({ quote, attribution }: { quote: string; attribution?: string
       <blockquote className="font-display text-display-xs font-semibold text-brand-primary md:text-display-sm">
         <p>“{quote}”</p>
       </blockquote>
-      {attribution && <figcaption className="mt-3 text-md text-brand-muted">— {attribution}</figcaption>}
+      {attribution && <figcaption className="mt-3 text-md font-semibold text-brand-muted">{attribution}</figcaption>}
     </figure>
   );
 }
