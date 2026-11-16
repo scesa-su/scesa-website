@@ -25,7 +25,7 @@ function FillWord({ progress, range, children, className }: {
   children: ReactNode;
   className?: string;
 }) {
-  const opacity = useTransform(progress, range, [0.2, 1]);
+  const opacity = useTransform(progress, range, [0.25, 1]);
   return (
     <motion.span style={{ opacity }} className={className}>
       {children}

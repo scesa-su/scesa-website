@@ -37,7 +37,6 @@ export function CommunitiesIndex() {
             <RuledItem key={name} ruleClassName="bg-white/15">
               <Link
                 href="/join"
-                aria-label={`${name}: join SCESA to take part`}
                 className={cn(
                   "group relative isolate flex items-center gap-4 overflow-hidden py-6 transition-colors duration-500 hover:text-brand-navy focus-visible:text-brand-navy sm:gap-8 lg:py-8",
                   "before:absolute before:inset-0 before:-z-10 before:origin-bottom before:scale-y-0 before:bg-brand-accent before:transition-transform before:duration-500 before:ease-out-expo hover:before:scale-y-100 focus-visible:before:scale-y-100",
@@ -45,11 +44,12 @@ export function CommunitiesIndex() {
                   "focus-visible:ring-inset",
                 )}
               >
-                <span className="w-8 shrink-0 pl-2 text-sm font-semibold text-slate-400 tabular-nums transition-colors duration-500 group-hover:text-brand-navy group-focus-visible:text-brand-navy sm:pl-4">
+                <span aria-hidden className="w-8 shrink-0 pl-2 text-sm font-semibold text-slate-400 tabular-nums transition-colors duration-500 group-hover:text-brand-navy group-focus-visible:text-brand-navy sm:pl-4">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="font-display text-display-xs font-semibold transition-transform duration-500 ease-out-expo group-hover:translate-x-3 sm:text-display-sm lg:text-display-md">
                   {name}
+                  <span className="sr-only">: join SCESA to take part</span>
                 </span>
                 <ArrowUpRightIcon
                   aria-hidden

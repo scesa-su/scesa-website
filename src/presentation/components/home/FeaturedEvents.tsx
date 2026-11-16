@@ -28,7 +28,7 @@ export function FeaturedEvents({ events }: { events: Event[] }) {
             Our Events
           </h2>
         </div>
-        <ArrowLink href="/events" aria-label="See all SCESA events">
+        <ArrowLink href="/events">
           See all events
         </ArrowLink>
       </div>
