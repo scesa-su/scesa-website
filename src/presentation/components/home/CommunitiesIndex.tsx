@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 import { CONTAINER, FOCUS_RING } from "@/lib/styles";
 import { RuledItem } from "@/presentation/components/motion/RuledItem";
 import { Button } from "@/presentation/components/ui/Button";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/presentation/components/ui/SectionLabel";
 
 export function CommunitiesIndex() {
   return (

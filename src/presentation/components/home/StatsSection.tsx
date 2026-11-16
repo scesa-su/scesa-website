@@ -2,7 +2,7 @@ import { HOME_STATS } from "@/lib/constants";
 import { BODY, H2, SECTION } from "@/lib/styles";
 import { CountUp } from "@/presentation/components/motion/CountUp";
 import { RuledItem } from "@/presentation/components/motion/RuledItem";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/presentation/components/ui/SectionLabel";
 
 export function StatsSection() {
   return (

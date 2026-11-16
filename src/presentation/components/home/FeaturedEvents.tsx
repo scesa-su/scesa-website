@@ -11,7 +11,7 @@ import { Reveal } from "@/presentation/components/motion/Reveal";
 import { ArrowLink } from "@/presentation/components/ui/ArrowLink";
 import { Badge } from "@/presentation/components/ui/Badge";
 import { Button } from "@/presentation/components/ui/Button";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/presentation/components/ui/SectionLabel";
 
 const LUMA_URL = SOCIAL_LINKS.find(({ icon }) => icon === "luma")?.href;
 const eventHref = (e: Event) => `/events/${e.slug}`;

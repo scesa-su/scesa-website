@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { SECTION } from "@/lib/styles";
 import { ScrollFillText } from "@/presentation/components/motion/ScrollFillText";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/presentation/components/ui/SectionLabel";
 
 function InlinePhoto({ src, rotate }: { src: string; rotate: string }) {
   return (

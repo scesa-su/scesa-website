@@ -8,7 +8,7 @@ import { Parallax } from "@/presentation/components/motion/Parallax";
 import { MarginNote } from "@/presentation/components/spotlight/MarginNote";
 import { Polaroid } from "@/presentation/components/spotlight/Polaroid";
 import { ArrowLink } from "@/presentation/components/ui/ArrowLink";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/presentation/components/ui/SectionLabel";
 
 export function SpotlightTeaser({ posts, partners }: { posts: SpotlightPost[]; partners: Partner[] }) {
   return (
