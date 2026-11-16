@@ -7,10 +7,8 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { MenuIcon, XIcon } from "lucide-react";
 import { NAV_LINKS, isActivePath } from "@/lib/constants";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING } from "@/lib/styles";
 import { Button } from "@/presentation/components/ui/Button";
-
-const FOCUS_RING =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
 
 export function MobileDrawer() {
   const [open, setOpen] = useState(false);
@@ -94,6 +92,7 @@ export function MobileDrawer() {
             role="dialog"
             aria-modal="true"
             aria-label="Main menu"
+            data-lenis-prevent
             onKeyDown={trapFocus}
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -124,7 +123,7 @@ export function MobileDrawer() {
                         onClick={close}
                         aria-current={active ? "page" : undefined}
                         className={cn(
-                          "rounded-md text-lg font-medium",
+                          "rounded-lg text-lg font-medium",
                           active ? "text-orange-300 underline underline-offset-8" : "hover:text-orange-300",
                           FOCUS_RING,
                         )}

@@ -6,12 +6,12 @@ import { BoardWall } from "@/presentation/components/about/BoardWall";
 import { GrowthPathways, MissionVision, Pillars } from "@/presentation/components/about/ClubStory";
 import { CodeOfConduct } from "@/presentation/components/about/CodeOfConduct";
 import { ClosingPanels, PartnersSection } from "@/presentation/components/about/PartnersSection";
-import { BODY, CONTAINER } from "@/presentation/components/about/styles";
+import { BODY, CONTAINER } from "@/lib/styles";
 import { Timeline } from "@/presentation/components/about/Timeline";
 import { Button } from "@/presentation/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "About | SCESA",
+  title: "About",
   description:
     "Who runs SCESA, what we stand for and how we help Strathmore computing and engineering students grow.",
 };
@@ -53,7 +53,7 @@ export default async function AboutPage() {
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="aspect-4/3 h-auto w-full rounded-3xl object-cover"
           />
-          <figcaption className="mt-3 font-hand text-xl text-slate-600 dark:text-slate-300">
+          <figcaption className="mt-3 font-marker text-lg text-brand-muted">
             Participants at a Data Engineering event (2025)
           </figcaption>
         </figure>

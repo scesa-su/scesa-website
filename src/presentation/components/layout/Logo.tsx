@@ -15,7 +15,7 @@ export function Logo({ tone = "adaptive", className }: LogoProps) {
       href="/"
       aria-label="SCESA home"
       className={cn(
-        "inline-flex shrink-0 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent",
+        "inline-flex shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent",
         className,
       )}
     >

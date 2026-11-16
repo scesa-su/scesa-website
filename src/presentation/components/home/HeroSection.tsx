@@ -9,7 +9,7 @@ export function HeroSection() {
           <h1 id="hero-title" className="max-w-md font-display text-display-md font-semibold text-brand-primary">
             Where Strathmore&apos;s Tech Pioneers Build the Future
           </h1>
-          <p className="max-w-lg text-lg text-slate-600 dark:text-slate-300">
+          <p className="max-w-lg text-lg text-brand-muted">
             Workshops, hackathons and communities for Strathmore&apos;s computing and engineering students.
           </p>
           <Button href="/join" size="md">

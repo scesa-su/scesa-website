@@ -1,6 +1,6 @@
 import type { Leader } from "@/domain/entities/Leader";
 import { PolaroidBoard } from "./PolaroidBoard";
-import { BODY, CONTAINER, H2 } from "./styles";
+import { BODY, CONTAINER, H2 } from "@/lib/styles";
 
 export function BoardWall({ leaders }: { leaders: Leader[] }) {
   return (

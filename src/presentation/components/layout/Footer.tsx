@@ -3,11 +3,9 @@ import { CalendarDaysIcon, MailIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { NAV_LINKS, SOCIAL_LINKS, type SocialIcon } from "@/lib/constants";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING } from "@/lib/styles";
 import { Button } from "@/presentation/components/ui/Button";
 import { Logo } from "./Logo";
-
-const FOCUS_RING =
-  "rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
 
 // lucide-react 1.x ships no brand icons, so these are small inline outlines.
 function BrandSvg({ children }: { children: ReactNode }) {
@@ -72,7 +70,7 @@ export function Footer() {
                       href={href}
                       aria-label={external ? `SCESA on ${label} (opens in new tab)` : `${label} SCESA`}
                       {...(external && { target: "_blank", rel: "noopener noreferrer" })}
-                      className={cn("inline-flex p-1 hover:text-orange-300", FOCUS_RING)}
+                      className={cn("inline-flex rounded-lg p-1 hover:text-orange-300", FOCUS_RING)}
                     >
                       {ICONS[icon]}
                     </a>
@@ -89,7 +87,7 @@ export function Footer() {
             <ul className="mt-6 flex flex-col items-start gap-6">
               {NAV_LINKS.filter(({ href }) => href !== "/").map(({ label, href }) => (
                 <li key={href}>
-                  <Link href={href} className={cn("text-md hover:text-orange-300", FOCUS_RING)}>
+                  <Link href={href} className={cn("rounded-lg text-md hover:text-orange-300", FOCUS_RING)}>
                     {label}
                   </Link>
                 </li>

@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { COMMUNITIES } from "@/lib/constants";
 import { Badge } from "@/presentation/components/ui/Badge";
-import { BODY, H2, H3, ICON_TILE, SECTION, SMALL } from "./styles";
+import { BODY, H2, H3, ICON_TILE, SECTION, SMALL } from "@/lib/styles";
 
 const MISSION_POINTS = [
   "Growing real interest in engineering and IT through meetings, publications, seminars and hands-on sessions.",
@@ -110,7 +110,7 @@ export function GrowthPathways() {
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="aspect-4/3 h-auto w-full rounded-3xl object-cover"
           />
-          <p className="mt-3 font-hand text-xl text-slate-600 dark:text-slate-300">A group photo after the SU Cybersecurity Meetup (2025)</p>
+          <p className="mt-3 font-marker text-lg text-brand-muted">A group photo after the SU Cybersecurity Meetup (2025)</p>
         </div>
         <div className="lg:col-span-7">
           <h2 id="growth" className={H2}>

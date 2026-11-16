@@ -34,8 +34,8 @@ export function EventCard({ title, excerpt, status, image, imageAlt, href, date 
           <h3 className="text-sm font-semibold text-brand-primary">{title}</h3>
           <Badge variant={status}>{STATUS_LABEL[status]}</Badge>
         </div>
-        {date && <p className="text-xs font-medium text-slate-600 dark:text-slate-300">{date}</p>}
-        <p className="mb-4 text-xs text-slate-600 dark:text-slate-300">{excerpt}</p>
+        {date && <p className="text-xs font-medium text-brand-muted">{date}</p>}
+        <p className="mb-4 text-xs text-brand-muted">{excerpt}</p>
         <Button href={href} variant="soft" aria-label={`View event: ${title}`} className="mt-auto w-full">
           View Event
         </Button>

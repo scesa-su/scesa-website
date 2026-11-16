@@ -4,7 +4,7 @@ import { CONTACT_EMAIL, MEMBERSHIP_FEE_KES, MEMBERSHIP_GOOGLE_FORM_URL } from "@
 import { RegistrationForm } from "@/presentation/components/join/RegistrationForm";
 
 export const metadata: Metadata = {
-  title: "Join | SCESA",
+  title: "Join",
   description: `Become a SCESA member: a one-time KES ${MEMBERSHIP_FEE_KES} fee, open to Strathmore computing and engineering students.`,
 };
 
@@ -14,11 +14,11 @@ export default function JoinPage() {
   return (
     <main className="mx-auto w-full max-w-3xl px-4 py-12 md:px-8 lg:pb-20">
       <h1 className="font-display text-display-sm font-semibold text-brand-primary lg:text-display-md">Join SCESA</h1>
-      <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+      <p className="mt-3 text-lg text-brand-muted">
         Membership is open to Strathmore University students and costs a one-time KES {MEMBERSHIP_FEE_KES}. Fill in your
         details, pick your communities and pay with M-Pesa. It takes about three minutes.
       </p>
-      <p className="mt-2 text-md text-slate-600 dark:text-slate-300">
+      <p className="mt-2 text-md text-brand-muted">
         Already applied?{" "}
         <Link href="/join/status" className={LINK}>
           Check your status

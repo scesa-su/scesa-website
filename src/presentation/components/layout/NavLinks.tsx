@@ -18,7 +18,7 @@ export function NavLinks() {
               href={href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "rounded-md text-md font-medium transition-colors",
+                "rounded-lg text-md font-medium transition-colors",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-4 focus-visible:ring-offset-brand-surface",
                 active
                   ? "text-orange-700 underline decoration-2 underline-offset-8 dark:text-brand-accent"

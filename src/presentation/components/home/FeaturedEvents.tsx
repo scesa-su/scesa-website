@@ -1,13 +1,14 @@
 import { eventRepository } from "@/data/repositories/EventRepository";
 import { cn } from "@/lib/cn";
 import { formatShortDate } from "@/lib/dates";
+import { CONTAINER } from "@/lib/styles";
 import { EventCard } from "@/presentation/components/events/EventCard";
 import { Button } from "@/presentation/components/ui/Button";
 
 export async function FeaturedEvents() {
   const events = (await eventRepository.getAll()).slice(0, 3);
   return (
-    <section aria-labelledby="our-events" className="mx-auto w-full max-w-360 px-4 py-12 md:px-8 lg:px-9 lg:pb-20">
+    <section aria-labelledby="our-events" className={`${CONTAINER} py-12 lg:pb-20`}>
       <h2 id="our-events" className="text-center font-display text-display-sm font-semibold text-brand-primary">
         Our Events
       </h2>

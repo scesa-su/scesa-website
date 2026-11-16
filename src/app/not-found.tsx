@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { CONTAINER } from "@/lib/styles";
 import { Button } from "@/presentation/components/ui/Button";
 import { Polaroid } from "@/presentation/components/spotlight/Polaroid";
 import SiteLayout from "./(site)/layout";
 
-export const metadata: Metadata = { title: "Page not found | SCESA" };
+export const metadata: Metadata = { title: { absolute: "Page not found | SCESA" } };
 
 const LINKS = [
   { href: "/events", label: "Events" },
@@ -15,13 +16,13 @@ const LINKS = [
 export default function NotFound() {
   return (
     <SiteLayout>
-      <main className="mx-auto grid w-full max-w-360 flex-1 items-center gap-12 px-4 py-16 md:px-8 lg:grid-cols-2 lg:px-9 lg:py-24">
+      <main className={`${CONTAINER} grid flex-1 items-center gap-12 py-16 lg:grid-cols-2 lg:py-24`}>
         <div className="text-center lg:text-left">
           <p className="font-marker text-xl font-bold text-brand-accent">Error 404</p>
           <h1 className="mt-2 font-display text-display-sm font-semibold text-brand-primary lg:text-display-lg">
             This page isn&apos;t on the board
           </h1>
-          <p className="mx-auto mt-4 max-w-md text-lg text-slate-600 lg:mx-0 dark:text-slate-300">
+          <p className="mx-auto mt-4 max-w-md text-lg text-brand-muted lg:mx-0">
             The link may be old, or the page may have moved. Head back home or pick up from one of these.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">

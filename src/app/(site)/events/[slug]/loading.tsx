@@ -1,8 +1,9 @@
+import { CONTAINER } from "@/lib/styles";
 import { LoadingPage, Skeleton } from "@/presentation/components/ui/Skeleton";
 
 export default function EventLoading() {
   return (
-    <LoadingPage className="mx-auto w-full max-w-360 px-4 py-8 md:px-8 lg:px-14 lg:py-12">
+    <LoadingPage className={`${CONTAINER} py-8 lg:py-12`}>
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-12">
         <Skeleton className="aspect-square rounded-2xl" />
         <div className="flex flex-col gap-6">

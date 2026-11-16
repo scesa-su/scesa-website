@@ -171,7 +171,7 @@ export function RegistrationForm() {
             <span
               className={cn(
                 "text-xs",
-                i === step ? "font-semibold text-brand-primary" : "text-slate-600 dark:text-slate-300",
+                i === step ? "font-semibold text-brand-primary" : "text-brand-muted",
               )}
             >
               <span className="sr-only sm:not-sr-only">{label}</span>
@@ -192,11 +192,11 @@ export function RegistrationForm() {
 
       {step === 3 ? (
         <div className="mt-4 flex flex-col gap-4">
-          <p className="text-md text-slate-600 dark:text-slate-300">
+          <p className="text-md text-brand-muted">
             We have your application. Your reference is:
           </p>
           <p className="font-mono text-display-xs font-semibold tracking-wider break-all text-brand-primary">{reference}</p>
-          <p className="text-md text-slate-600 dark:text-slate-300">
+          <p className="text-md text-brand-muted">
             Save it. The committee matches your M-Pesa payment and confirms your membership, usually within a few days.
             Once you are confirmed, the status page shows your invite to the SCESA WhatsApp community.
           </p>
@@ -262,7 +262,7 @@ export function RegistrationForm() {
 
           {step === 1 && (
             <fieldset aria-describedby={errors.communities ? "communities-error" : undefined}>
-              <legend className="text-md text-slate-600 dark:text-slate-300">
+              <legend className="text-md text-brand-muted">
                 Pick the communities you want to join. You can pick more than one.
               </legend>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -297,17 +297,17 @@ export function RegistrationForm() {
           {step === 2 && (
             <div className="flex flex-col gap-6">
               <div>
-                <p className="text-md text-slate-600 dark:text-slate-300">
+                <p className="text-md text-brand-muted">
                   Membership is a one-time fee. On your phone, open M-Pesa, choose Lipa na M-Pesa, then Pay Bill:
                 </p>
-                <dl className="mt-4 grid gap-3 rounded-xl bg-navy-25 p-4 sm:grid-cols-3">
+                <dl className="mt-4 grid gap-3 rounded-2xl bg-navy-25 p-4 sm:grid-cols-3">
                   {[
                     ["Business number", MPESA_PAYBILL],
                     ["Account number", MPESA_ACCOUNT],
                     ["Amount", `KES ${MEMBERSHIP_FEE_KES}`],
                   ].map(([term, value]) => (
                     <div key={term}>
-                      <dt className="text-sm text-slate-600 dark:text-slate-300">{term}</dt>
+                      <dt className="text-sm text-brand-muted">{term}</dt>
                       <dd className="font-mono text-lg font-semibold break-all text-brand-primary">{value}</dd>
                     </div>
                   ))}

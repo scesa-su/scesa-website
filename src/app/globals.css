@@ -9,6 +9,8 @@
   --brand-secondary: #A2D2FA;
   --brand-accent: #FF7A3F;
   --brand-border: #E2E8F0;
+  --brand-muted: #475569;
+  --brand-sunken: #F8FAFC;
   --navy-900: #161A51;
   --navy-800: #252F8A;
   --navy-700: #242EAF;
@@ -27,6 +29,8 @@
   --brand-surface: #1E293B;
   --brand-primary: #ECF3FF;
   --brand-border: #334155;
+  --brand-muted: #CBD5E1;
+  --brand-sunken: #0F172A;
   --navy-900: #ECF3FF;
   --navy-800: #DDE9FF;
   --navy-700: #C1D5FF;
@@ -48,6 +52,8 @@
   --color-brand-secondary: var(--brand-secondary);
   --color-brand-accent: var(--brand-accent);
   --color-brand-border: var(--brand-border);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-sunken: var(--brand-sunken);
   --color-navy-900: var(--navy-900);
   --color-navy-800: var(--navy-800);
   --color-navy-700: var(--navy-700);
@@ -126,6 +132,27 @@
     }
   }
 
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --animate-reveal-up: reveal-up 900ms var(--ease-out-expo) both;
+  @keyframes reveal-up {
+    from {
+      transform: translateY(110%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  /* Fluid sizes for the home page: the hero headline and the stat numerals. */
+  --text-display-hero: clamp(2.75rem, 1rem + 7vw, 7rem);
+  --text-display-hero--line-height: 0.95;
+  --text-display-hero--letter-spacing: -0.04em;
+  --text-display-numeral: clamp(4.5rem, 2rem + 12vw, 12rem);
+  --text-display-numeral--line-height: 0.9;
+  --text-display-numeral--letter-spacing: -0.04em;
+
   --text-display-2xl: 4.5rem;
   --text-display-2xl--line-height: 5.625rem;
   --text-display-2xl--letter-spacing: -0.02em;
@@ -164,11 +191,23 @@
 @theme inline {
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-hand: var(--font-caveat), cursive;
   --font-marker: var(--font-kalam), cursive;
 }
 
 body {
   @apply bg-brand-background text-brand-primary font-body;
+}
+
+@utility bg-blueprint {
+  background-image:
+    linear-gradient(to right, var(--brand-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--brand-border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 30% 40%, black 20%, transparent 70%);
+}
+
+@utility bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.04;
 }
 

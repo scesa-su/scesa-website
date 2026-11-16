@@ -6,7 +6,7 @@ import { spotlightRepository } from "@/data/repositories/SpotlightRepository";
 import { SITE_URL } from "@/lib/constants";
 import remarkGfm from "remark-gfm";
 import { allowOnly } from "@/lib/mdx";
-import { CONTAINER } from "@/presentation/components/about/styles";
+import { PAGE } from "@/lib/styles";
 import { PostRow } from "@/presentation/components/spotlight/FeedEntry";
 import { cn } from "@/lib/cn";
 import {
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps<"/spotlight/[slug]"
   const post = await spotlightRepository.getBySlug((await params).slug);
   if (!post) return {};
   return {
-    title: `${post.title} | SCESA Spotlight`,
+    title: `${post.title} | Spotlight`,
     description: post.dek,
     openGraph: {
       type: "article",
@@ -82,7 +82,7 @@ export default async function SpotlightArticlePage({ params }: PageProps<"/spotl
   );
 
   return (
-    <main className={`${CONTAINER} py-12 lg:pb-24`}>
+    <main className={PAGE}>
       {post.kind === "recap" && post.coverImage ? (
         <article className="mx-auto max-w-6xl">
           <RecapHeader post={post} />

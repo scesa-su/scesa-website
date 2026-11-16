@@ -14,7 +14,7 @@ export const proseElements = {
   ),
   pre: (props: ComponentProps<"pre">) => (
     <pre
-      className="mt-5 overflow-x-auto rounded-xl border border-brand-border bg-navy-25 p-4 text-sm leading-relaxed text-brand-primary [&>code]:bg-transparent [&>code]:p-0"
+      className="mt-5 overflow-x-auto rounded-2xl border border-brand-border bg-navy-25 p-4 text-sm leading-relaxed text-brand-primary [&>code]:bg-transparent [&>code]:p-0"
       {...props}
     />
   ),
@@ -35,7 +35,7 @@ export const proseElements = {
       <Image src={src} alt={alt ?? ""} width={1600} height={1067} sizes="(min-width: 768px) 68ch, 100vw" className="mt-6 h-auto w-full rounded-2xl border border-brand-border" />
     ) : null,
   table: (props: ComponentProps<"table">) => (
-    <div className="mt-6 overflow-x-auto rounded-xl border border-brand-border">
+    <div className="mt-6 overflow-x-auto rounded-2xl border border-brand-border">
       <table className="w-full border-collapse text-left text-sm" {...props} />
     </div>
   ),

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { TrophyIcon } from "lucide-react";
 import type { ReactNode } from "react";
-import { BODY, H2, SECTION, SMALL } from "./styles";
+import { BODY, H2, SECTION, SMALL } from "@/lib/styles";
 
 // Source: SCESA LinkedIn (Clubs & Sports Gala, 19 June 2026).
 const AWARDS = [
@@ -40,7 +40,7 @@ export function Timeline() {
               sizes="(min-width: 640px) 320px, 240px"
               className="h-auto w-full rounded-2xl"
             />
-            <figcaption className="mt-2 font-hand text-lg leading-tight text-slate-600 dark:text-slate-300">
+            <figcaption className="mt-2 font-marker text-md leading-tight text-brand-muted">
               Team building, June 2025
             </figcaption>
           </figure>
@@ -69,7 +69,7 @@ export function Timeline() {
                 sizes="(min-width: 1024px) 224px, (min-width: 640px) 192px, 240px"
                 className="h-auto w-full rounded-2xl"
               />
-              <figcaption className="mt-2 font-hand text-lg leading-tight text-slate-600 dark:text-slate-300">
+              <figcaption className="mt-2 font-marker text-md leading-tight text-brand-muted">
                 All four plaques, June 2026
               </figcaption>
             </figure>

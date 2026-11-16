@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { eventRepository } from "@/data/repositories/EventRepository";
 import { filterEvents, parseFilter } from "@/domain/usecases/eventQueries";
 import { formatShortDate } from "@/lib/dates";
+import { PAGE } from "@/lib/styles";
 import { EventCard } from "@/presentation/components/events/EventCard";
 import { EventFilters } from "@/presentation/components/events/EventFilters";
 import { Button } from "@/presentation/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Events | SCESA",
+  title: "Events",
   description: "Workshops, hackathons, talks and meetups from SCESA and its communities.",
 };
 
@@ -18,15 +19,15 @@ export default async function EventsPage({ searchParams }: PageProps<"/events">)
   const events = filterEvents(await eventRepository.getAll(), filter, q);
 
   return (
-    <main className="mx-auto w-full max-w-360 px-4 py-12 md:px-8 lg:px-9 lg:pb-20">
+    <main className={PAGE}>
       <h1 className="font-display text-display-sm font-semibold text-brand-primary lg:text-display-md">Events</h1>
-      <p className="mt-2 text-md text-slate-600 dark:text-slate-300">
+      <p className="mt-2 text-md text-brand-muted">
         Workshops, hackathons, talks and meetups from SCESA and its communities.
       </p>
       <div className="mt-8">
         <EventFilters filter={filter} q={q} />
       </div>
-      <p aria-live="polite" className="mt-6 text-sm text-slate-600 dark:text-slate-300">
+      <p aria-live="polite" className="mt-6 text-sm text-brand-muted">
         {events.length === 1 ? "1 event" : `${events.length} events`}
       </p>
       {events.length > 0 ? (
@@ -40,7 +41,7 @@ export default async function EventsPage({ searchParams }: PageProps<"/events">)
       ) : (
         <div className="mt-4 flex flex-col items-center gap-4 rounded-2xl border border-dashed border-brand-border px-4 py-16 text-center">
           <h2 className="font-display text-display-xs font-semibold text-brand-primary">No events match</h2>
-          <p className="text-md text-slate-600 dark:text-slate-300">Try another filter or a different search term.</p>
+          <p className="text-md text-brand-muted">Try another filter or a different search term.</p>
           <Button href="/events" variant="outline">
             Clear filters
           </Button>

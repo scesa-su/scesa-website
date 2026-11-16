@@ -1,8 +1,9 @@
+import { PAGE } from "@/lib/styles";
 import { LoadingPage, Skeleton } from "@/presentation/components/ui/Skeleton";
 
 export default function EventsLoading() {
   return (
-    <LoadingPage className="mx-auto w-full max-w-360 px-4 py-12 md:px-8 lg:px-9 lg:pb-20">
+    <LoadingPage className={PAGE}>
       <Skeleton className="h-10 w-40 lg:h-12" />
       <Skeleton className="mt-3 h-5 w-full max-w-lg" />
       <div className="mt-8 flex flex-wrap gap-2">

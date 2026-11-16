@@ -1,5 +1,5 @@
 import { CheckIcon } from "lucide-react";
-import { BODY, H2, SECTION } from "./styles";
+import { BODY, H2, SECTION } from "@/lib/styles";
 
 // Portfolio p. 5, "Behavior" and "Professionalism".
 const CONDUCT = [

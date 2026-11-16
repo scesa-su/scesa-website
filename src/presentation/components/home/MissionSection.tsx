@@ -7,7 +7,7 @@ export function MissionSection() {
           Strathmore Computing and Engineering Students Association.
         </span>
       </p>
-      <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
+      <p className="mt-4 text-lg text-brand-muted">
         We bridge the gap between classroom theory and real-world engineering.
       </p>
       <hr className="mx-auto mt-14 max-w-300 border-brand-border" />

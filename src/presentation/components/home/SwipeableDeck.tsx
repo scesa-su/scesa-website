@@ -5,6 +5,7 @@ import { motion, useReducedMotion, type PanInfo } from "framer-motion";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useState, type KeyboardEvent } from "react";
 import { HERO_PHOTOS } from "@/lib/constants";
+import { FOCUS_RING_OFFSET } from "@/lib/styles";
 import { wrapIndex } from "@/lib/wrap";
 
 // Loose pile offsets by stack position, so the photos look hand-held rather than aligned.
@@ -20,9 +21,7 @@ const FLICK_VELOCITY = 500;
 const THROW_DISTANCE = 520;
 const THROW = { duration: 0.28, ease: "easeIn" } as const;
 const SETTLE = { type: "spring", stiffness: 260, damping: 26 } as const;
-const FOCUS_RING =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-background";
-const NAV_BUTTON = `inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-brand-border bg-brand-surface text-brand-primary transition-colors hover:bg-navy-25 ${FOCUS_RING}`;
+const NAV_BUTTON = `inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-brand-border bg-brand-surface text-brand-primary transition-colors hover:bg-navy-25 ${FOCUS_RING_OFFSET}`;
 
 export function SwipeableDeck() {
   const [top, setTop] = useState(0);
@@ -67,7 +66,7 @@ export function SwipeableDeck() {
         aria-label="SCESA event photos. Use the left and right arrow keys to change photo."
         tabIndex={0}
         onKeyDown={onKeyDown}
-        className={`grid w-full max-w-110 place-items-center rounded-sm ${FOCUS_RING}`}
+        className={`grid w-full max-w-110 place-items-center rounded-sm ${FOCUS_RING_OFFSET}`}
       >
         {HERO_PHOTOS.map((photo, i) => {
           const pos = wrapIndex(i - top, n);
@@ -118,7 +117,7 @@ export function SwipeableDeck() {
         <button type="button" onClick={prev} aria-label="Previous photo" className={NAV_BUTTON}>
           <ChevronLeftIcon aria-hidden className="size-5" />
         </button>
-        <p className="text-xs text-slate-600 dark:text-slate-300">Swipe top photo left or right</p>
+        <p className="text-xs text-brand-muted">Swipe top photo left or right</p>
         <button type="button" onClick={() => next()} aria-label="Next photo" className={NAV_BUTTON}>
           <ChevronRightIcon aria-hidden className="size-5" />
         </button>

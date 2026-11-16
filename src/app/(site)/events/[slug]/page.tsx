@@ -13,6 +13,7 @@ import { Badge } from "@/presentation/components/ui/Badge";
 import { Card } from "@/presentation/components/ui/Card";
 import remarkGfm from "remark-gfm";
 import { allowOnly } from "@/lib/mdx";
+import { CONTAINER } from "@/lib/styles";
 
 // GFM: strikethrough and tables as Keystatic saves them. Only elements with a component render; raw HTML is dropped.
 const mdxOptions = { remarkPlugins: [remarkGfm, allowOnly(Object.keys(mdxComponents))] };
@@ -28,7 +29,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/events/[slug]">): Promise<Metadata> {
   const event = await eventRepository.getBySlug((await params).slug);
-  return event ? { title: `${event.title} | SCESA`, description: event.excerpt } : {};
+  return event ? { title: event.title, description: event.excerpt } : {};
 }
 
 export default async function EventPage({ params }: PageProps<"/events/[slug]">) {
@@ -37,7 +38,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
   const showCalendar = event.status !== "completed";
 
   return (
-    <main className="mx-auto w-full max-w-360 px-4 py-8 md:px-8 lg:px-14 lg:py-12">
+    <main className={`${CONTAINER} py-8 lg:py-12`}>
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-12">
         <div className="flex flex-col gap-8">
           <div className="relative aspect-square overflow-hidden rounded-2xl border border-brand-border">

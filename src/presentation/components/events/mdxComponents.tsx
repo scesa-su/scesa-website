@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 import { proseElements } from "@/presentation/components/ui/prose";
 
-const BODY = "text-md leading-relaxed text-slate-600 dark:text-slate-300";
+const BODY = "text-md leading-relaxed text-brand-muted";
 const H_TOP = "mt-6 font-display text-display-xs font-semibold text-brand-primary";
 
 /**

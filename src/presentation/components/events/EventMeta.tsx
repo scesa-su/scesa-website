@@ -5,7 +5,7 @@ import { formatDayOfMonth, formatLongDate, formatMonthAbbr, formatTimeRange } fr
 
 const tile =
   "flex size-10 shrink-0 flex-col items-center justify-center rounded-lg border border-brand-border bg-navy-25 text-brand-primary";
-const secondary = "text-sm text-slate-600 dark:text-slate-300";
+const secondary = "text-sm text-brand-muted";
 const link =
   "rounded-sm font-medium text-brand-primary underline underline-offset-2 hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
 
@@ -82,7 +82,7 @@ function HostStack({ hosts }: { hosts: string[] }) {
           </span>
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 rounded-md bg-slate-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+            className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 rounded-lg bg-slate-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
           >
             {name}
           </span>

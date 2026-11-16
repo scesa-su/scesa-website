@@ -11,7 +11,7 @@ export function EventMap({ query, venue }: { query: string; venue: string }) {
       <h2 id="event-location" className="font-display text-display-xs font-semibold text-brand-primary">
         Location
       </h2>
-      <p className="text-md text-slate-600 dark:text-slate-300">{venue}</p>
+      <p className="text-md text-brand-muted">{venue}</p>
       <iframe
         src={`https://www.google.com/maps?q=${q}&output=embed`}
         title={`Map showing ${venue}`}

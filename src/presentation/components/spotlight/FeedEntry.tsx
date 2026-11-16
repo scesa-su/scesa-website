@@ -44,7 +44,7 @@ export function LeadStory({ post }: EntryProps) {
             {post.title}
           </Link>
         </h2>
-        <p className="mt-3 max-w-[60ch] text-lg text-slate-600 dark:text-slate-300">{post.dek}</p>
+        <p className="mt-3 max-w-[60ch] text-lg text-brand-muted">{post.dek}</p>
         <PostMeta {...post} className="mt-4" />
       </div>
     </article>
@@ -78,7 +78,7 @@ export function PostRow({ post, index = 0, heading: Heading = "h2" }: PostRowPro
             {post.title}
           </Link>
         </Heading>
-        <p className="mt-2 max-w-[60ch] text-md text-slate-600 dark:text-slate-300">
+        <p className="mt-2 max-w-[60ch] text-md text-brand-muted">
           {post.member ? `“${post.member.quote}”` : post.excerpt}
         </p>
         <PostMeta {...post} className="mt-3" />

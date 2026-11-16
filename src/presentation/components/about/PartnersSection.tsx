@@ -3,7 +3,7 @@ import type { Partner } from "@/domain/entities/Partner";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { mailtoHref } from "@/lib/mailto";
 import { Button } from "@/presentation/components/ui/Button";
-import { H2, SECTION } from "./styles";
+import { H2, SECTION } from "@/lib/styles";
 
 export function PartnersSection({ partners }: { partners: Partner[] }) {
   return (
@@ -15,7 +15,7 @@ export function PartnersSection({ partners }: { partners: Partner[] }) {
         {partners.map((p) => (
           <li
             key={p.name}
-            className="flex min-h-24 items-center justify-center bg-brand-background p-4 text-center font-display text-md font-semibold md:min-h-28 md:p-6 md:text-lg text-slate-600 dark:text-slate-300"
+            className="flex min-h-24 items-center justify-center bg-brand-background p-4 text-center font-display text-md font-semibold md:min-h-28 md:p-6 md:text-lg text-brand-muted"
           >
             {p.logo ? <Image src={p.logo} alt={p.name} width={160} height={64} className="h-10 w-auto" /> : p.name}
           </li>
