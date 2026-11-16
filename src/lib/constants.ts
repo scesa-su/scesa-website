@@ -1,4 +1,7 @@
 export const SITE_URL = "https://scesa.co.ke";
+export const SITE_NAME = "SCESA";
+export const SITE_DESCRIPTION =
+  "Workshops, hackathons and communities for Strathmore University's computing and engineering students.";
 export const CONTACT_EMAIL = "scesa@strathmore.edu";
 
 export const NAV_LINKS = [
