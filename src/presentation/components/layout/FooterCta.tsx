@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Magnetic } from "@/presentation/components/motion/Magnetic";
 import { Button } from "@/presentation/components/ui/Button";
 
 const HIDDEN_ON = ["/", "/join", "/about"];
@@ -15,11 +14,9 @@ export function FooterCta() {
       <h2 className="max-w-3xl font-display text-display-md font-semibold text-balance lg:text-display-xl">
         Ready to build with us?
       </h2>
-      <Magnetic>
-        <Button href="/join" size="lg" className="focus-visible:ring-offset-brand-navy dark:focus-visible:ring-offset-slate-900">
-          Join SCESA
-        </Button>
-      </Magnetic>
+      <Button href="/join" size="lg" className="self-start focus-visible:ring-offset-brand-navy dark:focus-visible:ring-offset-slate-900">
+        Join SCESA
+      </Button>
     </div>
   );
 }

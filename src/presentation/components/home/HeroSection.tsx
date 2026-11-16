@@ -4,7 +4,6 @@ import type { Event } from "@/domain/entities/Event";
 import { cn } from "@/lib/cn";
 import { formatDayOfMonth, formatMonthAbbr } from "@/lib/dates";
 import { CONTAINER, EYEBROW, FOCUS_RING_OFFSET } from "@/lib/styles";
-import { Magnetic } from "@/presentation/components/motion/Magnetic";
 import { RevealText } from "@/presentation/components/motion/RevealText";
 import { ArrowLink } from "@/presentation/components/ui/ArrowLink";
 import { Button } from "@/presentation/components/ui/Button";
@@ -43,11 +42,9 @@ export function HeroSection({ nextEvent }: { nextEvent?: Event }) {
               className="mt-10 flex flex-col gap-6 motion-safe:animate-fade-up sm:flex-row sm:items-center sm:gap-8"
               style={{ animationDelay: `${AFTER_HEADLINE - 100}ms` }}
             >
-              <Magnetic className="w-full sm:w-auto">
-                <Button href="/join" size="xl" className="w-full sm:w-auto">
-                  Find Your Tribe
-                </Button>
-              </Magnetic>
+              <Button href="/join" size="xl" className="w-full sm:w-auto">
+                Find Your Tribe
+              </Button>
               <ArrowLink href="/events" className="self-center text-lg sm:self-auto">
                 See what&apos;s on
               </ArrowLink>

@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { MEMBERSHIP_FEE_KES } from "@/lib/constants";
 import { CONTAINER } from "@/lib/styles";
-import { Magnetic } from "@/presentation/components/motion/Magnetic";
 import { Button } from "@/presentation/components/ui/Button";
 import { useMediaQuery, usePrefersReducedMotion } from "@/presentation/hooks/useMediaQuery";
 
@@ -44,11 +43,9 @@ export function ClosingCta() {
             you&apos;re in.
           </p>
           <div className="mt-10">
-            <Magnetic>
-              <Button href="/join" size="xl" className="focus-visible:ring-offset-brand-navy">
-                Join SCESA
-              </Button>
-            </Magnetic>
+            <Button href="/join" size="xl" className="focus-visible:ring-offset-brand-navy">
+              Join SCESA
+            </Button>
           </div>
         </div>
       </motion.div>
