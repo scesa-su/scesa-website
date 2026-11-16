@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeftIcon } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { eventRepository } from "@/data/repositories/EventRepository";
 import { cn } from "@/lib/cn";
 import { formatDayOfMonth, formatLongDate, formatMonthAbbr, formatTimeRange } from "@/lib/dates";
 import { allowOnly } from "@/lib/mdx";
-import { CONTAINER, EYEBROW, FOCUS_RING_OFFSET } from "@/lib/styles";
+import { CONTAINER, EYEBROW } from "@/lib/styles";
 import { AddToCalendar } from "@/presentation/components/events/AddToCalendar";
 import { CATEGORY_LABEL, STATUS_LABEL } from "@/presentation/components/events/EventCard";
 import { EventMap } from "@/presentation/components/events/EventMap";
@@ -17,6 +15,7 @@ import { mdxComponents } from "@/presentation/components/events/mdxComponents";
 import { PosterViewer } from "@/presentation/components/events/PosterViewer";
 import { RevealText } from "@/presentation/components/motion/RevealText";
 import { ArrowLink } from "@/presentation/components/ui/ArrowLink";
+import { BackLink } from "@/presentation/components/ui/BackLink";
 import { Badge } from "@/presentation/components/ui/Badge";
 
 // GFM: strikethrough and tables as Keystatic saves them. Only elements with a component render; raw HTML is dropped.
@@ -55,16 +54,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
       <header className="relative overflow-x-clip">
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-blueprint" />
         <div className={`${CONTAINER} relative pt-8 pb-12 lg:pt-12 lg:pb-16`}>
-          <Link
-            href="/events"
-            className={cn(
-              "group inline-flex items-center gap-2 rounded-lg text-sm font-semibold text-brand-muted transition-colors duration-200 hover:text-brand-primary",
-              FOCUS_RING_OFFSET,
-            )}
-          >
-            <ArrowLeftIcon aria-hidden className="size-4 transition-transform duration-500 ease-out-expo group-hover:-translate-x-1" />
-            All events
-          </Link>
+          <BackLink href="/events">All events</BackLink>
 
           <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-8">
             <div className="lg:col-span-9">
