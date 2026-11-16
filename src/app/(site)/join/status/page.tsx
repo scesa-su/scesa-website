@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { CONTACT_EMAIL } from "@/lib/constants";
-import { FOCUS_RING } from "@/lib/styles";
+import { CONTAINER, FOCUS_RING } from "@/lib/styles";
 import { StatusLookup } from "@/presentation/components/join/StatusLookup";
+import { PageHeader } from "@/presentation/components/layout/PageHeader";
+import { BackLink } from "@/presentation/components/ui/BackLink";
 
 export const metadata: Metadata = {
   title: "Membership status",
@@ -12,18 +14,29 @@ export const metadata: Metadata = {
 export default async function StatusPage({ searchParams }: PageProps<"/join/status">) {
   const { ref } = await searchParams;
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-12 md:px-8 lg:pb-20">
-      <h1 className="font-display text-display-sm font-semibold text-brand-primary lg:text-display-md">Membership status</h1>
-      <p className="mt-3 text-lg text-brand-muted">
-        Enter the reference you got when you applied and your student ID. Lost your reference, or joined through the
-        Google Form? Email{" "}
-        <a href={`mailto:${CONTACT_EMAIL}`} className={`font-medium text-brand-primary underline underline-offset-4 ${FOCUS_RING}`}>
-          {CONTACT_EMAIL}
-        </a>
-        .
-      </p>
-      <div className="mt-8">
-        <StatusLookup initialReference={typeof ref === "string" ? ref : ""} />
+    <main>
+      <PageHeader
+        eyebrow="Membership"
+        title={["Check your", "status"]}
+        underline
+        intro={
+          <>
+            Enter the reference you got when you applied and your student ID. Lost your reference, or joined through
+            the Google Form? Email{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className={`font-medium text-brand-primary underline underline-offset-4 ${FOCUS_RING}`}>
+              {CONTACT_EMAIL}
+            </a>
+            .
+          </>
+        }
+      />
+      <div className={`${CONTAINER} border-t border-brand-border pt-10 pb-16 lg:pt-14 lg:pb-24`}>
+        <div className="max-w-3xl">
+          <StatusLookup initialReference={typeof ref === "string" ? ref : ""} />
+          <BackLink href="/join" className="mt-8">
+            Back to joining
+          </BackLink>
+        </div>
       </div>
     </main>
   );
