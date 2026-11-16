@@ -1,5 +1,5 @@
 import { MapPin, Video } from "lucide-react";
-import { useId, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { Event } from "@/domain/entities/Event";
 import { formatDayOfMonth, formatLongDate, formatMonthAbbr, formatTimeRange } from "@/lib/dates";
 import { FOCUS_RING } from "@/lib/styles";
@@ -52,65 +52,5 @@ export function EventMeta({ title, date, endDate, venue, virtualUrl }: MetaProps
         {joinLink && <p className={secondary}>{joinLink}</p>}
       </Row>
     </div>
-  );
-}
-
-const AVATAR_TONES = [
-  "bg-navy-50 text-brand-primary",
-  "bg-orange-100 text-orange-900",
-  "bg-brand-secondary text-slate-900",
-];
-
-/** "AWS Club" -> "AC", "GDSC" -> "GD". */
-export const initials = (name: string) => {
-  const words = name.trim().split(/\s+/);
-  return (words.length > 1 ? words[0][0] + words[1][0] : words[0].slice(0, 2)).toUpperCase();
-};
-
-/** Overlapping initial circles, Luma style; hover or keyboard focus shows each host's full name. */
-function HostStack({ hosts }: { hosts: string[] }) {
-  return (
-    <ul className="flex items-center py-3 pl-2">
-      {hosts.map((name, i) => (
-        <li key={name} className="group relative -ml-2">
-          <span
-            role="img"
-            aria-label={name}
-            tabIndex={0}
-            className={`flex size-10 items-center justify-center rounded-full text-sm font-semibold ring-2 ring-brand-surface focus-visible:outline-none focus-visible:ring-brand-accent ${AVATAR_TONES[i % AVATAR_TONES.length]}`}
-          >
-            <span aria-hidden="true">{initials(name)}</span>
-          </span>
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 rounded-lg bg-slate-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
-          >
-            {name}
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/** Host communities and, when there is one, the speaker. */
-export function HostedBy({ hosts, speaker }: Pick<Event, "hosts" | "speaker">) {
-  // Rendered twice (lg and below-lg copies), so the label id must be unique per instance.
-  const labelId = useId();
-  return (
-    <section aria-labelledby={labelId}>
-      <p id={labelId} className="border-b border-brand-border pb-2 text-sm font-semibold text-brand-primary">
-        Hosted by
-      </p>
-      <div className="divide-y divide-brand-border">
-        <HostStack hosts={hosts} />
-        {speaker && (
-          <div className="py-3">
-            <p className={secondary}>Speaker</p>
-            <p className="font-medium text-brand-primary">{speaker}</p>
-          </div>
-        )}
-      </div>
-    </section>
   );
 }

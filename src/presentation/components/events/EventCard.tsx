@@ -1,12 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { EventStatus } from "@/domain/entities/Event";
+import type { EventCategory, EventStatus } from "@/domain/entities/Event";
 import { FOCUS_RING } from "@/lib/styles";
 import { Badge } from "@/presentation/components/ui/Badge";
 import { Button } from "@/presentation/components/ui/Button";
 import { Card } from "@/presentation/components/ui/Card";
 
 export const STATUS_LABEL: Record<EventStatus, string> = { live: "Live", scheduled: "Scheduled", completed: "Completed" };
+
+export const CATEGORY_LABEL: Record<EventCategory, string> = {
+  workshop: "Workshop",
+  hackathon: "Hackathon",
+  talk: "Talk",
+  meetup: "Meetup",
+  "industry-visit": "Industry visit",
+  "team-building": "Team building",
+  "game-night": "Game night",
+};
 
 type EventCardProps = {
   title: string;
