@@ -28,7 +28,7 @@ const SPREAD_STAGGER = 0.09;
 const SPREAD_MS = 1500;
 const MAX_TILT = 8;
 const TILT_SPRING = { stiffness: 150, damping: 20 } as const;
-const NAV_BUTTON = `inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-brand-border bg-brand-surface text-brand-primary transition-colors hover:bg-navy-25 ${FOCUS_RING_OFFSET}`;
+const NAV_BUTTON = `inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-brand-border bg-brand-surface text-brand-primary transition-colors hover:bg-brand-sunken ${FOCUS_RING_OFFSET}`;
 
 export function SwipeableDeck() {
   const [top, setTop] = useState(0);

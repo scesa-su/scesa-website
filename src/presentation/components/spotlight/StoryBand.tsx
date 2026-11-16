@@ -19,7 +19,7 @@ export const STORY_MAILTO = mailtoHref({
 
 export function StoryBand() {
   return (
-    <section aria-labelledby="share-story" className="rounded-3xl bg-navy-25 p-8 md:p-12">
+    <section aria-labelledby="share-story" className="rounded-3xl bg-brand-sunken p-8 md:p-12">
       <h2 id="share-story" className="font-display text-display-xs font-semibold text-balance text-brand-primary md:text-display-sm">
         Have something to share? Send us your story.
       </h2>

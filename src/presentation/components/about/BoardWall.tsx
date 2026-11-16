@@ -4,7 +4,7 @@ import { BODY, CONTAINER, H2 } from "@/lib/styles";
 
 export function BoardWall({ leaders }: { leaders: Leader[] }) {
   return (
-    <section aria-labelledby="board" className="bg-navy-25 py-16 lg:py-24">
+    <section aria-labelledby="board" className="bg-brand-sunken py-16 lg:py-24">
       <div className={CONTAINER}>
         <div className="mx-auto max-w-2xl text-center">
           <h2 id="board" className={H2}>

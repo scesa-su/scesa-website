@@ -10,6 +10,7 @@ import { NAV_LINKS, SOCIAL_LINKS, isActivePath } from "@/lib/constants";
 import { cn } from "@/lib/cn";
 import { EYEBROW, FOCUS_RING } from "@/lib/styles";
 import { DURATION, EASE_OUT_EXPO } from "@/presentation/components/motion/tokens";
+import { usePrefersReducedMotion } from "@/presentation/hooks/useMediaQuery";
 import { Button } from "@/presentation/components/ui/Button";
 import { SOCIAL_ICONS, isExternal, socialLabel } from "./SocialIcons";
 import { ThemeToggle } from "./ThemeToggle";
@@ -27,6 +28,7 @@ export function MobileDrawer() {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false);
+  const reduce = usePrefersReducedMotion();
 
   // Close on any route change, including back/forward (reset during render, not in an effect).
   const [lastPath, setLastPath] = useState(pathname);
@@ -94,7 +96,7 @@ export function MobileDrawer() {
           initial={{ clipPath: "inset(0 0 100% 0)" }}
           animate={{ clipPath: "inset(0 0 0% 0)" }}
           exit={{ clipPath: "inset(0 0 100% 0)" }}
-          transition={PANEL}
+          transition={reduce ? { duration: 0 } : PANEL}
           className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-brand-navy px-6 pt-6 pb-10 text-white dark:bg-slate-900"
         >
           <div className="flex items-center justify-between">
@@ -184,7 +186,7 @@ export function MobileDrawer() {
         aria-expanded={open}
         aria-controls={open ? "mobile-drawer" : undefined}
         className={cn(
-          "inline-flex size-11 items-center justify-center rounded-lg text-brand-primary transition-colors duration-200 hover:bg-navy-25",
+          "inline-flex size-11 items-center justify-center rounded-lg text-brand-primary transition-colors duration-200 hover:bg-brand-sunken",
           FOCUS_RING,
         )}
       >

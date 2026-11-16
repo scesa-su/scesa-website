@@ -49,7 +49,7 @@ function GalleryImage({ src, alt }: { src: string; alt: string }) {
 
 function Callout({ title, children }: { title?: string; children?: ReactNode }) {
   return (
-    <aside className="mt-8 rounded-2xl border border-brand-border bg-navy-25 p-5 [&>*:first-child]:mt-0">
+    <aside className="mt-8 rounded-2xl border border-brand-border bg-brand-sunken p-5 [&>*:first-child]:mt-0">
       {title && <p className="font-display text-xl font-semibold text-brand-primary">{title}</p>}
       {children}
     </aside>

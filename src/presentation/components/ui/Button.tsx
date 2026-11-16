@@ -1,13 +1,14 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING_OFFSET } from "@/lib/styles";
 
 const variants = {
   // Design colour; white on #FF7A3F is ~2.6:1, below WCAG AA (owner decision 2026-10-27).
   primary: "bg-brand-accent text-white hover:bg-orange-500",
   soft: "bg-orange-50 text-brand-accent hover:bg-orange-100",
   outline:
-    "border border-brand-border bg-transparent text-brand-primary hover:bg-navy-25",
+    "border border-brand-border bg-transparent text-brand-primary hover:bg-brand-sunken",
 } as const;
 
 const sizes = {
@@ -39,7 +40,7 @@ export function Button({
 }: ButtonProps) {
   const classes = cn(
     "inline-flex items-center justify-center gap-2 rounded-lg font-body font-medium transition-colors",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-background",
+    FOCUS_RING_OFFSET,
     "disabled:pointer-events-none disabled:opacity-50",
     variants[variant],
     sizes[size],

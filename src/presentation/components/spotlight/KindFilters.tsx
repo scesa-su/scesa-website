@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SPOTLIGHT_KINDS, type SpotlightKind } from "@/domain/entities/SpotlightPost";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING_OFFSET } from "@/lib/styles";
 import { FILTER_LABEL } from "./kinds";
 
 const OPTIONS: { kind?: SpotlightKind; label: string }[] = [
@@ -24,10 +25,10 @@ export function KindFilters({ kind }: { kind?: SpotlightKind }) {
                 scroll={false}
                 className={cn(
                   "inline-flex h-10 items-center rounded-full border px-4 text-sm font-medium transition-colors",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-background",
+                  FOCUS_RING_OFFSET,
                   active
                     ? "border-brand-primary bg-brand-primary text-brand-background"
-                    : "border-brand-border bg-brand-surface text-brand-primary hover:bg-navy-25",
+                    : "border-brand-border bg-brand-surface text-brand-primary hover:bg-brand-sunken",
                 )}
               >
                 {o.label}

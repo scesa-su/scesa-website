@@ -11,7 +11,7 @@ import { PostMeta } from "./PostMeta";
 
 const H1 = "mt-4 font-display text-display-sm font-semibold text-balance text-brand-primary lg:text-display-lg";
 const DEK = "mt-4 text-xl text-brand-muted";
-const BOX = "rounded-2xl border border-brand-border bg-navy-25 p-6";
+const BOX = "rounded-2xl border border-brand-border bg-brand-sunken p-6";
 const BOX_H2 = "font-display text-xl font-semibold text-brand-primary";
 
 type PostProps = { post: SpotlightPost };

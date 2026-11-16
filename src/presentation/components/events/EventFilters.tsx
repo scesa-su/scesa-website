@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 import type { EventFilter } from "@/domain/usecases/eventQueries";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING_OFFSET } from "@/lib/styles";
 
 const FILTER_LABELS: Record<EventFilter, string> = {
   all: "All",
@@ -13,9 +14,6 @@ const FILTER_LABELS: Record<EventFilter, string> = {
   hackathons: "Hackathons",
   completed: "Completed",
 };
-
-const focusRing =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-brand-background";
 
 function eventsHref(filter: EventFilter, q: string) {
   const params = new URLSearchParams();
@@ -63,10 +61,10 @@ export function EventFilters({ filter, q }: EventFiltersProps) {
             onClick={() => navigate(f, value)}
             className={cn(
               "h-10 rounded-full border px-4 text-sm font-medium transition-colors",
-              focusRing,
+              FOCUS_RING_OFFSET,
               f === filter
                 ? "border-brand-primary bg-brand-primary text-brand-background"
-                : "border-brand-border bg-brand-surface text-brand-primary hover:bg-navy-25",
+                : "border-brand-border bg-brand-surface text-brand-primary hover:bg-brand-sunken",
             )}
           >
             {FILTER_LABELS[f]}
@@ -94,7 +92,7 @@ export function EventFilters({ filter, q }: EventFiltersProps) {
           }}
           className={cn(
             "h-10 w-full rounded-lg border border-brand-border bg-brand-surface pr-3 pl-9 text-sm text-brand-primary placeholder:text-slate-500 dark:placeholder:text-slate-400",
-            focusRing,
+            FOCUS_RING_OFFSET,
           )}
         />
       </div>

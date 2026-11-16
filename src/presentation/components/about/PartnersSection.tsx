@@ -53,7 +53,7 @@ export function ClosingPanels() {
             Partner with SCESA
           </Button>
         </div>
-        <div className="flex flex-col items-start rounded-3xl bg-navy-25 p-8 md:p-12">
+        <div className="flex flex-col items-start rounded-3xl bg-brand-sunken p-8 md:p-12">
           <h2 className="font-display text-display-xs font-semibold text-brand-primary md:text-display-sm">
             Ready to join us?
           </h2>

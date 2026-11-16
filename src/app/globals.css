@@ -10,7 +10,7 @@
   --brand-accent: #FF7A3F;
   --brand-border: #E2E8F0;
   --brand-muted: #475569;
-  --brand-sunken: #F8FAFC;
+  --brand-sunken: #ECF3FF;
   --navy-900: #161A51;
   --navy-800: #252F8A;
   --navy-700: #242EAF;
@@ -217,6 +217,16 @@
 
 html {
   scroll-padding-top: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {

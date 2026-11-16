@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { memberApplicationSchema } from "@/data/models/memberSchema";
 import { cn } from "@/lib/cn";
 import { COMMUNITIES, CONTACT_EMAIL, MEMBERSHIP_FEE_KES, MPESA_ACCOUNT, MPESA_PAYBILL, STRATHMORE_SCHOOLS } from "@/lib/constants";
+import { FOCUS_RING } from "@/lib/styles";
 import { Button } from "@/presentation/components/ui/Button";
 import { Card } from "@/presentation/components/ui/Card";
 import { ERROR_TEXT, SelectField, TextField } from "./Field";
@@ -276,7 +277,7 @@ export function RegistrationForm() {
                         "has-focus-visible:ring-2 has-focus-visible:ring-brand-accent has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-brand-background",
                         checked
                           ? "border-brand-primary bg-brand-primary text-brand-background"
-                          : "border-brand-border bg-brand-surface text-brand-primary hover:bg-navy-25",
+                          : "border-brand-border bg-brand-surface text-brand-primary hover:bg-brand-sunken",
                       )}
                     >
                       <input type="checkbox" name="communities" value={c} checked={checked} onChange={() => toggleCommunity(c)} className="sr-only" />
@@ -300,7 +301,7 @@ export function RegistrationForm() {
                 <p className="text-md text-brand-muted">
                   Membership is a one-time fee. On your phone, open M-Pesa, choose Lipa na M-Pesa, then Pay Bill:
                 </p>
-                <dl className="mt-4 grid gap-3 rounded-2xl bg-navy-25 p-4 sm:grid-cols-3">
+                <dl className="mt-4 grid gap-3 rounded-2xl bg-brand-sunken p-4 sm:grid-cols-3">
                   {[
                     ["Business number", MPESA_PAYBILL],
                     ["Account number", MPESA_ACCOUNT],
@@ -330,15 +331,15 @@ export function RegistrationForm() {
           )}
 
           {step === 0 && alreadyRegistered && (
-            <div role="alert" className="mt-6 rounded-lg border border-brand-border bg-navy-25 p-4 text-md text-brand-primary">
+            <div role="alert" className="mt-6 rounded-lg border border-brand-border bg-brand-sunken p-4 text-md text-brand-primary">
               <p className="font-semibold">This student ID is already registered.</p>
               <p className="mt-1">
                 You have probably joined before.{" "}
-                <a href="/join/status" className="font-medium underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent">
+                <a href="/join/status" className={`font-medium underline underline-offset-4 ${FOCUS_RING}`}>
                   Check your status
                 </a>{" "}
                 with your reference, or email{" "}
-                <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent">
+                <a href={`mailto:${CONTACT_EMAIL}`} className={`font-medium underline underline-offset-4 ${FOCUS_RING}`}>
                   {CONTACT_EMAIL}
                 </a>{" "}
                 if you joined through the Google Form or lost your reference.

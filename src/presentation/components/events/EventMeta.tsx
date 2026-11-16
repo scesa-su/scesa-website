@@ -2,12 +2,13 @@ import { MapPin, Video } from "lucide-react";
 import { useId, type ReactNode } from "react";
 import type { Event } from "@/domain/entities/Event";
 import { formatDayOfMonth, formatLongDate, formatMonthAbbr, formatTimeRange } from "@/lib/dates";
+import { FOCUS_RING } from "@/lib/styles";
 
 const tile =
-  "flex size-10 shrink-0 flex-col items-center justify-center rounded-lg border border-brand-border bg-navy-25 text-brand-primary";
+  "flex size-10 shrink-0 flex-col items-center justify-center rounded-lg border border-brand-border bg-brand-sunken text-brand-primary";
 const secondary = "text-sm text-brand-muted";
 const link =
-  "rounded-sm font-medium text-brand-primary underline underline-offset-2 hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
+  `rounded-sm font-medium text-brand-primary underline underline-offset-2 hover:text-brand-accent ${FOCUS_RING}`;
 
 function Row({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (
