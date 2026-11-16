@@ -14,11 +14,18 @@ const ICON_BUTTON = cn(
 /** Expand button for the bottom-right of the poster; opens the whole, uncropped poster in a modal dialog. */
 export function PosterViewer({ src, alt, title }: { src: string; alt: string; title: string }) {
   const dialog = useRef<HTMLDialogElement>(null);
+
+  function open() {
+    const root = document.documentElement;
+    root.style.setProperty("--scrollbar-gap", `${window.innerWidth - root.clientWidth}px`);
+    dialog.current?.showModal();
+  }
+
   return (
     <>
       <button
         type="button"
-        onClick={() => dialog.current?.showModal()}
+        onClick={open}
         aria-label={`View the full poster for ${title}`}
         className={cn("absolute right-3 bottom-3 bg-slate-900/70 text-white backdrop-blur-sm hover:bg-slate-900/90", ICON_BUTTON)}
       >

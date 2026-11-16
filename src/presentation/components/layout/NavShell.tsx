@@ -39,7 +39,7 @@ export function NavShell({ children }: { children: ReactNode }) {
         animate={{ y: hidden && !focused ? "-100%" : "0%" }}
         transition={{ duration: DURATION.base, ease: EASE_OUT_EXPO }}
         className={cn(
-          "group/nav fixed inset-x-0 top-0 z-40 border-b transition-[background-color,border-color] duration-500",
+          "site-header group/nav fixed inset-x-0 top-0 z-40 border-b transition-[background-color,border-color] duration-500",
           condensed ? "border-brand-border bg-brand-surface/80 backdrop-blur-md" : "border-transparent bg-transparent",
         )}
       >

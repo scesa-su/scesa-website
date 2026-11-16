@@ -224,6 +224,11 @@ html {
 
 html:has(dialog[open]:modal) {
   overflow: hidden;
+  padding-right: var(--scrollbar-gap, 0px);
+}
+
+html:has(dialog[open]:modal) .site-header {
+  right: var(--scrollbar-gap, 0px);
 }
 
 .poster-dialog {
