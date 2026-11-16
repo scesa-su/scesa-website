@@ -52,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${bricolage.variable} ${jakarta.variable} ${kalam.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-svh flex-col">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
