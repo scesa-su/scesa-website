@@ -28,7 +28,20 @@ const SPREAD_STAGGER = 0.09;
 const SPREAD_MS = 1500;
 const MAX_TILT = 8;
 const TILT_SPRING = { stiffness: 150, damping: 20 } as const;
+const DECK_PX = 440;
+const DECK_XL_PX = 520;
+const FRAME_PADDING_PX = 24;
+const PHONE_GUTTER_PX = 64;
 const NAV_BUTTON = `inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-brand-border bg-brand-surface text-brand-primary transition-colors hover:bg-brand-sunken ${FOCUS_RING_OFFSET}`;
+
+// Equal-area sizing: landscape photos get wider frames, portrait ones narrower.
+const frameShare = ({ width, height }: { width: number; height: number }) => Math.min(1, 0.84 * Math.sqrt(width / height));
+
+function photoSizes(share: number) {
+  const at = (deck: number) => `${Math.round(deck * share - FRAME_PADDING_PX)}px`;
+  const phone = `calc(${Math.round(share * 100)}vw - ${Math.round(share * PHONE_GUTTER_PX + FRAME_PADDING_PX)}px)`;
+  return `(min-width: 1280px) ${at(DECK_XL_PX)}, (min-width: 640px) ${at(DECK_PX)}, ${phone}`;
+}
 
 export function SwipeableDeck() {
   const [top, setTop] = useState(0);
@@ -131,8 +144,7 @@ export function SwipeableDeck() {
                         : { ...SETTLE, delay: SPREAD_START + (n - 1 - pos) * SPREAD_STAGGER }
                 }
                 onAnimationComplete={isThrown ? settle : undefined}
-                // Equal-area sizing: landscape photos get wider frames, portrait ones narrower.
-                style={{ zIndex: n - pos, width: `${Math.min(100, 84 * Math.sqrt(photo.width / photo.height))}%` }}
+                style={{ zIndex: n - pos, width: `${frameShare(photo) * 100}%` }}
                 className={`relative col-start-1 row-start-1 bg-white p-3 pb-0 shadow-xl ring-1 ring-slate-900/5 ${isTop ? "cursor-grab active:cursor-grabbing" : ""}`}
               >
                 {isTop && (
@@ -148,7 +160,7 @@ export function SwipeableDeck() {
                   height={photo.height}
                   priority={i === 0}
                   draggable={false}
-                  sizes="(min-width: 1024px) 520px, 90vw"
+                  sizes={photoSizes(frameShare(photo))}
                   className="pointer-events-none h-auto w-full select-none"
                 />
                 <figcaption className="flex -rotate-1 items-baseline justify-between gap-3 px-1 pt-2 pb-4 font-marker leading-tight text-slate-800">
