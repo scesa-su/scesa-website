@@ -145,11 +145,32 @@
     }
   }
 
-  /* Fluid sizes for the home page: the hero headline and the stat numerals. */
-  --text-display-hero: clamp(2.75rem, 1rem + 7vw, 7rem);
+  --animate-wipe: wipe 800ms var(--ease-out-expo) both;
+  @keyframes wipe {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  --animate-fade-up: fade-up 900ms var(--ease-out-expo) both;
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  --text-display-hero: clamp(2.25rem, 6.25vw - 0.125rem, 5.5rem);
   --text-display-hero--line-height: 0.95;
   --text-display-hero--letter-spacing: -0.04em;
-  --text-display-numeral: clamp(4.5rem, 2rem + 12vw, 12rem);
+  --text-display-numeral: clamp(4.5rem, 2rem + 9vw, 10rem);
   --text-display-numeral--line-height: 0.9;
   --text-display-numeral--letter-spacing: -0.04em;
 
