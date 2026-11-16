@@ -4,7 +4,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { MdxEventsDataSource } from "../data/datasources/MdxEventsDataSource.ts";
 import type { Event } from "../domain/entities/Event.ts";
-import { filterEvents, parseFilter, sortNewestFirst } from "../domain/usecases/eventQueries.ts";
+import { featuredEvents, filterEvents, parseFilter, sortNewestFirst } from "../domain/usecases/eventQueries.ts";
 import { parseEventFile } from "../data/models/eventSchema.ts";
 import { buildIcs, escapeIcsText } from "./ics.ts";
 import { formatTimeRange } from "./dates.ts";
@@ -52,6 +52,20 @@ test("filterEvents search is case-insensitive over title, speaker and hosts", ()
   assert.deepEqual(slugs(filterEvents(events, "all", "gdsc")), ["hack"]);
   assert.deepEqual(slugs(filterEvents(events, "all", "   ")), ["ws", "hack", "old"]);
   assert.deepEqual(slugs(filterEvents(events, "workshops", "x")), []);
+});
+
+test("featuredEvents puts upcoming soonest first, then past newest first", () => {
+  const list = [
+    { ...base, slug: "past-old", status: "completed" as const, date: "2026-01-01T10:00:00+03:00" },
+    { ...base, slug: "later", date: "2026-12-20T10:00:00+03:00" },
+    { ...base, slug: "past-new", status: "completed" as const, date: "2026-06-01T10:00:00+03:00" },
+    { ...base, slug: "live", status: "live" as const, date: "2026-11-01T10:00:00+03:00" },
+    { ...base, slug: "soon", date: "2026-11-20T10:00:00+03:00" },
+  ];
+  assert.deepEqual(slugs(featuredEvents(list)), ["live", "soon", "later"]);
+  assert.deepEqual(slugs(featuredEvents(list, 5)), ["live", "soon", "later", "past-new", "past-old"]);
+  assert.deepEqual(slugs(featuredEvents(list.filter((e) => e.status === "completed"))), ["past-new", "past-old"]);
+  assert.deepEqual(featuredEvents([]), []);
 });
 
 test("sortNewestFirst orders by start date descending without mutating", () => {
