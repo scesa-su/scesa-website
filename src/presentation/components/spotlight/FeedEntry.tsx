@@ -1,12 +1,13 @@
 import Link from "next/link";
 import type { SpotlightPost } from "@/domain/entities/SpotlightPost";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING } from "@/lib/styles";
 import { MarginNote } from "./MarginNote";
 import { Polaroid } from "./Polaroid";
 import { PostMeta } from "./PostMeta";
 
 const TITLE_LINK =
-  "rounded-sm after:absolute after:inset-0 hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
+  `rounded-sm after:absolute after:inset-0 hover:underline hover:underline-offset-4 ${FOCUS_RING}`;
 
 /** The note as a caption on the white frame: dark ink in both themes. */
 const ON_FRAME = "rotate-0 text-sm leading-tight text-slate-800 dark:text-slate-800 sm:text-md";

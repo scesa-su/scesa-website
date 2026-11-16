@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CONTACT_EMAIL } from "@/lib/constants";
+import { FOCUS_RING } from "@/lib/styles";
 import { StatusLookup } from "@/presentation/components/join/StatusLookup";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export default async function StatusPage({ searchParams }: PageProps<"/join/stat
       <p className="mt-3 text-lg text-brand-muted">
         Enter the reference you got when you applied and your student ID. Lost your reference, or joined through the
         Google Form? Email{" "}
-        <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium text-brand-primary underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent">
+        <a href={`mailto:${CONTACT_EMAIL}`} className={`font-medium text-brand-primary underline underline-offset-4 ${FOCUS_RING}`}>
           {CONTACT_EMAIL}
         </a>
         .

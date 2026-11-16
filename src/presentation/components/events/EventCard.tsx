@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { EventStatus } from "@/domain/entities/Event";
+import { FOCUS_RING } from "@/lib/styles";
 import { Badge } from "@/presentation/components/ui/Badge";
 import { Button } from "@/presentation/components/ui/Button";
 import { Card } from "@/presentation/components/ui/Card";
@@ -35,7 +36,7 @@ export function EventCard({ title, excerpt, status, image, imageAlt, href, date 
           <h3 className="font-display text-lg font-semibold text-brand-primary">
             <Link
               href={href}
-              className="rounded-sm after:absolute after:inset-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+              className={`rounded-sm after:absolute after:inset-0 ${FOCUS_RING}`}
             >
               {title}
             </Link>

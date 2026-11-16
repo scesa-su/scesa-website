@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { FOCUS_RING } from "@/lib/styles";
 
 type LogoProps = {
   // "adaptive": colour logo in light mode, white logo in dark mode. "light": always white (navy backgrounds).
@@ -16,7 +17,7 @@ export function Logo({ tone = "adaptive", className }: LogoProps) {
       href="/"
       aria-label="SCESA home"
       className={cn(
-        "inline-flex shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent",
+        `inline-flex shrink-0 rounded-lg ${FOCUS_RING}`,
         className,
       )}
     >

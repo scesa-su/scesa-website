@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT_EMAIL, MEMBERSHIP_FEE_KES, MEMBERSHIP_GOOGLE_FORM_URL } from "@/lib/constants";
+import { FOCUS_RING } from "@/lib/styles";
 import { RegistrationForm } from "@/presentation/components/join/RegistrationForm";
 
 export const metadata: Metadata = {
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description: `Become a SCESA member: a one-time KES ${MEMBERSHIP_FEE_KES} fee, open to Strathmore computing and engineering students.`,
 };
 
-const LINK = "font-medium text-brand-primary underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
+const LINK = `font-medium text-brand-primary underline underline-offset-4 ${FOCUS_RING}`;
 
 export default function JoinPage() {
   return (

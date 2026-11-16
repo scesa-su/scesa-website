@@ -14,6 +14,7 @@ import {
 } from "framer-motion";
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type RefObject } from "react";
 import type { Leader } from "@/domain/entities/Leader";
+import { FOCUS_RING } from "@/lib/styles";
 import { Button } from "@/presentation/components/ui/Button";
 import { PIN_COLOR_CYCLE, PushPin, PushPinDefs, PushPinShadow, type PinColor } from "./PushPin";
 
@@ -202,7 +203,7 @@ function Polaroid({
           aria-describedby="board-hint"
           onPointerDown={(e) => startDrag(e, true)}
           onKeyDown={nudge}
-          className="absolute -top-3 left-1/2 z-10 grid size-11 -translate-x-1/2 touch-none place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+          className={`absolute -top-3 left-1/2 z-10 grid size-11 -translate-x-1/2 touch-none place-items-center rounded-full ${FOCUS_RING}`}
         >
           <motion.span
             aria-hidden

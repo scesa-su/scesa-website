@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { Maximize2, X } from "lucide-react";
 import { useRef } from "react";
+import { FOCUS_RING } from "@/lib/styles";
 
 const iconButton =
-  "flex size-10 items-center justify-center rounded-full bg-slate-900/70 text-white backdrop-blur-sm transition-colors hover:bg-slate-900/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent";
+  `flex size-10 items-center justify-center rounded-full bg-slate-900/70 text-white backdrop-blur-sm transition-colors hover:bg-slate-900/90 ${FOCUS_RING}`;
 
 /** Expand button for the bottom-right of the poster; opens the whole, uncropped poster in a modal dialog. */
 export function PosterViewer({ src, alt, title }: { src: string; alt: string; title: string }) {
