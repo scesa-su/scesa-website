@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRightIcon } from "lucide-react";
+import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import { COMMUNITIES } from "@/lib/constants";
 import { cn } from "@/lib/cn";
 import { CONTAINER, FOCUS_RING } from "@/lib/styles";
@@ -60,14 +60,19 @@ export function CommunitiesIndex() {
           ))}
         </ul>
 
-        <div className="mt-12 flex justify-center lg:justify-start">
+        <div className="mt-14 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between lg:mt-20">
+          <p className="max-w-md text-lg text-slate-300">
+            Not sure where you fit? You can join more than one.
+          </p>
           <Button
             href="/join"
-            variant="soft"
-            size="lg"
-            className="focus-visible:ring-offset-brand-navy dark:focus-visible:ring-offset-slate-900"
+            size="xl"
+            className="self-start pr-5 focus-visible:ring-offset-brand-navy sm:self-auto dark:focus-visible:ring-offset-slate-900"
           >
             Join a community
+            <span className="flex size-8 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 ease-out-expo group-hover:translate-x-1">
+              <ArrowRightIcon aria-hidden className="size-4" />
+            </span>
           </Button>
         </div>
       </div>
