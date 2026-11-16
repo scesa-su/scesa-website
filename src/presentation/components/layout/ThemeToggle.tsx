@@ -2,34 +2,29 @@
 
 import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
-import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { MoonIcon, SunIcon } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { FOCUS_RING } from "@/lib/styles";
-
-const ORDER = ["light", "dark", "system"] as const;
-type ThemeName = (typeof ORDER)[number];
-const ICONS = { light: SunIcon, dark: MoonIcon, system: MonitorIcon } as const;
 
 const noopSubscribe = () => () => {};
 
 export function ThemeToggle({ className }: { className?: string }) {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   // false on the server and during hydration, true afterwards: avoids a theme mismatch.
   const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false);
   const base = "inline-flex size-10 items-center justify-center rounded-lg";
 
   if (!mounted) return <span aria-hidden className={cn(base, className)} />;
 
-  const current: ThemeName = ORDER.includes(theme as ThemeName) ? (theme as ThemeName) : "system";
-  const next = ORDER[(ORDER.indexOf(current) + 1) % ORDER.length];
-  const Icon = ICONS[current];
+  const next = resolvedTheme === "dark" ? "light" : "dark";
+  const Icon = next === "dark" ? MoonIcon : SunIcon;
 
   return (
     <button
       type="button"
       onClick={() => setTheme(next)}
-      aria-label={`Theme: ${current}. Switch to ${next} theme`}
-      title={`Theme: ${current}`}
+      aria-label={`Switch to ${next} theme`}
+      title={`Switch to ${next} theme`}
       className={cn(
         base,
         "text-brand-primary transition-colors hover:bg-brand-sunken",
