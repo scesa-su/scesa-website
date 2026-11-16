@@ -222,6 +222,54 @@ html {
   scroll-padding-top: 6rem;
 }
 
+html:has(dialog[open]:modal) {
+  overflow: hidden;
+}
+
+.poster-dialog {
+  opacity: 0;
+  scale: 0.96;
+  transition:
+    opacity 250ms ease-out,
+    scale 400ms var(--ease-out-expo),
+    overlay 400ms allow-discrete,
+    display 400ms allow-discrete;
+}
+
+.poster-dialog[open] {
+  opacity: 1;
+  scale: 1;
+}
+
+@starting-style {
+  .poster-dialog[open] {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+.poster-dialog::backdrop {
+  background-color: rgb(2 6 23 / 0);
+  backdrop-filter: blur(0);
+  transition:
+    background-color 300ms ease-out,
+    backdrop-filter 300ms ease-out,
+    overlay 300ms allow-discrete,
+    display 300ms allow-discrete;
+}
+
+.poster-dialog[open]::backdrop {
+  background-color: rgb(2 6 23 / 0.85);
+  backdrop-filter: blur(6px);
+}
+
+@starting-style {
+  .poster-dialog[open]::backdrop {
+    background-color: rgb(2 6 23 / 0);
+    backdrop-filter: blur(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
