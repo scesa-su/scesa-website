@@ -1,3 +1,4 @@
+import { AsteriskIcon } from "lucide-react";
 import { COMMUNITIES } from "@/lib/constants";
 import { Marquee } from "@/presentation/components/motion/Marquee";
 
@@ -13,9 +14,7 @@ export function MarqueeBand() {
                 className="flex items-center gap-8 pr-8 font-display text-display-xs font-semibold whitespace-nowrap lg:gap-12 lg:pr-12 lg:text-display-sm"
               >
                 {name}
-                <span aria-hidden className="text-brand-accent">
-                  ✳
-                </span>
+                <AsteriskIcon aria-hidden strokeWidth={3} className="size-6 shrink-0 text-brand-accent lg:size-8" />
               </li>
             ))}
           </ul>
